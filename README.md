@@ -1,0 +1,2 @@
+# IMS
+基于纯Java实现的InventoryManagementSystem进销存管理系统

@@ -4,5 +4,4 @@ import com.liziczh.ims.views.AbstractMainFrame;
 
 public class MainController extends AbstractMainFrame {
 
-
 }

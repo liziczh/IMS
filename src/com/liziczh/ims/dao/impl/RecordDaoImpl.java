@@ -1,13 +1,16 @@
 package com.liziczh.ims.dao.impl;
 
 import com.liziczh.ims.dao.IRecordDao;
+import com.liziczh.ims.domain.Product;
 import com.liziczh.ims.domain.Record;
+import com.liziczh.ims.tools.DateUtils;
 import com.liziczh.ims.tools.JDBCUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class RecordDaoImpl implements IRecordDao {
@@ -22,13 +25,6 @@ public class RecordDaoImpl implements IRecordDao {
             sql += " and \"proName\" in (select \"proName\" from \"product\" where \"dirName\" = ?)";
             recordList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,recordType,dirName);
         }
-        return recordList;
-    }
-
-    @Override
-    public List<Record> getRecordByName(String proName) throws SQLException {
-        String sql = "select * from \"record\" where \"proName\" = ?";
-        List<Record> recordList = queryRunner.query(sql,new BeanListHandler<Record>(Record.class),proName);
         return recordList;
     }
 
@@ -52,17 +48,53 @@ public class RecordDaoImpl implements IRecordDao {
         return recordList;
     }
 
-
     @Override
-    public void insertRecord(Record record) throws SQLException {
+    public void insertInStock(Product product, String register, String recordTpye) {
         String sql = "insert into \"record\" values(?,?,?,?,?,?)";
-        queryRunner.update(sql,record.getDate(),record.getProId(),record.getProName(),record.getCount(),record.getRegister(),record.getRecordType());
+        try {
+            queryRunner.update(sql,DateUtils.date2String(new Date()),product.getProId(), product.getProName(), product.getCount(),register,recordTpye);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void updateProduct(Product product) {
+        String sql = "update \"product\" set \"count\"= nvl(\"count\",0) + ? where \"proId\" = ?";
+        try {
+            queryRunner.update(sql,product.getCount(),product.getProId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void insertProduct(Product product) {
+        String sql = "insert into \"product\" values(?,?,?,?,?,?)";
+        try {
+            queryRunner.update(sql,product.getProId(),product.getProName(), product.getDirName(),product.getSupplier(), product.getBrand(),product.getCount());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void deleteById(int id) throws SQLException {
-        String sql = "delete from \"record\" where \"id\" = ?";
-        queryRunner.update(sql,id);
+    public void stockOut(Product product, int count) {
+        String sql = "update \"product\" set \"count\"= \"count\" - ? where \"proId\" = ?";
+        try {
+            queryRunner.update(sql,count,product.getProId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+    @Override
+    public void insertOutStock(Product product,int count, String register,String recordTpye) {
+        String sql = "insert into \"record\" values(?,?,?,?,?,?)";
+        try {
+            queryRunner.update(sql,DateUtils.date2String(new Date()),product.getProId(), product.getProName(),count,register,recordTpye);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

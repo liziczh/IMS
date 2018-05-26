@@ -2,28 +2,31 @@ package com.liziczh.ims.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class PurchaseInPanel extends JPanel {
+public abstract class AbstractPurchaseInPanel extends JPanel {
 
     private Font font = new Font("微软雅黑",Font.BOLD,14);
     private JLabel proId = new JLabel();
-    private JTextField proIdText = new JTextField();
+    protected JTextField proIdText = new JTextField();
     private JLabel proName = new JLabel();
-    private JTextField proNameText = new JTextField();
-    private JLabel dirId = new JLabel();
-    private JTextField dirIdText = new JTextField();
+    protected JTextField proNameText = new JTextField();
+    private JLabel dirName = new JLabel();
+    protected JTextField dirNameText = new JTextField();
     private JLabel supplier = new JLabel();
-    private JTextField supplierText = new JTextField();
+    protected JTextField supplierText = new JTextField();
     private JLabel brand = new JLabel();
-    private JTextField brandText = new JTextField();
+    protected JTextField brandText = new JTextField();
     private JLabel count = new JLabel();
-    private JTextField countText = new JTextField();
+    protected JTextField countText = new JTextField();
     private JLabel register = new JLabel();
-    private JTextField registerText = new JTextField();
+    protected JTextField registerText = new JTextField();
     protected JButton resetBtn = new JButton();
     protected JButton commitBtn = new JButton();
+    protected String recordType = "in";
 
-    public PurchaseInPanel(){
+    public AbstractPurchaseInPanel(){
         this.init();
     }
 
@@ -51,13 +54,13 @@ public class PurchaseInPanel extends JPanel {
         proNameText.setBounds(220,80,200,30);
         proNameText.setFont(font);
         this.add(proNameText);
-        dirId.setText("分类编号:");
-        dirId.setFont(font);
-        dirId.setBounds(150,120,100,30);
-        this.add(dirId);
-        dirIdText.setBounds(220,120,200,30);
-        dirIdText.setFont(font);
-        this.add(dirIdText);
+        dirName.setText("分   类 :");
+        dirName.setFont(font);
+        dirName.setBounds(150,120,100,30);
+        this.add(dirName);
+        dirNameText.setBounds(220,120,200,30);
+        dirNameText.setFont(font);
+        this.add(dirNameText);
         supplier.setText("供 应 商：");
         supplier.setFont(font);
         supplier.setBounds(150,160,100,30);
@@ -100,9 +103,31 @@ public class PurchaseInPanel extends JPanel {
 
     }
 
-    private void addListener(){
+    protected void addListener(){
 
+        //重置所有输入信息为空
+        resetBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                reset();
+            }
+        });
+
+        //进货入库页面提交后，数据内容保存到数据库中的商品表中，并转到入库记录界面
+        commitBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(proIdText.getText() == null && proNameText.getText() == null && dirNameText.getText() == null && supplierText == null && brandText == null && countText == null && registerText == null){
+                    JOptionPane.showMessageDialog(null,"请确认所有选项都已填写完成");
+                }else{
+                    commit();
+//                    reset();
+                }
+            }
+        });
     }
+    public abstract void commit();
+    public abstract void reset();
 
 }
 

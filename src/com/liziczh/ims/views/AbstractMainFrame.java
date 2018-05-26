@@ -1,7 +1,9 @@
 package com.liziczh.ims.views;
 
 import com.liziczh.ims.controller.InventoryQueryController;
+import com.liziczh.ims.controller.PurchaseInController;
 import com.liziczh.ims.controller.RecordController;
+import com.liziczh.ims.controller.SalesOutController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +30,10 @@ public abstract class AbstractMainFrame extends JFrame {
 
     // 操作界面组件
     // purchasePanel界面内容
-    private PurchaseInPanel purchaseInPanel = new PurchaseInPanel(); // 进货入库页面
+    private AbstractPurchaseInPanel purchaseInPanel = new PurchaseInController(); // 进货入库页面
     private AbstractRecordPanel purchaseRecordPanel = new RecordController(); // 入库记录页面
     // salesPanel界面内容
-    private SalesOutPanel salesOutPanel = new SalesOutPanel(); // 销售出库页面
+    private AbstractSalesOutPanel salesOutPanel = new SalesOutController(); // 销售出库页面
     private AbstractRecordPanel salesRecordPanel = new RecordController(); // 出库记录页面
     // inventoryPanel界面内容
     private AbstractInventoryQueryPanel inventoryQueryPanel = new InventoryQueryController(); // 查询库存页面

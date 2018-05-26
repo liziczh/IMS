@@ -15,21 +15,14 @@ public class ProductDaoImpl implements IProductDao {
     private QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
     private int total = 0;
     @Override
-    public Product getProductById(int id) throws SQLException {
-        String sql = "select * from \"product\" where \"proId\" = ?";
-        Product product = queryRunner.query(sql, new BeanHandler<Product>(Product.class), id);
-        return product;
-    }
-
-    @Override
     public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName, int currentPage, int pageSize) throws SQLException {
         List<Product>  proList = null;
         String sql = "select * from \"product\" where \"proName\" like '%' || ? || '%' and \"count\" between ? and ? ";
         if("全部".equals(dirName)){
-            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Product>(Product.class), proName, lowerCount, upperCount);
+            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<>(Product.class), proName, lowerCount, upperCount);
         }else{
             sql += " and \"dirName\" = ? ";
-            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Product>(Product.class),proName,lowerCount,upperCount,dirName);
+            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<>(Product.class),proName,lowerCount,upperCount,dirName);
         }
         return proList;
     }
@@ -50,27 +43,34 @@ public class ProductDaoImpl implements IProductDao {
     @Override
     public List<Product> getAllProduct() throws SQLException {
         String sql = "select * from \"product\"";
-        List<Product> proList  = queryRunner.query(sql,new BeanListHandler<Product>(Product.class));
+        List<Product> proList  = queryRunner.query(sql,new BeanListHandler<>(Product.class));
         return proList;
     }
 
     @Override
-    public void insertProduct(Product product) throws SQLException {
-        String sql = "insert into \"product\" values(?,?,?,?,?,?)";
-        queryRunner.update(sql,product.getProName(),product.getProId(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
+    public Product getProductById(int id) {
+        String sql = "select * from \"product\" where \"proId\" = ?";
+        Product  product = null;
+        try {
+            product= queryRunner.query(sql,new BeanHandler<>(Product.class),id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
     }
 
     @Override
-    public void updateProduct(Product product) throws SQLException {
-        String sql = "update \"product\" set \"proName\" = ?, \"dirId\" = ?, \"supplier\" = ?, \"brand\" = ?, \"count\" = ? where \"proId\" = ?";
-        queryRunner.update(sql,product.getProName(),product.getProId(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
+    public boolean stockOut(int id,int count,String register) {
+        String sql = "update \"product\" set \"count\" = \"count\" - ? where \"proId\" = ? ";
+        try {
+            queryRunner.update(sql,id,count);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    @Override
-    public void deleteById(int id) throws SQLException {
-        String sql = "delete from \"product\" where \"id\" = ?";
-        queryRunner.update(sql,id);
-    }
 
 
 }

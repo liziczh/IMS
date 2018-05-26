@@ -2,22 +2,25 @@ package com.liziczh.ims.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class SalesOutPanel extends JPanel {
+public abstract class AbstractSalesOutPanel extends JPanel {
 
     private Font font = new Font("微软雅黑",Font.BOLD,14);
     private JLabel proId = new JLabel();
-    private JTextField proIdText = new JTextField();
+    protected JTextField proIdText = new JTextField();
     private JLabel proName = new JLabel();
-    private JTextField proNameText = new JTextField();
+    protected JTextField proNameText = new JTextField();
     private JLabel count = new JLabel();
-    private JTextField countText = new JTextField();
+    protected JTextField countText = new JTextField();
     private JLabel register = new JLabel();
-    private JTextField registerText = new JTextField();
+    protected JTextField registerText = new JTextField();
     private JButton resetBtn = new JButton();
     private JButton deleteBtn = new JButton();
+    protected String recordType = "out";
 
-    public SalesOutPanel(){
+    public AbstractSalesOutPanel(){
         this.init();
     }
 
@@ -73,9 +76,22 @@ public class SalesOutPanel extends JPanel {
 
     }
 
-    private void addListener(){
-
+    protected void addListener(){
+        resetBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                reset();
+            }
+        });
+        deleteBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                delete();
+            }
+        });
     }
+    public abstract void reset();
+    public abstract void delete();
 
 }
 

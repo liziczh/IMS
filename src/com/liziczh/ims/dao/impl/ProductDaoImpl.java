@@ -7,11 +7,12 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+
 import java.sql.SQLException;
 import java.util.List;
 
 public class ProductDaoImpl implements IProductDao {
-    QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+    private QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
     @Override
     public Product getProductById(int id) throws SQLException {
         String sql = "select * from \"product\" where \"proId\" = ?";
@@ -20,17 +21,22 @@ public class ProductDaoImpl implements IProductDao {
     }
 
     @Override
-    public List<Product> getProductByName(String proName) throws SQLException {
-        String sql = "select * from \"product\" where \"proName\" is like %?%";
-        List<Product>  proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class),proName);
+    public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName) throws SQLException {
+        List<Product>  proList = null;
+        String sql = "select * from \"product\" where \"proName\" like '%' || ? || '%' and \"count\" between ? and ? ";
+        if("全部".equals(dirName)){
+            proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class),proName,lowerCount,upperCount);
+        }else{
+            sql += " and \"dirName\" = ? ";
+            proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class),proName,lowerCount,upperCount,dirName);
+        }
         return proList;
     }
 
     @Override
     public List<Product> getAllProduct() throws SQLException {
         String sql = "select * from \"product\"";
-        List<Product> proList = null;
-        proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class));
+        List<Product> proList  = queryRunner.query(sql,new BeanListHandler<Product>(Product.class));
         return proList;
     }
 
@@ -51,13 +57,13 @@ public class ProductDaoImpl implements IProductDao {
     @Override
     public void insertProduct(Product product) throws SQLException {
         String sql = "insert into \"product\" values(?,?,?,?,?,?)";
-        queryRunner.update(sql,product.getProName(),product.getProId(),product.getDirId(),product.getSupplier(),product.getBrand(),product.getProId());
+        queryRunner.update(sql,product.getProName(),product.getProId(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
     }
 
     @Override
     public void updateProduct(Product product) throws SQLException {
         String sql = "update \"product\" set \"proName\" = ?, \"dirId\" = ?, \"supplier\" = ?, \"brand\" = ?, \"count\" = ? where \"proId\" = ?";
-        queryRunner.update(sql,product.getProName(),product.getProId(),product.getDirId(),product.getSupplier(),product.getBrand(),product.getProId());
+        queryRunner.update(sql,product.getProName(),product.getProId(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
     }
 
     @Override

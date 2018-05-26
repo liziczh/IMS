@@ -15,17 +15,10 @@ public class RecordDaoImpl implements IRecordDao {
     public List<Record> getRecordByDateAndDirName(String beginDate,String endDate, String recordType,String dirName) throws SQLException {
         List<Record> recordList = null;
         String sql = "select * from \"record\" where (\"date\" between ? and ?) and \"recordType\" = ? ";
-        if(dirName.equals("全部")){
+        if("全部".equals(dirName)){
             recordList = queryRunner.query(sql,new BeanListHandler<Record>(Record.class),beginDate,endDate,recordType);
         }else{
-            sql += " and \"record\".\"proName\" in (" +
-                    "select \"proName\" " +
-                    "from \"product\" " +
-                    "where \"product\".\"proId\" = (" +
-                    "select \"proId\" " +
-                    "from \"productDir\" " +
-                    "where \"productDir\".\"dirName\" = ?" +
-                    "))";
+            sql += " and \"proName\" in (select \"proName\" from \"product\" where \"dirName\" = ?)";
             recordList = queryRunner.query(sql,new BeanListHandler<Record>(Record.class),beginDate,endDate,recordType,dirName);
         }
         return recordList;

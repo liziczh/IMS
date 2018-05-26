@@ -10,15 +10,15 @@ import java.util.List;
 
 public class RecordServiceImpl implements IRecordService {
     private IRecordDao recordDao = new RecordDaoImpl();
-    @Override
-    public List<Record> queryRecord(String beginDate, String endDate, String recordType, String dirName) {
-        List<Record> recordList = null;
-        try {
-            recordList = recordDao.getRecordByDateAndDirName(beginDate,endDate,recordType,dirName);
-        } catch (SQLException e) {
-            e.printStackTrace();
-    }
-        return recordList;
-    }
+        @Override
+        public List<Record> queryRecord(String beginDate, String endDate, String recordType, String dirName) {
+            List<Record> recordList = null;
+            try {
+                recordList = recordDao.getRecordByDateAndDirName(beginDate,endDate,recordType,dirName);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return recordList;
+        }
 
 }

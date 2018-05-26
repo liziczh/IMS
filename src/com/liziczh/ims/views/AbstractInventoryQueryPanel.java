@@ -1,29 +1,38 @@
 package com.liziczh.ims.views;
 
+import com.liziczh.ims.domain.Product;
+import com.liziczh.ims.tools.ListTableModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-public class InventoryQueryPanel extends JPanel {
+public abstract class AbstractInventoryQueryPanel extends JPanel {
     private Font font = new Font("微软雅黑", Font.BOLD, 14);
     // 产品名称
     private JLabel proNameLabel = new JLabel();
-    private JTextField proNameText = new JTextField();
+    protected JTextField proNameText = new JTextField();
     // 库存量
     private JLabel countLowerLabel = new JLabel();
-    private JTextField countLowerText = new JTextField(6);
+    protected JTextField countLowerText = new JTextField(6);
     private JLabel countUpperLabel = new JLabel();
-    private JTextField countUpperText = new JTextField(6);
+    protected JTextField countUpperText = new JTextField(6);
     // 分类
     private JLabel dirLabel = new JLabel();
     // 查询
     private JButton queryBtn = new JButton();
     // 分类
-    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书"};
-    private JComboBox dirBox = new JComboBox<>(def);
+    protected String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书"};
+    protected JComboBox dirBox = new JComboBox<>(def);
     // 表格
-    private JTable purchaseInTable = new JTable();
+    protected List<Product> proList = new ArrayList<>();
+    protected String[] colNames = {"产品编号", "产品名称", "分类","供应商", "商标","数量"};
+    protected String[] propNames = {"proId", "proName", "dirName", "supplier", "brand","count"};
+    protected JTable stockTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();
     // 首页
     private JButton homePageBtn = new JButton();
@@ -34,16 +43,16 @@ public class InventoryQueryPanel extends JPanel {
     // 末页
     private JButton endPageBtn = new JButton();
 
-    public InventoryQueryPanel(){
-        this.init();
-    }
-
+    public AbstractInventoryQueryPanel(){
+            this.init();
+        }
     private void init(){
         this.setLayout(null);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         this.setBounds(0,0,650,500);
         this.addComponent();
+        this.addListener();
         this.setVisible(true);
     }
 
@@ -122,37 +131,36 @@ public class InventoryQueryPanel extends JPanel {
         this.add(endPageBtn);
 
     }
-    private void setTable(){
+    protected void setTable(){
         // 表格
         scrollPanel.setBounds(50,70,540,231);
-        Object[] colNames = {"产品编号", "产品名称", "分类","供应商", "商标","数量"};
-        Object[][] data = {
-                {1001, "罗技M90", "电脑/办公", "罗技", "罗技", 100},
-                {1002, "罗技M100", "电脑/办公", "罗技", "罗技", 200},
-                {1003, "罗技M115", "电脑/办公", "罗技", "罗技", 240},
-                {1004, "罗技M125", "电脑/办公", "罗技", "罗技", 100},
-                {1005, "罗技木星轨迹球", "电脑/办公", "罗技", "罗技", 50},
-                {1006, "罗技火星轨迹球", "电脑/办公", "罗技", "罗技", 50},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-        };
-        purchaseInTable.setModel(new DefaultTableModel(data, colNames));
+        try {
+            stockTable.setModel(new ListTableModel<Product>(proList,Product.class,colNames,propNames));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // 单元格居中
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
-        purchaseInTable.setDefaultRenderer(Object.class, r);
+        stockTable.setDefaultRenderer(Object.class, r);
         // 列编辑
-        purchaseInTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//单选
-        purchaseInTable.getTableHeader().setReorderingAllowed(false);//列不能移动
+        stockTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//单选
+        stockTable.getTableHeader().setReorderingAllowed(false);//列不能移动
         // 添加表头表格
-        scrollPanel.setViewportView(purchaseInTable);
+        scrollPanel.setViewportView(stockTable);
         this.add(scrollPanel);
     }
+    private void addListener(){
+        queryBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                queryRecord();
+            }
+        });
+    }
+
+    public abstract void queryRecord();
 
 
 }
+

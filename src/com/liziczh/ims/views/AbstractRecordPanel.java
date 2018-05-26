@@ -27,7 +27,7 @@ public abstract class AbstractRecordPanel extends JPanel {
     private JLabel dirLabel = new JLabel();
     // 下拉框
     private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
-    protected JComboBox dir = new JComboBox<>(def);
+    protected JComboBox dirBox = new JComboBox<>(def);
     // 查询
     private JButton queryBtn = new JButton();
     // record类型
@@ -36,27 +36,6 @@ public abstract class AbstractRecordPanel extends JPanel {
     protected List<Record> recordList = new ArrayList<>();
     protected String[] colNames = {"日期", "产品编号", "产品名称", "数量", "登记人"};
     protected String[] propNames = {"date", "proId", "proName", "count", "register"};
-    protected Object[][] data = {
-//            {"2018-5-22", 1001, "罗技M90", 100, "萧峰"},
-//            {"2018-5-22", 1002, "罗技M100", 200, "陆小凤"},
-//            {"2018-5-22", 1003, "罗技M115", 240, "花满楼"},
-//            {"2018-5-22", 1004, "罗技M125", 100, "张三丰"},
-//            {"2018-5-22", 1005, "罗技木星轨迹球", 50, "张无忌"},
-//            {"2018-5-22", 1006, "罗技火星轨迹球", 50, "李寻欢"},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null}
-    };
     protected JTable recordTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();
     // 首页
@@ -110,10 +89,10 @@ public abstract class AbstractRecordPanel extends JPanel {
         dirLabel.setBounds(350, 25, 60, 25);
         this.add(dirLabel);
         // 下拉框
-        dir.setFont(font);
-        dir.setBackground(Color.white);
-        dir.setBounds(400,25,100,25);
-        this.add(dir);
+        dirBox.setFont(font);
+        dirBox.setBackground(Color.white);
+        dirBox.setBounds(400,25,100,25);
+        this.add(dirBox);
         // 查询按钮
         queryBtn.setText("查询");
         queryBtn.setBackground(Color.white);
@@ -150,7 +129,7 @@ public abstract class AbstractRecordPanel extends JPanel {
         this.add(endPageBtn);
 
     }
-    public void setTable(){
+    protected void setTable(){
         // 表格
         scrollPanel.setBounds(50,70,540,231);
         try {

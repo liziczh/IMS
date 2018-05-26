@@ -9,7 +9,7 @@ public interface IProductDao {
     // 根据id查询
     public Product getProductById(int id) throws SQLException;
     // 根据Name查询
-    public List<Product> getProductByName(String proName) throws SQLException;
+    public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName) throws SQLException;
     // 查询所有
     public List<Product> getAllProduct() throws SQLException;
     // 查询库存不足

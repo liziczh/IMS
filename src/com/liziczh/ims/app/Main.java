@@ -7,8 +7,8 @@ import com.liziczh.ims.views.AbstractMainFrame;
 
 public class Main {
     public static void main(String[] args) {
-        new LoginController();
-//        new MainController();
+//        new LoginController();
+        new MainController();
 
     }
 }

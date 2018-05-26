@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Product {
     private int proId;
     private String proName;
-    private String dirId;
+    private String dirName;
     private String supplier;
     private String brand;
     private int count;
@@ -14,14 +14,15 @@ public class Product {
 
     }
 
-    public Product(int proId, String proName, String dirId, String supplier, String brand, int count) {
+    public Product(int proId, String proName, String dirName, String supplier, String brand, int count) {
         this.proId = proId;
         this.proName = proName;
-        this.dirId = dirId;
+        this.dirName = dirName;
         this.supplier = supplier;
         this.brand = brand;
         this.count = count;
     }
+
 
     public int getProId() {
         return proId;
@@ -39,12 +40,12 @@ public class Product {
         this.proName = proName;
     }
 
-    public String getDirId() {
-        return dirId;
+    public String getDirName() {
+        return dirName;
     }
 
-    public void setDirId(String dirId) {
-        this.dirId = dirId;
+    public void setDirName(String dirName) {
+        this.dirName = dirName;
     }
 
     public String getSupplier() {
@@ -79,7 +80,7 @@ public class Product {
         return proId == product.proId &&
                 count == product.count &&
                 Objects.equals(proName, product.proName) &&
-                Objects.equals(dirId, product.dirId) &&
+                Objects.equals(dirName, product.dirName) &&
                 Objects.equals(supplier, product.supplier) &&
                 Objects.equals(brand, product.brand);
     }
@@ -87,7 +88,7 @@ public class Product {
     @Override
     public int hashCode() {
 
-        return Objects.hash(proId, proName, dirId, supplier, brand, count);
+        return Objects.hash(proId, proName, dirName, supplier, brand, count);
     }
 
     @Override
@@ -95,7 +96,7 @@ public class Product {
         return "Product{" +
                 "proId=" + proId +
                 ", proName='" + proName + '\'' +
-                ", dirId='" + dirId + '\'' +
+                ", dirId='" + dirName + '\'' +
                 ", supplier='" + supplier + '\'' +
                 ", brand='" + brand + '\'' +
                 ", count=" + count +

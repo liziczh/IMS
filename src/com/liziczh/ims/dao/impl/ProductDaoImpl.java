@@ -6,13 +6,14 @@ import com.liziczh.ims.tools.JDBCUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class ProductDaoImpl implements IProductDao {
     private QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+    private int total = 0;
     @Override
     public Product getProductById(int id) throws SQLException {
         String sql = "select * from \"product\" where \"proId\" = ?";
@@ -21,36 +22,35 @@ public class ProductDaoImpl implements IProductDao {
     }
 
     @Override
-    public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName) throws SQLException {
+    public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName, int currentPage, int pageSize) throws SQLException {
         List<Product>  proList = null;
         String sql = "select * from \"product\" where \"proName\" like '%' || ? || '%' and \"count\" between ? and ? ";
         if("全部".equals(dirName)){
-            proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class),proName,lowerCount,upperCount);
+            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Product>(Product.class), proName, lowerCount, upperCount);
         }else{
             sql += " and \"dirName\" = ? ";
-            proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class),proName,lowerCount,upperCount,dirName);
+            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Product>(Product.class),proName,lowerCount,upperCount,dirName);
         }
         return proList;
+    }
+
+    @Override
+    public int getTotalByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName) throws SQLException {
+        int total ;
+        String sql = "select count(*) from \"product\" where \"proName\" like '%' || ? || '%' and \"count\" between ? and ? ";
+        if("全部".equals(dirName)){
+            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1), proName, lowerCount, upperCount).toString());
+        }else{
+            sql += " and \"dirName\" = ? ";
+            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1),proName,lowerCount,upperCount,dirName));
+        }
+        return total;
     }
 
     @Override
     public List<Product> getAllProduct() throws SQLException {
         String sql = "select * from \"product\"";
         List<Product> proList  = queryRunner.query(sql,new BeanListHandler<Product>(Product.class));
-        return proList;
-    }
-
-    @Override
-    public List<Product> getProductCountLess(int count) throws SQLException {
-        String sql = "select * from \"product\" where \"count\" < ?";
-        List<Product> proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class),count);
-        return proList;
-    }
-
-    @Override
-    public List<Product> getProductCountOver(int count) throws SQLException {
-        String sql = "select * from \"product\" where \"count\" > ?";
-        List<Product> proList = queryRunner.query(sql,new BeanListHandler<Product>(Product.class),count);
         return proList;
     }
 

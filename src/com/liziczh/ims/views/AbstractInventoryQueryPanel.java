@@ -26,7 +26,7 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
     // 查询
     private JButton queryBtn = new JButton();
     // 分类
-    protected String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书"};
+    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书"};
     protected JComboBox dirBox = new JComboBox<>(def);
     // 表格
     protected List<Product> proList = new ArrayList<>();
@@ -34,6 +34,9 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
     protected String[] propNames = {"proId", "proName", "dirName", "supplier", "brand","count"};
     protected JTable stockTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();
+    // 当前页数和页内数据行数
+    protected int currentPage = 1;
+    protected int pageSize = 2;
     // 首页
     private JButton homePageBtn = new JButton();
     // 上一页
@@ -131,11 +134,11 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
         this.add(endPageBtn);
 
     }
-    protected void setTable(){
+    private void setTable(){
         // 表格
         scrollPanel.setBounds(50,70,540,231);
         try {
-            stockTable.setModel(new ListTableModel<Product>(proList,Product.class,colNames,propNames));
+            stockTable.setModel(new ListTableModel<>(proList,Product.class,colNames,propNames));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,13 +157,41 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
         queryBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                queryRecord();
+                queryProduct();
             }
         });
+        homePageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                homePage();
+            }
+        });
+        prevPageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                prevPage();
+            }
+        });
+        nextPageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                nextPage();
+            }
+        });
+        endPageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                endPage();
+            }
+        });
+
     }
 
-    public abstract void queryRecord();
-
+    public abstract void queryProduct();
+    public abstract void homePage();
+    public abstract void prevPage();
+    public abstract void nextPage();
+    public abstract void endPage();
 
 }
 

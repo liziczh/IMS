@@ -7,7 +7,6 @@ import com.liziczh.ims.tools.ListTableModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,6 +37,9 @@ public abstract class AbstractRecordPanel extends JPanel {
     protected String[] propNames = {"date", "proId", "proName", "count", "register"};
     protected JTable recordTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();
+    // 当前页数和页内数据行数
+    protected int currentPage = 1;
+    protected int pageSize = 2;
     // 首页
     private JButton homePageBtn = new JButton();
     // 上一页
@@ -133,7 +135,7 @@ public abstract class AbstractRecordPanel extends JPanel {
         // 表格
         scrollPanel.setBounds(50,70,540,231);
         try {
-            recordTable.setModel(new ListTableModel<Record>(recordList,Record.class,colNames,propNames));
+            recordTable.setModel(new ListTableModel<>(recordList,Record.class,colNames,propNames));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,15 +151,44 @@ public abstract class AbstractRecordPanel extends JPanel {
         this.add(scrollPanel);
     }
 
-    private void addListener(){
+    private void addListener() {
         queryBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 queryRecord();
             }
         });
+        homePageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                homePage();
+            }
+        });
+        prevPageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                prevPage();
+            }
+        });
+        nextPageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                nextPage();
+            }
+        });
+        endPageBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                endPage();
+            }
+        });
+
     }
+
+
     public abstract void queryRecord();
-
-
+    public abstract void homePage();
+    public abstract void prevPage();
+    public abstract void nextPage();
+    public abstract void endPage();
 }

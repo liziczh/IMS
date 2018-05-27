@@ -197,7 +197,7 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
         inventoryMngBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                getSelectProduct();
             }
         });
     }

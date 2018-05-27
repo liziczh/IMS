@@ -15,7 +15,10 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class AbstractRecordPanel extends JPanel {
-    private Font font = new Font("微软雅黑", Font.BOLD, 14);
+    // 页面标签
+    protected JLabel titleLabel = new JLabel();
+    // 入库/出库按钮
+    protected JButton stockBtn = new JButton();
     // 开始时间
     private JLabel beginDateLabel = new JLabel();
     protected JTextField beginDateText = new JTextField(6);
@@ -39,7 +42,7 @@ public abstract class AbstractRecordPanel extends JPanel {
     private JScrollPane scrollPanel = new JScrollPane();
     // 当前页数和页内数据行数
     protected int currentPage = 1;
-    protected int pageSize = 13;
+    protected int pageSize = 10;
     // 首页
     private JButton homePageBtn = new JButton();
     // 上一页
@@ -57,29 +60,40 @@ public abstract class AbstractRecordPanel extends JPanel {
         this.setLayout(null);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        this.setBounds(0,0,650,500);
+        this.setBounds(0,100,800,500);
         this.addComponent();
         this.addListener();
     }
 
     private void addComponent() {
+        // 页面标签
+        titleLabel.setText("Stock I/O");
+        titleLabel.setBounds(50,20,120,40);
+        titleLabel.setFont(new Font("微软雅黑",Font.BOLD,22));
+        this.add(titleLabel);
+        // 入库出库按钮
+        stockBtn.setText("Stock I/O");
+        stockBtn.setBounds(620,25,120,35);
+        stockBtn.setBackground(Color.white);
+        stockBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        this.add(stockBtn);
         // 开始日期
         beginDateLabel.setText("日期：");
         beginDateLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        beginDateLabel.setBounds(50, 25, 60, 25);
-        beginDateText.setFont(font);
-        beginDateText.setBounds(100, 25, 90, 25);
+        beginDateLabel.setBounds(50, 70, 60, 25);
+        beginDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        beginDateText.setBounds(95, 70, 90, 25);
         beginDateText.setText(String.format("%tF", DateUtils.getFirstDayOfMethod()));
         beginDateText.setEditable(true);
         DateChooser.getInstance().register(this.beginDateText);
         this.add(beginDateLabel);
         this.add(beginDateText);
         // 结束日期
-        endDateLabel.setText("-");
+        endDateLabel.setText(" - ");
         endDateLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        endDateLabel.setBounds(195, 25, 20, 25);
-        endDateText.setFont(font);
-        endDateText.setBounds(210, 25, 90, 25);
+        endDateLabel.setBounds(185, 70, 20, 25);
+        endDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        endDateText.setBounds(205, 70, 90, 25);
         endDateText.setEditable(true);
         endDateText.setText(String.format("%tF", new Date()));
         DateChooser.getInstance().register(this.endDateText);
@@ -88,57 +102,38 @@ public abstract class AbstractRecordPanel extends JPanel {
         // 分类
         dirLabel.setText("分类：");
         dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        dirLabel.setBounds(350, 25, 60, 25);
+        dirLabel.setBounds(500, 70, 60, 25);
         this.add(dirLabel);
         // 下拉框
-        dirBox.setFont(font);
+        dirBox.setFont(new Font("微软雅黑", Font.BOLD, 14));
         dirBox.setBackground(Color.white);
-        dirBox.setBounds(400,25,100,25);
+        dirBox.setBounds(545,70,100,25);
         this.add(dirBox);
         // 查询按钮
         queryBtn.setText("查询");
         queryBtn.setBackground(Color.white);
-        queryBtn.setFont(font);
-        queryBtn.setBounds(508,25,80,25);
+        queryBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        queryBtn.setBounds(660,70,80,25);
         this.add(queryBtn);
 
         // 添加表格
         this.setTable();
 
-        // 首页
-        homePageBtn.setText("首页");
-        homePageBtn.setBackground(Color.lightGray);
-        homePageBtn.setFont(font);
-        homePageBtn.setBounds(50,310,80,25);
-        this.add(homePageBtn);
-        // 上一页
-        prevPageBtn.setText("上一页");
-        prevPageBtn.setBackground(Color.lightGray);
-        prevPageBtn.setFont(font);
-        prevPageBtn.setBounds(230,310,80,25);
-        this.add(prevPageBtn);
-        // 下一页
-        nextPageBtn.setText("下一页");
-        nextPageBtn.setBackground(Color.lightGray);
-        nextPageBtn.setFont(font);
-        nextPageBtn.setBounds(330,310,80,25);
-        this.add(nextPageBtn);
-        // 末页
-        endPageBtn.setText("末页");
-        endPageBtn.setBackground(Color.lightGray);
-        endPageBtn.setFont(font);
-        endPageBtn.setBounds(508,310,80,25);
-        this.add(endPageBtn);
+
 
     }
     protected void setTable(){
         // 表格
-        scrollPanel.setBounds(50,70,540,231);
+        scrollPanel.setBounds(50,110,690,267);
         try {
             recordTable.setModel(new ListTableModel<>(recordList,Record.class,colNames,propNames));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // 表格格式设置
+        recordTable.setFont(new Font("微软雅黑",Font.PLAIN,14));
+        recordTable.setRowHeight(24);
+        recordTable.getTableHeader().setFont(new Font("微软雅黑",Font.BOLD,15));
         // 单元格居中
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
@@ -149,6 +144,31 @@ public abstract class AbstractRecordPanel extends JPanel {
         // 添加表头表格
         scrollPanel.setViewportView(recordTable);
         this.add(scrollPanel);
+
+        // 首页
+        homePageBtn.setText("首页");
+        homePageBtn.setBackground(Color.white);
+        homePageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        homePageBtn.setBounds(50,390,80,25);
+        this.add(homePageBtn);
+        // 上一页
+        prevPageBtn.setText("上一页");
+        prevPageBtn.setBackground(Color.white);
+        prevPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        prevPageBtn.setBounds(300,390,80,25);
+        this.add(prevPageBtn);
+        // 下一页
+        nextPageBtn.setText("下一页");
+        nextPageBtn.setBackground(Color.white);
+        nextPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        nextPageBtn.setBounds(400,390,80,25);
+        this.add(nextPageBtn);
+        // 末页
+        endPageBtn.setText("末页");
+        endPageBtn.setBackground(Color.white);
+        endPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        endPageBtn.setBounds(660,390,80,25);
+        this.add(endPageBtn);
     }
 
     private void addListener() {
@@ -182,7 +202,6 @@ public abstract class AbstractRecordPanel extends JPanel {
                 endPage();
             }
         });
-
     }
 
 

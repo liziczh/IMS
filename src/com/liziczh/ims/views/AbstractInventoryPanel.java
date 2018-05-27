@@ -1,7 +1,7 @@
 package com.liziczh.ims.views;
 
-import com.liziczh.ims.controller.InventoryMngController;
 import com.liziczh.ims.domain.Product;
+import com.liziczh.ims.domain.Record;
 import com.liziczh.ims.tools.ListTableModel;
 
 import javax.swing.*;
@@ -12,8 +12,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractInventoryQueryPanel extends JPanel {
+public abstract class AbstractInventoryPanel extends JPanel {
     private Font font = new Font("微软雅黑", Font.BOLD, 14);
+    // 页面标签
+    protected JLabel titleLabel = new JLabel();
+    // 商品管理按钮
+    protected JButton inventoryMngBtn = new JButton();
     // 产品名称
     private JLabel proNameLabel = new JLabel();
     protected JTextField proNameText = new JTextField();
@@ -37,7 +41,7 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
     private JScrollPane scrollPanel = new JScrollPane();
     // 当前页数和页内数据行数
     protected int currentPage = 1;
-    protected int pageSize = 13;
+    protected int pageSize = 10;
     // 首页
     private JButton homePageBtn = new JButton();
     // 上一页
@@ -46,106 +50,93 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
     private JButton nextPageBtn = new JButton();
     // 末页
     private JButton endPageBtn = new JButton();
-//-------------------------------------------------------------
-    // 很随便的一个Btn
-    private JButton inventoryMngBtn = new JButton();
-//-------------------------------------------------------------
-    public AbstractInventoryQueryPanel(){
+
+    public AbstractInventoryPanel(){
             this.init();
         }
     private void init(){
         this.setLayout(null);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        this.setBounds(0,0,650,500);
+        this.setBounds(0,100,800,500);
         this.addComponent();
         this.addListener();
         this.setVisible(true);
     }
 
     private void addComponent() {
-        // 开始日期
+        // 页面标签 Label
+        titleLabel.setText("出/入库管理");
+        titleLabel.setBounds(50,20,120,40);
+        titleLabel.setFont(new Font("微软雅黑",Font.BOLD,22));
+        this.add(titleLabel);
+        // 商品管理按钮
+        inventoryMngBtn.setText("商品管理");
+        inventoryMngBtn.setBounds(620,25,120,35);
+        inventoryMngBtn.setBackground(Color.white);
+        inventoryMngBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        this.add(inventoryMngBtn);
+        // 产品名称
         proNameLabel.setText("产品名称：");
-        proNameLabel.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        proNameLabel.setBounds(50, 25, 80, 25);
+        proNameLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        proNameLabel.setBounds(50, 70, 80, 25);
         proNameText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        proNameText.setBounds(120, 25, 80, 25);
+        proNameText.setBounds(130, 70, 120, 25);
         proNameText.setEditable(true);
         this.add(proNameLabel);
         this.add(proNameText);
         // 库存查询下限
         countLowerLabel.setText("库存：");
-        countLowerLabel.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        countLowerLabel.setBounds(210, 25, 60, 25);
+        countLowerLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        countLowerLabel.setBounds(270, 70, 60, 25);
         this.add(countLowerLabel);
         // 库存查询下限数值
-        countLowerText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        countLowerText.setBounds(250, 25, 40, 25);
+        countLowerText.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        countLowerText.setBounds(310, 70, 50, 25);
         countLowerText.setEditable(true);
         this.add(countLowerText);
         // 库存查询上限
-        countUpperLabel.setText("-");
-        countUpperLabel.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        countUpperLabel.setBounds(295, 25, 20, 25);
+        countUpperLabel.setText(" - ");
+        countUpperLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        countUpperLabel.setBounds(360, 70, 20, 25);
         this.add(countUpperLabel);
         // 库存查询上限数值
         countUpperText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        countUpperText.setBounds(310, 25, 40, 25);
+        countUpperText.setBounds(380, 70, 50, 25);
         countUpperText.setEditable(true);
         this.add(countUpperText);
         // 分类
         dirLabel.setText("分类：");
-        dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        dirLabel.setBounds(360, 25, 80, 25);
+        dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        dirLabel.setBounds(490, 70, 60, 25);
         this.add(dirLabel);
         // 分类下拉框
         dirBox.setFont(new Font("微软雅黑", Font.BOLD, 14));
         dirBox.setBackground(Color.white);
-        dirBox.setBounds(400,25,100,25);
+        dirBox.setBounds(540,70,100,25);
         this.add(dirBox);
         // 查询按钮
         queryBtn.setText("查询");
         queryBtn.setBackground(Color.white);
         queryBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        queryBtn.setBounds(508,25,80,25);
+        queryBtn.setBounds(660,70,80,25);
         this.add(queryBtn);
         // 添加表格
         this.setTable();
 
-        // 首页
-        homePageBtn.setText("首页");
-        homePageBtn.setBackground(Color.lightGray);
-        homePageBtn.setFont(font);
-        homePageBtn.setBounds(50,310,80,25);
-        this.add(homePageBtn);
-        // 上一页
-        prevPageBtn.setText("上一页");
-        prevPageBtn.setBackground(Color.lightGray);
-        prevPageBtn.setFont(font);
-        prevPageBtn.setBounds(230,310,80,25);
-        this.add(prevPageBtn);
-        // 下一页
-        nextPageBtn.setText("下一页");
-        nextPageBtn.setBackground(Color.lightGray);
-        nextPageBtn.setFont(font);
-        nextPageBtn.setBounds(330,310,80,25);
-        this.add(nextPageBtn);
-        // 末页
-        endPageBtn.setText("末页");
-        endPageBtn.setBackground(Color.lightGray);
-        endPageBtn.setFont(font);
-        endPageBtn.setBounds(508,310,80,25);
-        this.add(endPageBtn);
-
     }
     private void setTable(){
         // 表格
-        scrollPanel.setBounds(50,70,540,231);
+        scrollPanel.setBounds(50,110,690,267);
         try {
-            stockTable.setModel(new ListTableModel<>(proList,Product.class,colNames,propNames));
+            stockTable.setModel(new ListTableModel<>(proList,Record.class,colNames,propNames));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // 表格格式设置
+        stockTable.setFont(new Font("微软雅黑",Font.PLAIN,14));
+        stockTable.setRowHeight(24);
+        stockTable.getTableHeader().setFont(new Font("微软雅黑",Font.BOLD,15));
         // 单元格居中
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
@@ -157,11 +148,30 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
         scrollPanel.setViewportView(stockTable);
         this.add(scrollPanel);
 
-        // ------------------------------------------
-        inventoryMngBtn.setBounds(0,0,80,25);
-        inventoryMngBtn.setText("更新");
-        this.add(inventoryMngBtn);
-        // ------------------------------------------
+        // 首页
+        homePageBtn.setText("首页");
+        homePageBtn.setBackground(Color.white);
+        homePageBtn.setFont(font);
+        homePageBtn.setBounds(50,390,80,25);
+        this.add(homePageBtn);
+        // 上一页
+        prevPageBtn.setText("上一页");
+        prevPageBtn.setBackground(Color.white);
+        prevPageBtn.setFont(font);
+        prevPageBtn.setBounds(300,390,80,25);
+        this.add(prevPageBtn);
+        // 下一页
+        nextPageBtn.setText("下一页");
+        nextPageBtn.setBackground(Color.white);
+        nextPageBtn.setFont(font);
+        nextPageBtn.setBounds(400,390,80,25);
+        this.add(nextPageBtn);
+        // 末页
+        endPageBtn.setText("末页");
+        endPageBtn.setBackground(Color.white);
+        endPageBtn.setFont(font);
+        endPageBtn.setBounds(660,390,80,25);
+        this.add(endPageBtn);
     }
     private void addListener(){
         queryBtn.addMouseListener(new MouseAdapter() {
@@ -194,12 +204,6 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
                 endPage();
             }
         });
-        inventoryMngBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                getSelectProduct();
-            }
-        });
     }
 
     public abstract void queryProduct();
@@ -207,6 +211,6 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
     public abstract void prevPage();
     public abstract void nextPage();
     public abstract void endPage();
-    public abstract void getSelectProduct();
+
 }
 

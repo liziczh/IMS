@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public abstract class AbstractInventoryMngDialog extends JDialog {
+public abstract class AbstractStockInDialog extends JDialog {
 
     private Font font = new Font("微软雅黑",Font.BOLD,14);
     private JLabel titleLabel = new JLabel();
@@ -23,25 +23,23 @@ public abstract class AbstractInventoryMngDialog extends JDialog {
     protected JTextField supplierText = new JTextField();
     private JLabel brandLabel = new JLabel();
     protected JTextField brandText = new JTextField();
-    private JButton resetBtn = new JButton();
-    private JButton modifyBtn = new JButton();
-    // 商品显示信息的封装
-    public Product product = new Product();
+    private JLabel countLabel = new JLabel();
+    protected JTextField countText = new JTextField();
+    private JLabel registerLabel = new JLabel();
+    protected JTextField registerText = new JTextField();
+    protected JButton resetBtn = new JButton();
+    protected JButton inStockBtn = new JButton();
+    protected String recordType = "in";
 
-    public AbstractInventoryMngDialog(){
+    public AbstractStockInDialog(){
         this.init();
     }
 
     private void init(){
-        titleLabel.setText("商品管理");
-        titleLabel.setIcon(new ImageIcon("imgs/in.png"));
-        titleLabel.setFont(new Font("微软雅黑",Font.PLAIN,20));
-        titleLabel.setBounds(120,20,120,40);
-        this.add(titleLabel);
-        this.setTitle("商品管理");
+        this.setTitle("进货入库");
         this.getContentPane().setBackground(Color.white);
         this.setIconImage(new ImageIcon("imgs/logo.png").getImage());
-        this.setSize(360,400);
+        this.setBounds(0,0,360,480);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -52,6 +50,11 @@ public abstract class AbstractInventoryMngDialog extends JDialog {
     }
 
     private void addComponent(){
+        titleLabel.setText("进货入库");
+        titleLabel.setIcon(new ImageIcon("imgs/in.png"));
+        titleLabel.setFont(new Font("微软雅黑",Font.PLAIN,20));
+        titleLabel.setBounds(120,20,120,40);
+        this.add(titleLabel);
         proIdLabel.setText("产品编号:");
         proIdLabel.setFont(font);
         proIdLabel.setBounds(40,80,100,30);
@@ -88,45 +91,55 @@ public abstract class AbstractInventoryMngDialog extends JDialog {
         brandText.setBounds(110,240,200,30);
         brandText.setFont(font);
         this.add(brandText);
+        countLabel.setText("产品数量:");
+        countLabel.setFont(font);
+        countLabel.setBounds(40,280,100,30);
+        this.add(countLabel);
+        countText.setBounds(110,280,200,30);
+        countText.setFont(font);
+        this.add(countText);
+        registerLabel.setText("负 责 人：");
+        registerLabel.setFont(font);
+        registerLabel.setBounds(40,320,100,30);
+        this.add(registerLabel);
+        registerText.setBounds(110,320,200,30);
+        registerText.setFont(font);
+        this.add(registerText);
+
         resetBtn.setText("重置");
         resetBtn.setFont(font);
-        resetBtn.setBounds(40,300,100,30);
+        resetBtn.setBounds(40,380,100,30);
         resetBtn.setBackground(new Color(230,200,80));
         this.add(resetBtn);
-        modifyBtn.setText("修改");
-        modifyBtn.setFont(font);
-        modifyBtn.setBounds(200,300,100,30);
-        modifyBtn.setBackground(new Color(80,150,230));
-        this.add(modifyBtn);
-    }
-    public void setText(Product product){
-        if(product != null){
-            proIdText.setText(String.valueOf(product.getProId()));
-            proNameText.setText(product.getProName());
-            dirBox.setSelectedItem(product.getDirName());
-            supplierText.setText(product.getSupplier());
-            brandText.setText(product.getBrand());
-        }
+        inStockBtn.setText("入库");
+        inStockBtn.setFont(font);
+        inStockBtn.setBounds(200,380,100,30);
+        inStockBtn.setBackground(new Color(80,150,230));
+        this.add(inStockBtn);
+
     }
 
-    private void addListener(){
+    protected void addListener(){
+
+        //重置所有输入信息为空
         resetBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 reset();
             }
         });
-        modifyBtn.addMouseListener(new MouseAdapter() {
+
+        //进货入库页面提交后，数据内容保存到数据库中的商品表中，并转到入库记录界面
+        inStockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                modify();
+                stockIn();
             }
         });
     }
 
-
     public abstract void reset();
-    public abstract void modify();
+    public abstract void stockIn();
 
 }
 

@@ -3,11 +3,11 @@ package com.liziczh.ims.controller;
 import com.liziczh.ims.domain.Product;
 import com.liziczh.ims.service.IStockInService;
 import com.liziczh.ims.service.impl.StockInServiceImpl;
-import com.liziczh.ims.views.AbstractPurchaseInPanel;
+import com.liziczh.ims.views.AbstractStockInDialog;
 
 import javax.swing.*;
 
-public class PurchaseInController extends AbstractPurchaseInPanel {
+public class StockInController extends AbstractStockInDialog {
     private IStockInService stockInService = new StockInServiceImpl();
     @Override
     public void reset() {

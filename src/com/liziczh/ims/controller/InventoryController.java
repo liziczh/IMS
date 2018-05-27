@@ -5,11 +5,11 @@ import com.liziczh.ims.service.IProductService;
 import com.liziczh.ims.service.impl.ProductServiceImpl;
 import com.liziczh.ims.tools.ListTableModel;
 import com.liziczh.ims.views.AbstractInventoryMngDialog;
-import com.liziczh.ims.views.AbstractInventoryQueryPanel;
+import com.liziczh.ims.views.AbstractInventoryPanel;
 
 import javax.swing.*;
 
-public class InventoryQueryController extends AbstractInventoryQueryPanel {
+public class InventoryController extends AbstractInventoryPanel {
     private IProductService productService = new ProductServiceImpl();
     // 库存上下限默认值
     private int lowerCount = 0;
@@ -82,21 +82,6 @@ public class InventoryQueryController extends AbstractInventoryQueryPanel {
                 currentPage = total/pageSize + 1;
             }
             queryProduct();
-        }
-    }
-
-    @Override
-    public void getSelectProduct() {
-        if(stockTable.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(null,"未选中任何商品","温馨提示",JOptionPane.WARNING_MESSAGE);
-        }else{
-            AbstractInventoryMngDialog inventoryMngDialog= new InventoryMngController();
-            try {
-                inventoryMngDialog.product = new ListTableModel<>(proList,Product.class,colNames,propNames).getInstance(stockTable.getSelectedRow());
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-            inventoryMngDialog.setText(inventoryMngDialog.product);
         }
     }
 

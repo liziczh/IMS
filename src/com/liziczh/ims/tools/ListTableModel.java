@@ -22,7 +22,7 @@ public class ListTableModel<T> extends AbstractTableModel {
 
     public int getRowCount() {
     	int size = list.size();
-        return size < 13 ? 13 : size;
+        return size < 10 ? 10 : size;
     }
 
     public int getColumnCount() {

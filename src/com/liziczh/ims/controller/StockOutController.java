@@ -2,11 +2,11 @@ package com.liziczh.ims.controller;
 
 import com.liziczh.ims.service.IStockOutService;
 import com.liziczh.ims.service.impl.StockOutServiceImpl;
-import com.liziczh.ims.views.AbstractSalesOutPanel;
+import com.liziczh.ims.views.AbstractStockOutDialog;
 
 import javax.swing.*;
 
-public class SalesOutController extends AbstractSalesOutPanel {
+public class StockOutController extends AbstractStockOutDialog {
     private IStockOutService stockOutService = new StockOutServiceImpl();
 
     @Override

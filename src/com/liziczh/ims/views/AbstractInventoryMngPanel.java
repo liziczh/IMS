@@ -2,8 +2,10 @@ package com.liziczh.ims.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class InventoryMngPanel extends JPanel {
+public abstract class AbstractInventoryMngPanel extends JPanel {
 
     private Font font = new Font("微软雅黑",Font.BOLD,14);
     private JLabel proId = new JLabel();
@@ -11,17 +13,17 @@ public class InventoryMngPanel extends JPanel {
     private JLabel proName = new JLabel();
     private JTextField proNameText = new JTextField();
     private JLabel dirId = new JLabel();
-    private JTextField dirIdText = new JTextField();
+    // 分类下拉框
+    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
+    protected JComboBox dirBox = new JComboBox<>(def);
     private JLabel supplier = new JLabel();
     private JTextField supplierText = new JTextField();
     private JLabel brand = new JLabel();
     private JTextField brandText = new JTextField();
-    private JLabel count = new JLabel();
-    private JTextField countText = new JTextField();
     protected JButton resetBtn = new JButton();
-    protected JButton commitBtn = new JButton();
+    protected JButton modifyBtn = new JButton();
 
-    public InventoryMngPanel(){
+    public AbstractInventoryMngPanel(){
         this.init();
     }
 
@@ -49,13 +51,14 @@ public class InventoryMngPanel extends JPanel {
         proNameText.setBounds(220,80,200,30);
         proNameText.setFont(font);
         this.add(proNameText);
-        dirId.setText("分类编号:");
+        dirId.setText("分   类 :");
         dirId.setFont(font);
         dirId.setBounds(150,120,100,30);
         this.add(dirId);
-        dirIdText.setBounds(220,120,200,30);
-        dirIdText.setFont(font);
-        this.add(dirIdText);
+        dirBox.setBounds(220,120,200,30);
+        dirBox.setFont(font);
+        dirBox.setBackground(Color.white);
+        this.add(dirBox);
         supplier.setText("供 应 商：");
         supplier.setFont(font);
         supplier.setBounds(150,160,100,30);
@@ -70,30 +73,30 @@ public class InventoryMngPanel extends JPanel {
         brandText.setBounds(220,200,200,30);
         brandText.setFont(font);
         this.add(brandText);
-        count.setText("产品数量:");
-        count.setFont(font);
-        count.setBounds(150,240,100,30);
-        this.add(count);
-        countText.setBounds(220,240,200,30);
-        countText.setFont(font);
-        this.add(countText);
 
         resetBtn.setText("重置");
         resetBtn.setFont(font);
         resetBtn.setBounds(150,300,100,30);
         resetBtn.setBackground(new Color(230,200,80));
         this.add(resetBtn);
-        commitBtn.setText("更新");
-        commitBtn.setFont(font);
-        commitBtn.setBounds(320,300,100,30);
-        commitBtn.setBackground(new Color(80,150,230));
-        this.add(commitBtn);
+        modifyBtn.setText("修改");
+        modifyBtn.setFont(font);
+        modifyBtn.setBounds(320,300,100,30);
+        modifyBtn.setBackground(new Color(80,150,230));
+        this.add(modifyBtn);
 
     }
 
     private void addListener(){
-
+        modifyBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                modify();
+            }
+        });
     }
+
+    public abstract void modify();
 
 }
 

@@ -80,7 +80,7 @@ public class VerifiCodeUtil{
                 int isbold = random.nextInt(2);
 
                 /* 随机字体大小 */
-                int fontsize = 22 + random.nextInt(10);
+                int fontsize = 22 + random.nextInt(8);
 
                 Font font = new Font(fontname,isbold ,fontsize);
 

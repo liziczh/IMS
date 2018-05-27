@@ -15,6 +15,12 @@ public interface IProductDao {
 
     // 根据id查询
     public Product getProductById(int id);
-    // 商品出库
-    public boolean stockOut(int id,int count,String register);
+    // 插入产品
+    public void insertProduct(Product product);
+    // 更新产品
+    public void updateProductCountPlus(Product product);
+    public void updateProductCountSub(Product product,int count);
+
+
+
 }

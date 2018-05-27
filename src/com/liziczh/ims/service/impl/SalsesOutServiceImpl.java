@@ -10,8 +10,9 @@ import com.liziczh.ims.service.ISalesOutService;
 public class SalsesOutServiceImpl implements ISalesOutService {
     IProductDao productDao = new ProductDaoImpl();
     IRecordDao recordDao = new RecordDaoImpl();
+
     @Override
-    public Product QueryProduct(int id,int count) {
+    public Product checkProduct(int id,int count) {
         if(productDao.getProductById(id) == null){
             return null;
         }else if(productDao.getProductById(id).getCount() < count){
@@ -20,10 +21,12 @@ public class SalsesOutServiceImpl implements ISalesOutService {
             return productDao.getProductById(id);
         }
     }
+
     @Override
     public void outStock(int id, int count,String register,String recordType) {
         Product product = productDao.getProductById(id);
-        recordDao.insertOutStock(product,count,register,recordType);
-        recordDao.stockOut(product,count);
+        recordDao.insertRecord(product,count,register,recordType);
+        productDao.updateProductCountSub(product,count);
     }
+
 }

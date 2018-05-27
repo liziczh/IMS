@@ -48,48 +48,12 @@ public class RecordDaoImpl implements IRecordDao {
         return recordList;
     }
 
-    @Override
-    public void insertInStock(Product product, String register, String recordTpye) {
-        String sql = "insert into \"record\" values(?,?,?,?,?,?)";
-        try {
-            queryRunner.update(sql,DateUtils.date2String(new Date()),product.getProId(), product.getProName(), product.getCount(),register,recordTpye);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    @Override
-    public void updateProduct(Product product) {
-        String sql = "update \"product\" set \"count\"= nvl(\"count\",0) + ? where \"proId\" = ?";
-        try {
-            queryRunner.update(sql,product.getCount(),product.getProId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    @Override
-    public void insertProduct(Product product) {
-        String sql = "insert into \"product\" values(?,?,?,?,?,?)";
-        try {
-            queryRunner.update(sql,product.getProId(),product.getProName(), product.getDirName(),product.getSupplier(), product.getBrand(),product.getCount());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
-    public void stockOut(Product product, int count) {
-        String sql = "update \"product\" set \"count\"= \"count\" - ? where \"proId\" = ?";
-        try {
-            queryRunner.update(sql,count,product.getProId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    @Override
-    public void insertOutStock(Product product,int count, String register,String recordTpye) {
+    public void insertRecord(Product product,int count, String register,String recordType) {
         String sql = "insert into \"record\" values(?,?,?,?,?,?)";
         try {
-            queryRunner.update(sql,DateUtils.date2String(new Date()),product.getProId(), product.getProName(),count,register,recordTpye);
+            queryRunner.update(sql,DateUtils.date2String(new Date()),product.getProId(), product.getProName(),count,register,recordType);
         } catch (SQLException e) {
             e.printStackTrace();
         }

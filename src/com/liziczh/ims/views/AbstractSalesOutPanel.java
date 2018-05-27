@@ -17,7 +17,7 @@ public abstract class AbstractSalesOutPanel extends JPanel {
     private JLabel register = new JLabel();
     protected JTextField registerText = new JTextField();
     private JButton resetBtn = new JButton();
-    private JButton deleteBtn = new JButton();
+    private JButton outStockBtn = new JButton();
     protected String recordType = "out";
 
     public AbstractSalesOutPanel(){
@@ -68,11 +68,11 @@ public abstract class AbstractSalesOutPanel extends JPanel {
         resetBtn.setBounds(150,290,100,30);
         resetBtn.setBackground(new Color(230,200,80));
         this.add(resetBtn);
-        deleteBtn.setText("删除");
-        deleteBtn.setFont(font);
-        deleteBtn.setBounds(320,290,100,30);
-        deleteBtn.setBackground(new Color(200,70,30));
-        this.add(deleteBtn);
+        outStockBtn.setText("出库");
+        outStockBtn.setFont(font);
+        outStockBtn.setBounds(320,290,100,30);
+        outStockBtn.setBackground(new Color(200,70,30));
+        this.add(outStockBtn);
 
     }
 
@@ -83,15 +83,15 @@ public abstract class AbstractSalesOutPanel extends JPanel {
                 reset();
             }
         });
-        deleteBtn.addMouseListener(new MouseAdapter() {
+        outStockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                delete();
+                outStock();
             }
         });
     }
     public abstract void reset();
-    public abstract void delete();
+    public abstract void outStock();
 
 }
 

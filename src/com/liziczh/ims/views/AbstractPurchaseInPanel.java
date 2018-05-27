@@ -1,5 +1,7 @@
 package com.liziczh.ims.views;
 
+import com.liziczh.ims.domain.Product;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -13,7 +15,9 @@ public abstract class AbstractPurchaseInPanel extends JPanel {
     private JLabel proName = new JLabel();
     protected JTextField proNameText = new JTextField();
     private JLabel dirName = new JLabel();
-    protected JTextField dirNameText = new JTextField();
+    // 分类下拉框
+    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
+    protected JComboBox dirBox = new JComboBox<>(def);
     private JLabel supplier = new JLabel();
     protected JTextField supplierText = new JTextField();
     private JLabel brand = new JLabel();
@@ -23,7 +27,7 @@ public abstract class AbstractPurchaseInPanel extends JPanel {
     private JLabel register = new JLabel();
     protected JTextField registerText = new JTextField();
     protected JButton resetBtn = new JButton();
-    protected JButton commitBtn = new JButton();
+    protected JButton inStockBtn = new JButton();
     protected String recordType = "in";
 
     public AbstractPurchaseInPanel(){
@@ -58,9 +62,10 @@ public abstract class AbstractPurchaseInPanel extends JPanel {
         dirName.setFont(font);
         dirName.setBounds(150,120,100,30);
         this.add(dirName);
-        dirNameText.setBounds(220,120,200,30);
-        dirNameText.setFont(font);
-        this.add(dirNameText);
+        dirBox.setBounds(220,120,200,30);
+        dirBox.setFont(font);
+        dirBox.setBackground(Color.white);
+        this.add(dirBox);
         supplier.setText("供 应 商：");
         supplier.setFont(font);
         supplier.setBounds(150,160,100,30);
@@ -95,11 +100,11 @@ public abstract class AbstractPurchaseInPanel extends JPanel {
         resetBtn.setBounds(150,320,100,30);
         resetBtn.setBackground(new Color(230,200,80));
         this.add(resetBtn);
-        commitBtn.setText("提交");
-        commitBtn.setFont(font);
-        commitBtn.setBounds(320,320,100,30);
-        commitBtn.setBackground(new Color(80,150,230));
-        this.add(commitBtn);
+        inStockBtn.setText("入库");
+        inStockBtn.setFont(font);
+        inStockBtn.setBounds(320,320,100,30);
+        inStockBtn.setBackground(new Color(80,150,230));
+        this.add(inStockBtn);
 
     }
 
@@ -114,19 +119,14 @@ public abstract class AbstractPurchaseInPanel extends JPanel {
         });
 
         //进货入库页面提交后，数据内容保存到数据库中的商品表中，并转到入库记录界面
-        commitBtn.addMouseListener(new MouseAdapter() {
+        inStockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(proIdText.getText() == null && proNameText.getText() == null && dirNameText.getText() == null && supplierText == null && brandText == null && countText == null && registerText == null){
-                    JOptionPane.showMessageDialog(null,"请确认所有选项都已填写完成");
-                }else{
-                    commit();
-//                    reset();
-                }
+                inStock();
             }
         });
     }
-    public abstract void commit();
+    public abstract void inStock();
     public abstract void reset();
 
 }

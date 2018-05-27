@@ -1,16 +1,13 @@
 package com.liziczh.ims.views;
 
-import com.liziczh.ims.controller.InventoryQueryController;
-import com.liziczh.ims.controller.PurchaseInController;
-import com.liziczh.ims.controller.RecordController;
-import com.liziczh.ims.controller.SalesOutController;
+import com.liziczh.ims.controller.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public abstract class AbstractMainFrame extends JFrame {
+public class MainFrame extends JFrame {
 
     private CardLayout card = new CardLayout(); // 卡片布局
     // 菜单栏组件
@@ -37,12 +34,12 @@ public abstract class AbstractMainFrame extends JFrame {
     private AbstractRecordPanel salesRecordPanel = new RecordController(); // 出库记录页面
     // inventoryPanel界面内容
     private AbstractInventoryQueryPanel inventoryQueryPanel = new InventoryQueryController(); // 查询库存页面
-    private InventoryMngPanel inventoryMngPanel = new InventoryMngPanel(); // 库存更新界面
+    private AbstractInventoryMngPanel inventoryMngPanel = new InventoryMngController(); // 库存更新界面
     // statistics界面内容
     private StatisticsPanel statisticsPurchasePanel = new StatisticsPanel();
     private StatisticsPanel statisticsSalesPanel = new StatisticsPanel();
 
-    public AbstractMainFrame(){
+    public MainFrame(){
         this.init();
     }
 
@@ -119,7 +116,7 @@ public abstract class AbstractMainFrame extends JFrame {
         // 下方面板Panel
         tabPanel.setLayout(card);
         tabPanel.setBackground(Color.white);
-        tabPanel.setBounds(0,100,1200,600);
+        tabPanel.setBounds(0,100,800,400);
         tabPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         // 进货管理
@@ -239,11 +236,6 @@ public abstract class AbstractMainFrame extends JFrame {
                 statisticsBtn.setBackground(new Color(214,213,183));
             }
         });
-
-        /*
-         * 功能实现
-         */
-
 
 
     }

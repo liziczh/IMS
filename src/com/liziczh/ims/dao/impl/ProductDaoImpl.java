@@ -60,15 +60,33 @@ public class ProductDaoImpl implements IProductDao {
     }
 
     @Override
-    public boolean stockOut(int id,int count,String register) {
-        String sql = "update \"product\" set \"count\" = \"count\" - ? where \"proId\" = ? ";
+    public void insertProduct(Product product) {
+        String sql = "insert into \"product\" values(?,?,?,?,?,?)";
         try {
-            queryRunner.update(sql,id,count);
-            return true;
+            queryRunner.update(sql,product.getProId(),product.getProName(), product.getDirName(),product.getSupplier(), product.getBrand(),product.getCount());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+    }
+
+    @Override
+    public void updateProductCountPlus(Product product) {
+        String sql = "update \"product\" set \"count\"= nvl(\"count\",0) + ? where \"proId\" = ?";
+        try {
+            queryRunner.update(sql,product.getCount(),product.getProId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateProductCountSub(Product product, int count) {
+        String sql = "update \"product\" set \"count\"= \"count\" - ? where \"proId\" = ?";
+        try {
+            queryRunner.update(sql,count,product.getProId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

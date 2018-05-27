@@ -75,7 +75,7 @@ public abstract class AbstractLoginFrame extends JFrame {
         loginPanel.add(codeText);
         // 验证码图片
         codeImgLabel.setIcon(new ImageIcon(VerifiCodeUtil.getBufferdImage(120,40)));
-        codeImgLabel.setBounds(320,215,120,40);
+        codeImgLabel.setBounds(320,220,120,30);
         loginPanel.add(codeImgLabel);
         // 登陆按钮
         loginBtn.setText("登   陆");

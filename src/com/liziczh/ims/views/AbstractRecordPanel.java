@@ -39,7 +39,7 @@ public abstract class AbstractRecordPanel extends JPanel {
     private JScrollPane scrollPanel = new JScrollPane();
     // 当前页数和页内数据行数
     protected int currentPage = 1;
-    protected int pageSize = 2;
+    protected int pageSize = 13;
     // 首页
     private JButton homePageBtn = new JButton();
     // 上一页

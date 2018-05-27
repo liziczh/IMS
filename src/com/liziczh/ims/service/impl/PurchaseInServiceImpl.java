@@ -10,13 +10,14 @@ import com.liziczh.ims.service.IPurchaseInService;
 public class PurchaseInServiceImpl implements IPurchaseInService {
     IRecordDao recordDao = new RecordDaoImpl();
     IProductDao productDao = new ProductDaoImpl();
+
     @Override
-    public void commitData(Product product, String register,String in) {
-        recordDao.insertInStock(product,register,in);
+    public void inStock(Product product, String register, String recordType) {
+        recordDao.insertRecord(product,product.getCount(),register,recordType);
         if(productDao.getProductById(product.getProId()) != null){
-            recordDao.updateProduct(product);
+            productDao.updateProductCountPlus(product);
         }else{
-            recordDao.insertProduct(product);
+            productDao.insertProduct(product);
         }
     }
 }

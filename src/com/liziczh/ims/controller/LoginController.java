@@ -4,6 +4,8 @@ import com.liziczh.ims.service.IUserService;
 import com.liziczh.ims.service.impl.UserServiceImpl;
 import com.liziczh.ims.tools.VerifiCodeUtil;
 import com.liziczh.ims.views.AbstractLoginFrame;
+import com.liziczh.ims.views.MainFrame;
+
 import javax.swing.*;
 
 public class LoginController extends AbstractLoginFrame {
@@ -38,7 +40,7 @@ public class LoginController extends AbstractLoginFrame {
         if(isUser && isCode){
             JOptionPane.showMessageDialog(this,"登陆成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            new MainController();
+            new MainFrame();
         }
     }
 

@@ -34,7 +34,6 @@ public class MainFrame extends JFrame {
     private AbstractRecordPanel salesRecordPanel = new RecordController(); // 出库记录页面
     // inventoryPanel界面内容
     private AbstractInventoryQueryPanel inventoryQueryPanel = new InventoryQueryController(); // 查询库存页面
-    private AbstractInventoryMngPanel inventoryMngPanel = new InventoryMngController(); // 库存更新界面
     // statistics界面内容
     private StatisticsPanel statisticsPurchasePanel = new StatisticsPanel();
     private StatisticsPanel statisticsSalesPanel = new StatisticsPanel();
@@ -171,8 +170,6 @@ public class MainFrame extends JFrame {
 
         // 查询库存
         inventoryPanel.tabItem1Panel.add("inventoryQueryPanel",inventoryQueryPanel);
-        // 商品管理
-        inventoryPanel.tabItem2Panel.add("inventoryMngPanel",inventoryMngPanel);
 
 
         // 采购统计
@@ -236,6 +233,8 @@ public class MainFrame extends JFrame {
                 statisticsBtn.setBackground(new Color(214,213,183));
             }
         });
+
+
 
 
     }

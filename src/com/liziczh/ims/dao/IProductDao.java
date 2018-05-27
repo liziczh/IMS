@@ -17,10 +17,11 @@ public interface IProductDao {
     public Product getProductById(int id);
     // 插入产品
     public void insertProduct(Product product);
-    // 更新产品
+    // 更新产品库存
     public void updateProductCountPlus(Product product);
     public void updateProductCountSub(Product product,int count);
 
-
+    // 更新产品信息
+    public void updateProduct(Product product);
 
 }

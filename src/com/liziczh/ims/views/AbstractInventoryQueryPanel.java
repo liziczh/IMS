@@ -1,5 +1,6 @@
 package com.liziczh.ims.views;
 
+import com.liziczh.ims.controller.InventoryMngController;
 import com.liziczh.ims.domain.Product;
 import com.liziczh.ims.tools.ListTableModel;
 
@@ -45,7 +46,10 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
     private JButton nextPageBtn = new JButton();
     // 末页
     private JButton endPageBtn = new JButton();
-
+//-------------------------------------------------------------
+    // 很随便的一个Btn
+    private JButton inventoryMngBtn = new JButton();
+//-------------------------------------------------------------
     public AbstractInventoryQueryPanel(){
             this.init();
         }
@@ -152,6 +156,12 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
         // 添加表头表格
         scrollPanel.setViewportView(stockTable);
         this.add(scrollPanel);
+
+        // ------------------------------------------
+        inventoryMngBtn.setBounds(0,0,80,25);
+        inventoryMngBtn.setText("更新");
+        this.add(inventoryMngBtn);
+        // ------------------------------------------
     }
     private void addListener(){
         queryBtn.addMouseListener(new MouseAdapter() {
@@ -184,7 +194,12 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
                 endPage();
             }
         });
+        inventoryMngBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
+            }
+        });
     }
 
     public abstract void queryProduct();
@@ -192,6 +207,6 @@ public abstract class AbstractInventoryQueryPanel extends JPanel {
     public abstract void prevPage();
     public abstract void nextPage();
     public abstract void endPage();
-
+    public abstract void getSelectProduct();
 }
 

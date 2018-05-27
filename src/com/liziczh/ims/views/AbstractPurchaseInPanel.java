@@ -41,6 +41,7 @@ public abstract class AbstractPurchaseInPanel extends JPanel {
         this.setBounds(0,0,650,500);
         this.addComponent();
         this.addListener();
+        this.setVisible(true);
     }
 
     private void addComponent(){
@@ -122,11 +123,11 @@ public abstract class AbstractPurchaseInPanel extends JPanel {
         inStockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                inStock();
+                stockIn();
             }
         });
     }
-    public abstract void inStock();
+    public abstract void stockIn();
     public abstract void reset();
 
 }

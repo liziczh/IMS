@@ -89,6 +89,16 @@ public class ProductDaoImpl implements IProductDao {
         }
     }
 
+    @Override
+    public void updateProduct(Product product) {
+        String sql = "update \"product\" set \"proName\" = ?, \"dirName\" = ?, \"supplier\" = ?, \"brand\" = ? where \"proId\" = ?";
+        try {
+            queryRunner.update(sql,product.getProName(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

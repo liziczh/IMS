@@ -59,6 +59,15 @@ public class RecordDaoImpl implements IRecordDao {
         }
     }
 
+    @Override
+    public void updateRecord(int proId,String proName) {
+        String sql = "update \"record\" set \"proName\" = ? where \"proId\" = ?";
+        try {
+            queryRunner.update(sql,proName,proId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

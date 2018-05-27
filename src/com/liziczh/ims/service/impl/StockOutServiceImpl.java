@@ -5,9 +5,9 @@ import com.liziczh.ims.dao.IRecordDao;
 import com.liziczh.ims.dao.impl.ProductDaoImpl;
 import com.liziczh.ims.dao.impl.RecordDaoImpl;
 import com.liziczh.ims.domain.Product;
-import com.liziczh.ims.service.ISalesOutService;
+import com.liziczh.ims.service.IStockOutService;
 
-public class SalsesOutServiceImpl implements ISalesOutService {
+public class StockOutServiceImpl implements IStockOutService {
     IProductDao productDao = new ProductDaoImpl();
     IRecordDao recordDao = new RecordDaoImpl();
 
@@ -23,7 +23,7 @@ public class SalsesOutServiceImpl implements ISalesOutService {
     }
 
     @Override
-    public void outStock(int id, int count,String register,String recordType) {
+    public void stockOut(int id, int count,String register,String recordType) {
         Product product = productDao.getProductById(id);
         recordDao.insertRecord(product,count,register,recordType);
         productDao.updateProductCountSub(product,count);

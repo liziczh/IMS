@@ -16,7 +16,8 @@ public interface IRecordDao {
     // 插入记录
     public void insertRecord(Product product,int count,String register,String recoryType);
 
-
+    // 更新记录信息
+    public void updateRecord(int proId,String proName);
 
 
 }

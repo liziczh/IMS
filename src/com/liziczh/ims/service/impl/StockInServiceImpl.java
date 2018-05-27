@@ -5,14 +5,14 @@ import com.liziczh.ims.dao.IRecordDao;
 import com.liziczh.ims.dao.impl.ProductDaoImpl;
 import com.liziczh.ims.dao.impl.RecordDaoImpl;
 import com.liziczh.ims.domain.Product;
-import com.liziczh.ims.service.IPurchaseInService;
+import com.liziczh.ims.service.IStockInService;
 
-public class PurchaseInServiceImpl implements IPurchaseInService {
+public class StockInServiceImpl implements IStockInService {
     IRecordDao recordDao = new RecordDaoImpl();
     IProductDao productDao = new ProductDaoImpl();
 
     @Override
-    public void inStock(Product product, String register, String recordType) {
+    public void stockIn(Product product, String register, String recordType) {
         recordDao.insertRecord(product,product.getCount(),register,recordType);
         if(productDao.getProductById(product.getProId()) != null){
             productDao.updateProductCountPlus(product);

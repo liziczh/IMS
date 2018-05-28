@@ -2,20 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85d5d2e0-d6b3-43a3-8459-6f91ff360ee1" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/StatisticsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/liziczh/ims/dao/ILedgerDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/liziczh/ims/dao/impl/LedgerDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/liziczh/ims/service/ILedgerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/liziczh/ims/service/impl/LedgerServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/liziczh/ims/tools/ChartUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsChartDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryMngController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryMngController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/controller/PurchaseInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/StockInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/controller/SalesOutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/StockOutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/tools/ListTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/tools/ListTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryMngDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryMngDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryQueryPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractPurchaseInPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractStockInDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractRecordPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractRecordPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractSalesOutPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractStockOutDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/tools/JFreeChartUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractLoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractLoginFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/TabPanel.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,11 +31,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/MainFrame.java">
+      <file leaf-file-name="StatisticsPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="153" column="11" lean-forward="true" selection-start-line="153" selection-start-column="11" selection-end-line="153" selection-end-column="11" />
+            <state relative-caret-position="217">
+              <caret line="78" column="27" lean-forward="true" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StatisticsChartDialog.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsChartDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -70,8 +78,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/liziczh/ims/service/impl/RecordServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/PurchaseInPanel.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractMainFrame.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/InventoryMngPanel.java" />
@@ -79,7 +85,6 @@
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/service/IPurchaseInService.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/app/Main.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/tools/VerifiCodeUtil.java" />
-        <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractLoginFrame.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/service/ISalesOutService.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/service/impl/PurchaseInServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/service/impl/SalsesOutServiceImpl.java" />
@@ -108,19 +113,22 @@
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractStockInPanel.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryQueryPanel.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryQueryController.java" />
-        <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/tools/ListTableModel.java" />
-        <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractRecordPanel.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryPanel.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractStockInDialog.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractStockOutDialog.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryMngDialog.java" />
-        <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/StockOutController.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryMngController.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/StockInController.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractLoginFrame.java" />
+        <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java" />
+        <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/StatisticsChartController.java" />
+        <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/StatisticsController.java" />
+        <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java" />
       </list>
     </option>
   </component>
@@ -134,10 +142,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="148" />
-    <option name="y" value="15" />
-    <option name="width" value="1126" />
-    <option name="height" value="702" />
+    <option name="x" value="225" />
+    <option name="y" value="8" />
+    <option name="width" value="1047" />
+    <option name="height" value="691" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -147,9 +155,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,6 +191,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -199,22 +207,22 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\service\impl" />
-      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\service" />
-      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\controller" />
-      <recent name="D:\Code\Java\workplace-java-idea\IMS\lib" />
-      <recent name="D:\Code\Java\workplace-java-idea\IMS\imgs" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.liziczh.ims.views" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\dao" />
       <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\tools" />
       <recent name="D:\Code\Java\workplace-java-idea\IMS\lib" />
       <recent name="D:\Code\Java\workplace-java-idea\IMS\imgs" />
       <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\domain" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.liziczh.ims.views" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\views" />
+      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\controller" />
+      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\service\impl" />
       <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\dao\impl" />
+      <recent name="D:\Code\Java\workplace-java-idea\IMS\src\com\liziczh\ims\service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -376,20 +384,23 @@
       <workItem from="1527382910025" duration="11334000" />
       <workItem from="1527394679697" duration="21421000" />
       <workItem from="1527418111613" duration="11068000" />
-      <workItem from="1527430902668" duration="3370000" />
+      <workItem from="1527430902668" duration="5128000" />
+      <workItem from="1527480634310" duration="465000" />
+      <workItem from="1527487134284" duration="1376000" />
+      <workItem from="1527488810051" duration="596000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255007000" />
+    <option name="totallyTimeSpent" value="259202000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="148" y="15" width="1126" height="702" extended-state="0" />
+    <frame x="261" y="7" width="1047" height="691" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.19120136" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.19085173" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -397,18 +408,18 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8779264" visible="true" weight="0.2956081" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8779264" visible="true" weight="0.23235801" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24324325" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26188168" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49916387" weight="0.3791209" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49916387" weight="0.3783784" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3297769" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -433,36 +444,17 @@
           <properties />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="35" />
+      <option name="time" value="36" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1474">
-          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="1848">
+          <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/../../JDK/src.zip!/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="356" selection-start-line="356" selection-end-line="356" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../JDK/src.zip!/java/net/URLClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="380" selection-start-line="380" selection-end-line="380" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/dao/impl/ProductDirDaoImpl.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/domain/ProductDir.java" />
     <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/tools/Pagenation.java" />
     <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/tools/PageSqlUtils.java" />
     <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/domain/Product.java">
@@ -505,9 +497,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -659,46 +648,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractLoginFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsInPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-770">
-          <caret line="35" column="30" lean-forward="true" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="44" column="35" lean-forward="true" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1850#1851#0" expanded="true" />
-            <element signature="e#1877#1878#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractStockOutDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="46" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsInPanel.java" />
     <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryMngDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="105" column="54" selection-start-line="105" selection-start-column="54" selection-end-line="105" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -719,16 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractRecordPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2124">
-          <caret line="166" column="33" lean-forward="true" selection-start-line="166" selection-start-column="33" selection-end-line="166" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/controller/RecordController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
@@ -740,19 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="80" column="18" lean-forward="true" selection-start-line="80" selection-start-column="18" selection-end-line="80" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -767,9 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
           <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -777,16 +705,85 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractLoginFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractStockOutDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-330">
+          <caret line="47" column="31" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractRecordPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="203" column="11" selection-start-line="203" selection-start-column="11" selection-end-line="203" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1342">
+          <caret line="61" column="20" lean-forward="true" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/controller/StatisticsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="12" column="13" lean-forward="true" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/service/impl/LedgerServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/service/ILedgerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="153" column="11" lean-forward="true" selection-start-line="153" selection-start-column="11" selection-end-line="153" selection-end-column="11" />
+        <state relative-caret-position="-177">
+          <caret line="59" column="15" lean-forward="true" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="78" column="27" lean-forward="true" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/views/StatisticsChartDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

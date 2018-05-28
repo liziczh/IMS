@@ -13,26 +13,26 @@ public abstract class AbstractLoginFrame extends JFrame {
     private Font font = new Font("微软雅黑",Font.BOLD,16);
 
     private JPanel loginPanel = new JPanel(); // 登陆面板
-    private JLabel loginImg = new JLabel(new ImageIcon("imgs/loginbg.jpg"));
-    private JLabel usernameLabel = new JLabel();
-    private JLabel passwordLabel = new JLabel();
-    private JLabel codeLabel = new JLabel();
-    protected JLabel codeImgLabel = new JLabel();
-    protected JTextField usernameText = new JTextField();
-    protected JPasswordField passwordText = new JPasswordField();
-    protected JTextField codeText = new JTextField();
-    private JLabel autherLabel = new JLabel();
-    private JButton loginBtn = new JButton();
-    private JButton registerBtn = new JButton();
+    private JLabel loginImg = new JLabel(new ImageIcon("imgs/loginbg.jpg")); // 登陆背景图
+    private JLabel usernameLabel = new JLabel(); // 用户名标签
+    private JLabel passwordLabel = new JLabel(); // 密码标签
+    private JLabel codeLabel = new JLabel(); // 验证码标签
+    protected JLabel codeImgLabel = new JLabel(); // 验证码图片
+    protected JTextField usernameText = new JTextField(); // 用户名文本框
+    protected JPasswordField passwordText = new JPasswordField(); // 密码文本框
+    protected JTextField codeText = new JTextField(); // 验证码文本框
+    private JLabel autherLabel = new JLabel(); // 作者标签
+    private JButton loginBtn = new JButton(); // 登陆按钮
+    private JButton registerBtn = new JButton(); // 注册按钮
 
     public AbstractLoginFrame(){
         this.init();
     }
 
     private void init(){
-        this.setTitle("进销存管理系统 登陆");
-        this.setIconImage(new ImageIcon("imgs/logo.png").getImage());
-        this.setSize(600,400);
+        this.setTitle("进销存管理系统 登陆"); // 设置窗口Frame标题
+        this.setIconImage(new ImageIcon("imgs/logo.png").getImage()); // 设置窗口Frame
+        this.setSize(600,400); // 设置窗口大小
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);

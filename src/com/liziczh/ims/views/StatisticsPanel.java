@@ -1,13 +1,17 @@
 package com.liziczh.ims.views;
 
+import com.liziczh.ims.service.ILedgerService;
+import com.liziczh.ims.service.impl.LedgerServiceImpl;
 import com.liziczh.ims.tools.DateChooser;
 import com.liziczh.ims.tools.DateUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 
-public class StatisticsPanel extends JPanel {
+public abstract class StatisticsPanel extends JPanel {
     // 页面标签
     protected JLabel titleLabel = new JLabel();
     // 开始时间
@@ -19,7 +23,7 @@ public class StatisticsPanel extends JPanel {
     // 分类
     private JLabel dirLabel = new JLabel();
     // 下拉框
-    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
+    private String[] def = {"采购","销售"};
     protected JComboBox dirBox = new JComboBox<>(def);
     // 统计
     private JButton countBtn = new JButton();
@@ -69,27 +73,40 @@ public class StatisticsPanel extends JPanel {
         this.add(endDateLabel);
         this.add(endDateText);
         // 分类
-        dirLabel.setText("分 类：");
+        dirLabel.setText("统计类型：");
         dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        dirLabel.setBounds(490, 70, 60, 25);
+        dirLabel.setBounds(480, 70, 100, 25);
         this.add(dirLabel);
         // 下拉框
         dirBox.setFont(new Font("微软雅黑", Font.BOLD, 14));
         dirBox.setBackground(Color.white);
-        dirBox.setBounds(540,70,100,25);
+        dirBox.setBounds(580,70,60,25);
         this.add(dirBox);
-        // 查询按钮
-        countBtn.setText("查询");
+        // 统计按钮
+        countBtn.setText("统计");
         countBtn.setBackground(Color.white);
         countBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
         countBtn.setBounds(660,70,80,25);
         this.add(countBtn);
 
-    }
-
-    private void addListener() {
+        this.setShape();
 
     }
+    private void setShape(){
+
+    }
+
+    public void addListener() {
+
+        countBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                count();
+            }
+        });
+    }
+
+    public abstract void count();
 
 
 }

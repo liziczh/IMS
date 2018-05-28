@@ -61,11 +61,7 @@ public class InventoryController extends AbstractInventoryPanel {
     public void nextPage() {
         int endPage;
         if(total != 0){
-            if(total % pageSize == 0){
-                endPage = total/pageSize;
-            }else{
-                endPage = total/pageSize + 1;
-            }
+            endPage = (int) Math.ceil(total/pageSize);
             if(currentPage != endPage){
                 currentPage ++;
                 queryProduct();
@@ -76,11 +72,7 @@ public class InventoryController extends AbstractInventoryPanel {
     @Override
     public void endPage() {
         if(total != 0){
-            if(total % pageSize == 0){
-                currentPage = total/pageSize;
-            }else{
-                currentPage = total/pageSize + 1;
-            }
+            currentPage = (int) Math.ceil(total/pageSize);
             queryProduct();
         }
     }

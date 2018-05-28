@@ -1,26 +1,22 @@
 # IMS-进销存管理系统
-基于Java实现的InventoryManagementSystem进销存管理系统。
+基于 Java 实现的进销存管理系统（Inventory Management System）
 
-## 进销存管理系统
+## 系统功能设计
 
-进销存管理系统（Inventory Management System）
+- **进货管理（Stock-In）**
+  - **进货入库（StockIn）**：Btn->Form
+  - **入库记录（StockInRecord）**：Table
+- **销售管理（Stock-Out）**
+  - **销售出库（StockOut）**：Btn->Form
+  - **出库记录（StockOutRecord）**：Table
+- **库存管理（Inventory ）**
+  - **查询库存（Inventory）**：Table
+  - **商品管理（InventoryMng）**：Btn->Form
+- **统计报表（Statistics）**
+  - **商品采购统计（StatisticsStockInPanel）**：统计图
+  - **商品销售统计（StatisticsStockOutPanel）**：统计图
 
-- 进货管理（purchase）
-  - **进货入库（purchaseIn）：表单**
-  - **入库记录（purchaseRecord）：表格**
-- 销售管理（sales）
-  - **销售出库（salesOut）：表单，delete**
-  - **出库记录（salesRecord）：表格**
-- 库存管理（inventory ）
-  - **查询库存（InventoryQuery）：表单**
-  - **商品管理（InventoryMng）**：表格，update
-- 统计报表（statistics）
-  - **商品采购统计（statisticsPurchasePanel）**：统计图
-  - **商品销售统计（statisticsSalesPanel）**：统计图
-
-## FES
-
-MVC项目架构：
+## MVC项目架构
 
 - Model：数据模型层
 - View：视图层
@@ -29,81 +25,89 @@ MVC项目架构：
 ```
   View：UI层
     ↑
-Controller：控制层调用业务逻辑
+Controller：控制层
     ↑
- Service：业务逻辑， 处理异常
+ Service：业务逻辑
     ↑
    DAO：底层实现
     ↑
    DB：数据库
 ```
 
-窗口：JFrame
-
-面板：JPanel
-
-对话框：JDialog
-
-表格：JTable
-
-## GUI
+## GUI设计
 
 ```
-           
-           OperationPanel
-           		↑
-           SidebarPanel-1+SidebarPanel-2+SidebarPanel-3...
-                ↑
-MenuPanel + SidebarPanel
-   ↑
-MainFrame
+.
+|—— 用户登陆界面(LoginFrame)
+|—— 主界面(MainFrame)
+	|—— 菜单栏(MenuPanel)：logo，进货管理，销售出库，库存管理，统计报表
+	|—— 内容栏(ContentPanel)
+		|—— 进货管理(StockInPanel)：入库记录(StockInRecordTable)，进货入库(StockInBtn->Form)
+		|—— 销售管理(StockOutPanel)：出库记录(StockOutRecordTable)，销售出库(StockOutBtn->Form)
+		|—— 库存管理(InventoryPanel)：查询库存(InventoryTable)，商品管理(InventoryMngBtn->Form)
+		|—— 统计报表(StatisticsPanel)：采购统计，销售统计
 ```
 
-
+- JFrame：界面窗口
+- JPanel：界面内容
+- JDialog：表单对话框
 
 ## 数据库设计
 
-用户表user：id，username，password(md5)；
+用户表user：id (uk)，username，md5(password)；
 
-库存表product：proId，proName，dirId，supplier，brand，count
+库存表product：proId (uk)，proName，dirName，supplier，brand，count；
 
-库存分类表productDir：dirId，dirName
+记录表record：date，proId，proName，count，register，recordType；
 
-记录表purchaseRecord：date，proId，proName，count，register，recordType
+## 功能实现
 
-## 功能操作
+**进货管理（Stock-In）**：
 
-进货入库：
+- **入库记录表（StockInRecord）**：查询by日期/产品名称/分类；
 
-- 插入，库存表product；proId，proName，dirId，supplier，brand，count，register
-- 插入，入库记录表；datetime，proId，proName，count
+- **进货入库（StockIn）**：
 
-入库记录：
+```
+if(新商品在product表中存在){
+    商品库存量 += count;
+}else{
+    插入新商品到product表中;
+}
+插入一条入库记录到record表中
+```
 
-- 查询，入库记录表；
+**销售出库**：
 
-销售出库：
+- **出库记录表（StockInRecord）**：查询by日期/产品名称/分类；
 
-- 删除，库存表product；proId，proName；
-- 插入，出库记录表；datetime，proId，proName，count
+- **销售出库（StockOut）**：
 
-出库记录：
+```
+if(新商品在product表中存在){
+    if(被删除商品的库存数量>出库数量){
+        商品库存量 -= count;
+    }else{
+        提示商品库存不足;
+    }
+}else{
+    商品不存在
+}
+```
 
-- 查询，出库记录表；
+**库存管理（Inventory ）**
 
-查询库存：
+- **查询库存（Inventory）**：查询by产品名称/库存范围/分类；
+- **商品管理（InventoryMng）**：
 
-- 查询byProName，
-- 查询All
-- 查询by库存不足
-- 查询by库存过多
-
-商品管理：
-
-- 更新proName
-- 更新dirId
-- 更新supplier，
-- 更新brand
-
+```
+选中库存表中任意一行
+Mng.product = 获取到改行的product对象;
+if(选中的product不为空){
+   修改商品信息;
+   更新product表信息;
+   更新record表信息;
+}
+```
 
 

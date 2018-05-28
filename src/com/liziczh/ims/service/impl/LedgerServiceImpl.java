@@ -11,7 +11,7 @@ import java.util.List;
 public class LedgerServiceImpl implements ILedgerService {
 
     @Override
-    public List<String> creatPie(String recordType, String startTime, String endTime) {
+    public List<String> createPie(String recordType, String startTime, String endTime) {
         ILedgerDao dao = new LedgerDaoImpl();
         List<String> imgList = new ArrayList<>();
         String title;

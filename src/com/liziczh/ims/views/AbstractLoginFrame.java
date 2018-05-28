@@ -1,6 +1,7 @@
 package com.liziczh.ims.views;
 
 import com.liziczh.ims.controller.LoginController;
+import com.liziczh.ims.controller.RegisterController;
 import com.liziczh.ims.tools.VerifiCodeUtil;
 
 import javax.swing.*;
@@ -77,11 +78,17 @@ public abstract class AbstractLoginFrame extends JFrame {
         codeImgLabel.setIcon(new ImageIcon(VerifiCodeUtil.getBufferdImage(120,40)));
         codeImgLabel.setBounds(320,220,120,30);
         loginPanel.add(codeImgLabel);
+        // 注册按钮
+        registerBtn.setText("注  册");
+        registerBtn.setFont(font);
+        registerBtn.setBackground(Color.white);
+        registerBtn.setBounds(180,280, 120,30);
+        this.add(registerBtn);
         // 登陆按钮
-        loginBtn.setText("登   陆");
+        loginBtn.setText("登  陆");
         loginBtn.setFont(font);
         loginBtn.setBackground(Color.white);
-        loginBtn.setBounds(230,280, 140,40);
+        loginBtn.setBounds(320,280, 120,30);
 
         loginPanel.add(loginBtn);
         // 作者信息
@@ -113,19 +120,44 @@ public abstract class AbstractLoginFrame extends JFrame {
             }
         });
 
-        this.addKeyListener(new KeyAdapter() {
+        // 注册
+        registerBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new RegisterController();;
+            }
+        });
+
+        // 键盘登陆
+        usernameText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_ENTER:
                         login();
-                        break;
+                }
+            }
+        });
+        passwordText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                        login();
+                }
+            }
+        });
+        codeText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                        login();
                 }
             }
         });
 
     }
     public abstract void login();
-
 
 }

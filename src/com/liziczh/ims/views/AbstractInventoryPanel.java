@@ -88,21 +88,21 @@ public abstract class AbstractInventoryPanel extends JPanel {
         // 库存查询下限
         countLowerLabel.setText("库存：");
         countLowerLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        countLowerLabel.setBounds(270, 70, 60, 25);
+        countLowerLabel.setBounds(290, 70, 60, 25);
         this.add(countLowerLabel);
         // 库存查询下限数值
         countLowerText.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        countLowerText.setBounds(310, 70, 50, 25);
+        countLowerText.setBounds(330, 70, 50, 25);
         countLowerText.setEditable(true);
         this.add(countLowerText);
         // 库存查询上限
         countUpperLabel.setText(" - ");
         countUpperLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        countUpperLabel.setBounds(360, 70, 20, 25);
+        countUpperLabel.setBounds(380, 70, 20, 25);
         this.add(countUpperLabel);
         // 库存查询上限数值
         countUpperText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        countUpperText.setBounds(380, 70, 50, 25);
+        countUpperText.setBounds(400, 70, 50, 25);
         countUpperText.setEditable(true);
         this.add(countUpperText);
         // 分类

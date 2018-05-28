@@ -17,7 +17,7 @@ public class StatisticsController extends StatisticsPanel {
         }else if(((String)dirBox.getSelectedItem()).equals("销售")){
             recordType = "out";
         }
-        service.creatPie(recordType,beginDateText.getText(),endDateText.getText());
+        service.createPie(recordType,beginDateText.getText(),endDateText.getText());
         new StatisticsChartDialog(recordType).setVisible(true);
     }
 }

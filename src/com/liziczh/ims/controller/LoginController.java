@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class LoginController extends AbstractLoginFrame {
     private IUserService userService = new UserServiceImpl();
-
+    protected MainFrame mainFrame;
     @Override
     public void login(){
         String username = this.usernameText.getText();
@@ -40,10 +40,9 @@ public class LoginController extends AbstractLoginFrame {
         if(isUser && isCode){
             JOptionPane.showMessageDialog(this,"登陆成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            new MainFrame();
+            mainFrame = new MainFrame();
         }
     }
-
 
 
 }

@@ -9,12 +9,17 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import java.sql.SQLException;
 
 public class UserDaoImpl implements IUserDao {
-
+    private QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
     @Override
     public User getUserByUsernameAndPassword(String username, String password) throws SQLException {
-        QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
         String sql = "select * from \"user\" where \"username\" = ? and \"password\" = ?";
         User user = queryRunner.query(sql,new BeanHandler<User>(User.class),username,password);
         return user;
+    }
+
+    @Override
+    public void insertUser(String username, String password) throws SQLException {
+        String sql = "insert into \"user\" values(id_seq.nextval, ?,FN_MD5(?))";
+        queryRunner.update(sql,username,password);
     }
 }

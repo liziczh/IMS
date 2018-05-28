@@ -25,6 +25,9 @@ public abstract class AbstractRecordPanel extends JPanel {
     // 结束时间
     private JLabel endDateLabel = new JLabel();
     protected JTextField endDateText = new JTextField(6);
+    // 产品名称
+    private JLabel proNameLabel = new JLabel();
+    protected JTextField proNameText = new JTextField();
     // 分类
     private JLabel dirLabel = new JLabel();
     // 下拉框
@@ -99,6 +102,15 @@ public abstract class AbstractRecordPanel extends JPanel {
         DateChooser.getInstance().register(this.endDateText);
         this.add(endDateLabel);
         this.add(endDateText);
+        // 产品名称
+        proNameLabel.setText("产品名称：");
+        proNameLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+        proNameLabel.setBounds(310, 70, 80, 25);
+        proNameText.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        proNameText.setBounds(390, 70, 100, 25);
+        proNameText.setEditable(true);
+        this.add(proNameLabel);
+        this.add(proNameText);
         // 分类
         dirLabel.setText("分类：");
         dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));

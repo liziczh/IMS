@@ -28,6 +28,7 @@ public class StockInController extends AbstractStockInDialog {
             stockInService.stockIn(product,registerText.getText(),recordType);
             JOptionPane.showMessageDialog(this,"成功入库","温馨提示",JOptionPane.INFORMATION_MESSAGE);
             reset();
+
         }
 
     }

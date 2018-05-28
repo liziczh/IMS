@@ -11,8 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class LedgerDaoImpl implements ILedgerDao {
-    DataSource ds = JDBCUtils.getDataSource();
-    QueryRunner queryRunner = new QueryRunner(ds);
+    QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
     @Override
     public int getTotalCount(String recordType) {
         String sql = "select sum(\"count\") from \"record\" WHERE \"recordType\" = ?";

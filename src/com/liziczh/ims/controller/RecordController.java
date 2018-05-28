@@ -10,10 +10,10 @@ import com.liziczh.ims.views.AbstractRecordPanel;
 public class RecordController extends AbstractRecordPanel {
     private IRecordService recordService = new RecordServiceImpl();
     // 总记录数
-    int total = recordService.getTotal(beginDateText.getText(),endDateText.getText(),recordType,(String) dirBox.getSelectedItem());
+    int total = recordService.getTotal(beginDateText.getText(),endDateText.getText(),proNameText.getText(),recordType,(String) dirBox.getSelectedItem());
     @Override
     public void queryRecord() {
-        recordList = recordService.queryRecord(beginDateText.getText(),endDateText.getText(),recordType,(String)dirBox.getSelectedItem(),currentPage,pageSize);
+        recordList = recordService.queryRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),recordType,(String)dirBox.getSelectedItem(),currentPage,pageSize);
         try {
             recordTable.setModel(new ListTableModel<Record>(recordList,Record.class,colNames,propNames));
         } catch (Exception e) {

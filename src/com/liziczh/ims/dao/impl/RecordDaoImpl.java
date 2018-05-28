@@ -16,27 +16,27 @@ import java.util.List;
 public class RecordDaoImpl implements IRecordDao {
     QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
     @Override
-    public List<Record> getRecordByDateAndDirName(String beginDate,String endDate, String recordType,String dirName, int currentPage, int pageSize) throws SQLException {
+    public List<Record> getRecordByDateAndDirName(String beginDate,String endDate, String proName, String recordType,String dirName, int currentPage, int pageSize) throws SQLException {
         List<Record> recordList = null;
-        String sql = "select * from \"record\" where (\"date\" between ? and ?) and \"recordType\" = ? ";
+        String sql = "select * from \"record\" where (\"date\" between ? and ?) and (\"proName\" like '%' || ? || '%') and \"recordType\" = ?";
         if("全部".equals(dirName)){
-            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,recordType);
+            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType);
         }else{
             sql += " and \"proName\" in (select \"proName\" from \"product\" where \"dirName\" = ?)";
-            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,recordType,dirName);
+            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType,dirName);
         }
         return recordList;
     }
 
     @Override
-    public int getTotalByDateAndDirName(String beginDate, String endDate, String recordType, String dirName) throws SQLException {
+    public int getTotalByDateAndDirName(String beginDate, String endDate, String proName,String recordType, String dirName) throws SQLException {
         int total ;
-        String sql = "select count(*) from \"record\" where (\"date\" between ? and ?) and \"recordType\" = ? ";
+        String sql = "select count(*) from \"record\" where (\"date\" between ? and ?) and (\"proName\" like '%' || ? || '%')  and \"recordType\" = ? ";
         if("全部".equals(dirName)){
-            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1), beginDate,endDate,recordType).toString());
+            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1), beginDate,endDate,proName,recordType).toString());
         }else{
             sql += " and \"proName\" in (select \"proName\" from \"product\" where \"dirName\" = ?)";
-            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1),beginDate,endDate,recordType,dirName));
+            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1),beginDate,endDate,proName,recordType,dirName));
         }
         return total;
     }

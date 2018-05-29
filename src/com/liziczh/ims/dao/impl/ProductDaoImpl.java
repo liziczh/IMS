@@ -13,16 +13,16 @@ import java.util.List;
 
 public class ProductDaoImpl implements IProductDao {
     private QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
-    private int total = 0;
     @Override
     public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName, int currentPage, int pageSize) throws SQLException {
         List<Product>  proList = null;
         String sql = "select * from \"product\" where \"proName\" like '%' || ? || '%' and \"count\" between ? and ? ";
+        String order = "order by \"proId\" ";
         if("全部".equals(dirName)){
-            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<>(Product.class), proName, lowerCount, upperCount);
+            proList = queryRunner.query(JDBCUtils.PagenationSql(sql+order,currentPage,pageSize),new BeanListHandler<>(Product.class), proName, lowerCount, upperCount);
         }else{
             sql += " and \"dirName\" = ? ";
-            proList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<>(Product.class),proName,lowerCount,upperCount,dirName);
+            proList = queryRunner.query(JDBCUtils.PagenationSql(sql+order,currentPage,pageSize),new BeanListHandler<>(Product.class),proName,lowerCount,upperCount,dirName);
         }
         return proList;
     }

@@ -19,11 +19,12 @@ public class RecordDaoImpl implements IRecordDao {
     public List<Record> getRecordByDateAndDirName(String beginDate,String endDate, String proName, String recordType,String dirName, int currentPage, int pageSize) throws SQLException {
         List<Record> recordList = null;
         String sql = "select * from \"record\" where (\"date\" between ? and ?) and (\"proName\" like '%' || ? || '%') and \"recordType\" = ?";
+        String order = " order by \"date\" desc";
         if("全部".equals(dirName)){
-            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType);
+            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql+order,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType);
         }else{
             sql += " and \"proName\" in (select \"proName\" from \"product\" where \"dirName\" = ?)";
-            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType,dirName);
+            recordList = queryRunner.query(JDBCUtils.PagenationSql(sql+order,currentPage,pageSize),new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType,dirName);
         }
         return recordList;
     }

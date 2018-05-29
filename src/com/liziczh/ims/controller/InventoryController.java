@@ -15,7 +15,7 @@ public class InventoryController extends AbstractInventoryPanel {
     private int lowerCount = 0;
     private int upperCount = 99999;
     // 总记录数
-    private int total = productService.getTotal(proNameText.getText(),lowerCount,upperCount,(String) dirBox.getSelectedItem());
+
     @Override
     public void queryProduct() {
         // 判断库存下限值输入是否合法
@@ -36,6 +36,8 @@ public class InventoryController extends AbstractInventoryPanel {
         }
         // 结果集
         proList = productService.queryProduct(proNameText.getText(),lowerCount,upperCount, (String) dirBox.getSelectedItem(),currentPage,pageSize);
+        // 总记录数
+        total = productService.getTotal(proNameText.getText(),lowerCount,upperCount,(String) dirBox.getSelectedItem());
         try {
             stockTable.setModel(new ListTableModel<>(proList,Product.class,colNames,propNames));
         } catch (Exception e) {
@@ -47,6 +49,7 @@ public class InventoryController extends AbstractInventoryPanel {
     public void homePage() {
         currentPage = 1;
         queryProduct();
+        pageNumText.setText(String.valueOf(currentPage));
     }
 
     @Override
@@ -54,6 +57,7 @@ public class InventoryController extends AbstractInventoryPanel {
         if(currentPage != 1){
             currentPage--;
             queryProduct();
+            pageNumText.setText(String.valueOf(currentPage));
         }
     }
 
@@ -69,6 +73,7 @@ public class InventoryController extends AbstractInventoryPanel {
             if(currentPage != endPage){
                 currentPage ++;
                 queryProduct();
+                pageNumText.setText(String.valueOf(currentPage));
             }
         }
     }
@@ -81,6 +86,25 @@ public class InventoryController extends AbstractInventoryPanel {
             }else{
                 currentPage = total/pageSize + 1;
             }
+            queryProduct();
+            pageNumText.setText(String.valueOf(currentPage));
+        }
+    }
+
+    @Override
+    public void jumpPage() {
+        int endPage;
+        if(total % pageSize == 0){
+            endPage = total/pageSize;
+        }else{
+            endPage = total/pageSize + 1;
+        }
+        if(Integer.parseInt(pageNumText.getText()) < endPage){
+            currentPage = Integer.parseInt(pageNumText.getText());
+            queryProduct();
+        }else{
+            currentPage = endPage;
+            pageNumText.setText(String.valueOf(currentPage));
             queryProduct();
         }
     }

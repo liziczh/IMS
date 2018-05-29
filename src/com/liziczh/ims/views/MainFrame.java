@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
 
     // 内容栏组件
     private JPanel contentPanel = new JPanel(); // 下栏容器
-    private AbstractRecordPanel stockInPanel = new RecordController();// 进货管理页面
+    public AbstractRecordPanel stockInPanel = new RecordController();// 进货管理页面
     private AbstractRecordPanel stockOutPanel = new RecordController();// 销售管理页面
     private AbstractInventoryPanel inventoryPanel = new InventoryController();// 库存管理页面
     private StatisticsPanel statisticsPanel = new StatisticsController();// 统计报表

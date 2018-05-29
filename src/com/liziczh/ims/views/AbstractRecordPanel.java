@@ -8,6 +8,8 @@ import com.liziczh.ims.tools.ListTableModel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -38,9 +40,10 @@ public abstract class AbstractRecordPanel extends JPanel {
     // record类型
     protected String recordType = "in";
     // 表格
-    protected List<Record> recordList = new ArrayList<>();
-    protected String[] colNames = {"日期", "产品编号", "产品名称", "数量", "登记人"};
-    protected String[] propNames = {"date", "proId", "proName", "count", "register"};
+    protected List<Record> recordList = new ArrayList<>(); // 结果集
+    protected int total = 0; // 总记录数
+    protected String[] colNames = {"日期", "产品编号", "产品名称", "数量", "登记人"}; // 列名
+    protected String[] propNames = {"date", "proId", "proName", "count", "register"}; // Record属性
     protected JTable recordTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();
     // 当前页数和页内数据行数
@@ -54,6 +57,10 @@ public abstract class AbstractRecordPanel extends JPanel {
     private JButton nextPageBtn = new JButton();
     // 末页
     private JButton endPageBtn = new JButton();
+    // 当前页数
+    protected JTextField pageNumText = new JTextField();
+    // 跳转Btn
+    protected JButton goBtn = new JButton();
 
     public AbstractRecordPanel(){
         this.init();
@@ -123,9 +130,10 @@ public abstract class AbstractRecordPanel extends JPanel {
         this.add(dirBox);
         // 查询按钮
         queryBtn.setText("查询");
+        queryBtn.setIcon(new ImageIcon("imgs/soso.png"));
         queryBtn.setBackground(Color.white);
         queryBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        queryBtn.setBounds(660,70,80,25);
+        queryBtn.setBounds(650,70,90,25);
         this.add(queryBtn);
 
         // 添加表格
@@ -158,28 +166,41 @@ public abstract class AbstractRecordPanel extends JPanel {
         this.add(scrollPanel);
 
         // 首页
-        homePageBtn.setText("首页");
+        homePageBtn.setIcon(new ImageIcon("imgs/home.png"));
         homePageBtn.setBackground(Color.white);
         homePageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        homePageBtn.setBounds(50,390,80,25);
+        homePageBtn.setBounds(50,390,50,25);
         this.add(homePageBtn);
         // 上一页
-        prevPageBtn.setText("上一页");
+        prevPageBtn.setIcon(new ImageIcon("imgs/left.png"));
         prevPageBtn.setBackground(Color.white);
         prevPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        prevPageBtn.setBounds(300,390,80,25);
+        prevPageBtn.setBounds(300,390,50,25);
         this.add(prevPageBtn);
+        // 页数
+        pageNumText.setText(String.valueOf(currentPage));
+        pageNumText.setBackground(Color.white);
+        pageNumText.setHorizontalAlignment(JTextField.CENTER);
+        pageNumText.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        pageNumText.setBounds(370,390,25,25);
+        this.add(pageNumText);
+        // Go
+        goBtn.setIcon(new ImageIcon("imgs/jump.png"));
+        goBtn.setBackground(Color.white);
+        goBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        goBtn.setBounds(393,390,30,25);
+        this.add(goBtn);
         // 下一页
-        nextPageBtn.setText("下一页");
+        nextPageBtn.setIcon(new ImageIcon("imgs/right.png"));
         nextPageBtn.setBackground(Color.white);
         nextPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        nextPageBtn.setBounds(400,390,80,25);
+        nextPageBtn.setBounds(440,390,50,25);
         this.add(nextPageBtn);
         // 末页
-        endPageBtn.setText("末页");
+        endPageBtn.setIcon(new ImageIcon("imgs/end.png"));
         endPageBtn.setBackground(Color.white);
         endPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        endPageBtn.setBounds(660,390,80,25);
+        endPageBtn.setBounds(690,390,50,25);
         this.add(endPageBtn);
     }
 
@@ -187,6 +208,8 @@ public abstract class AbstractRecordPanel extends JPanel {
         queryBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                currentPage = 1;
+                pageNumText.setText(String.valueOf(currentPage));
                 queryRecord();
             }
         });
@@ -214,6 +237,21 @@ public abstract class AbstractRecordPanel extends JPanel {
                 endPage();
             }
         });
+        pageNumText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                        jumpPage();
+                }
+            }
+        });
+        goBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                jumpPage();
+            }
+        });
     }
 
 
@@ -222,4 +260,5 @@ public abstract class AbstractRecordPanel extends JPanel {
     public abstract void prevPage();
     public abstract void nextPage();
     public abstract void endPage();
+    public abstract void jumpPage();
 }

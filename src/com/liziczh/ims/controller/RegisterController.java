@@ -19,8 +19,8 @@ public class RegisterController extends AbstractRegisterDialog {
     @Override
     public void register() {
         String username = usernameText.getText();
-        String password = passwordText.getText();
-        String confirm = confirmText.getText();
+        String password = String.valueOf(passwordText.getPassword());
+        String confirm = String.valueOf(confirmText.getPassword());
         if(username != null && password != null && confirm != null ){
             if(!"".equals(username) && !"".equals(password) && !"".equals(confirm)){
                 if(password.equals(confirm)){

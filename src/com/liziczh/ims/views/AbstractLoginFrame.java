@@ -15,6 +15,7 @@ public abstract class AbstractLoginFrame extends JFrame {
 
     private JPanel loginPanel = new JPanel(); // 登陆面板
     private JLabel loginImg = new JLabel(new ImageIcon("imgs/loginbg.jpg")); // 登陆背景图
+    private JLabel loginLabel = new JLabel();
     private JLabel usernameLabel = new JLabel(); // 用户名标签
     private JLabel passwordLabel = new JLabel(); // 密码标签
     private JLabel codeLabel = new JLabel(); // 验证码标签
@@ -46,7 +47,12 @@ public abstract class AbstractLoginFrame extends JFrame {
         // Panel的设置
         loginPanel.setLayout(null);
         loginPanel.setBackground(Color.white);
-
+        // 登陆标签
+        loginLabel.setText(" 登   陆");
+        loginLabel.setIcon(new ImageIcon("imgs/username.png"));
+        loginLabel.setFont(new Font("微软雅黑",Font.BOLD,16));
+        loginLabel.setBounds(240,100,90,30);
+        this.add(loginLabel);
         // 账号组件
         usernameLabel.setText(" 用户名：");
         usernameLabel.setIcon(new ImageIcon("imgs/username.png"));

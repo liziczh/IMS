@@ -9,11 +9,11 @@ import com.liziczh.ims.views.AbstractRecordPanel;
 
 public class RecordController extends AbstractRecordPanel {
     private IRecordService recordService = new RecordServiceImpl();
-    // 总记录数
-    int total = recordService.getTotal(beginDateText.getText(),endDateText.getText(),proNameText.getText(),recordType,(String) dirBox.getSelectedItem());
+
     @Override
     public void queryRecord() {
         recordList = recordService.queryRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),recordType,(String)dirBox.getSelectedItem(),currentPage,pageSize);
+        total = recordService.getTotal(beginDateText.getText(),endDateText.getText(),proNameText.getText(),recordType,(String) dirBox.getSelectedItem());
         try {
             recordTable.setModel(new ListTableModel<Record>(recordList,Record.class,colNames,propNames));
         } catch (Exception e) {
@@ -25,6 +25,7 @@ public class RecordController extends AbstractRecordPanel {
     public void homePage() {
         currentPage = 1;
         queryRecord();
+        pageNumText.setText(String.valueOf(currentPage));
     }
 
     @Override
@@ -32,6 +33,7 @@ public class RecordController extends AbstractRecordPanel {
         if(currentPage != 1){
             currentPage--;
             queryRecord();
+            pageNumText.setText(String.valueOf(currentPage));
         }
     }
 
@@ -47,6 +49,7 @@ public class RecordController extends AbstractRecordPanel {
             if(currentPage != endPage){
                 currentPage ++;
                 queryRecord();
+                pageNumText.setText(String.valueOf(currentPage));
             }
         }
     }
@@ -59,6 +62,25 @@ public class RecordController extends AbstractRecordPanel {
             }else{
                 currentPage = total/pageSize + 1;
             }
+            queryRecord();
+            pageNumText.setText(String.valueOf(currentPage));
+        }
+    }
+
+    @Override
+    public void jumpPage() {
+        int endPage;
+        if(total % pageSize == 0){
+            endPage = total/pageSize;
+        }else{
+            endPage = total/pageSize + 1;
+        }
+        if(Integer.parseInt(pageNumText.getText()) < endPage){
+            currentPage = Integer.parseInt(pageNumText.getText());
+            queryRecord();
+        }else{
+            currentPage = endPage;
+            pageNumText.setText(String.valueOf(currentPage));
             queryRecord();
         }
     }

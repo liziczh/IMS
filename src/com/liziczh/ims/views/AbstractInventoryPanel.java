@@ -7,6 +7,8 @@ import com.liziczh.ims.tools.ListTableModel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -31,10 +33,11 @@ public abstract class AbstractInventoryPanel extends JPanel {
     // 查询
     private JButton queryBtn = new JButton();
     // 分类
-    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书"};
+    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
     protected JComboBox dirBox = new JComboBox<>(def);
     // 表格
     protected List<Product> proList = new ArrayList<>();
+    protected int total = 0; // 总记录数
     protected String[] colNames = {"产品编号", "产品名称", "分类","供应商", "商标","数量"};
     protected String[] propNames = {"proId", "proName", "dirName", "supplier", "brand","count"};
     protected JTable stockTable = new JTable();
@@ -50,10 +53,15 @@ public abstract class AbstractInventoryPanel extends JPanel {
     private JButton nextPageBtn = new JButton();
     // 末页
     private JButton endPageBtn = new JButton();
+    // 当前页数
+    protected JTextField pageNumText = new JTextField();
+    // 跳转Btn
+    protected JButton goBtn = new JButton();
 
     public AbstractInventoryPanel(){
             this.init();
         }
+
     private void init(){
         this.setLayout(null);
         this.setBackground(Color.white);
@@ -72,6 +80,7 @@ public abstract class AbstractInventoryPanel extends JPanel {
         this.add(titleLabel);
         // 商品管理按钮
         inventoryMngBtn.setText("商品管理");
+        inventoryMngBtn.setIcon(new ImageIcon("imgs/management.png"));
         inventoryMngBtn.setBounds(620,25,120,35);
         inventoryMngBtn.setBackground(Color.white);
         inventoryMngBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
@@ -117,9 +126,10 @@ public abstract class AbstractInventoryPanel extends JPanel {
         this.add(dirBox);
         // 查询按钮
         queryBtn.setText("查询");
+        queryBtn.setIcon(new ImageIcon("imgs/soso.png"));
         queryBtn.setBackground(Color.white);
         queryBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        queryBtn.setBounds(660,70,80,25);
+        queryBtn.setBounds(650,70,90,25);
         this.add(queryBtn);
         // 添加表格
         this.setTable();
@@ -149,34 +159,49 @@ public abstract class AbstractInventoryPanel extends JPanel {
         this.add(scrollPanel);
 
         // 首页
-        homePageBtn.setText("首页");
+        homePageBtn.setIcon(new ImageIcon("imgs/home.png"));
         homePageBtn.setBackground(Color.white);
-        homePageBtn.setFont(font);
-        homePageBtn.setBounds(50,390,80,25);
+        homePageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        homePageBtn.setBounds(50,390,50,25);
         this.add(homePageBtn);
         // 上一页
-        prevPageBtn.setText("上一页");
+        prevPageBtn.setIcon(new ImageIcon("imgs/left.png"));
         prevPageBtn.setBackground(Color.white);
-        prevPageBtn.setFont(font);
-        prevPageBtn.setBounds(300,390,80,25);
+        prevPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        prevPageBtn.setBounds(300,390,50,25);
         this.add(prevPageBtn);
+        // 页数
+        pageNumText.setText(String.valueOf(currentPage));
+        pageNumText.setBackground(Color.white);
+        pageNumText.setHorizontalAlignment(JTextField.CENTER);
+        pageNumText.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        pageNumText.setBounds(370,390,25,25);
+        this.add(pageNumText);
+        // Go
+        goBtn.setIcon(new ImageIcon("imgs/jump.png"));
+        goBtn.setBackground(Color.white);
+        goBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        goBtn.setBounds(393,390,30,25);
+        this.add(goBtn);
         // 下一页
-        nextPageBtn.setText("下一页");
+        nextPageBtn.setIcon(new ImageIcon("imgs/right.png"));
         nextPageBtn.setBackground(Color.white);
-        nextPageBtn.setFont(font);
-        nextPageBtn.setBounds(400,390,80,25);
+        nextPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        nextPageBtn.setBounds(440,390,50,25);
         this.add(nextPageBtn);
         // 末页
-        endPageBtn.setText("末页");
+        endPageBtn.setIcon(new ImageIcon("imgs/end.png"));
         endPageBtn.setBackground(Color.white);
-        endPageBtn.setFont(font);
-        endPageBtn.setBounds(660,390,80,25);
+        endPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        endPageBtn.setBounds(690,390,50,25);
         this.add(endPageBtn);
     }
     private void addListener(){
         queryBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                currentPage = 1;
+                pageNumText.setText(String.valueOf(currentPage));
                 queryProduct();
             }
         });
@@ -204,6 +229,22 @@ public abstract class AbstractInventoryPanel extends JPanel {
                 endPage();
             }
         });
+        pageNumText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                        currentPage = Integer.parseInt(pageNumText.getText());
+                        queryProduct();
+                }
+            }
+        });
+        goBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                jumpPage();
+            }
+        });
     }
 
     public abstract void queryProduct();
@@ -211,6 +252,6 @@ public abstract class AbstractInventoryPanel extends JPanel {
     public abstract void prevPage();
     public abstract void nextPage();
     public abstract void endPage();
-
+    public abstract void jumpPage();
 }
 

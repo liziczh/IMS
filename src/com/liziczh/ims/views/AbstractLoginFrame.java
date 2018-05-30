@@ -32,7 +32,7 @@ public abstract class AbstractLoginFrame extends JFrame {
     }
 
     private void init(){
-        this.setTitle("进销存管理系统 登陆"); // 设置窗口Frame标题
+        this.setTitle("IMS-login"); // 设置窗口Frame标题
         this.setIconImage(new ImageIcon("imgs/logo.png").getImage()); // 设置窗口Frame
         this.setSize(600,400); // 设置窗口大小
         this.setLocationRelativeTo(null);
@@ -48,10 +48,10 @@ public abstract class AbstractLoginFrame extends JFrame {
         loginPanel.setLayout(null);
         loginPanel.setBackground(Color.white);
         // 登陆标签
-        loginLabel.setText(" 登   陆");
-        loginLabel.setIcon(new ImageIcon("imgs/username.png"));
-        loginLabel.setFont(new Font("微软雅黑",Font.BOLD,16));
-        loginLabel.setBounds(240,100,90,30);
+        loginLabel.setText("  IMS");
+        loginLabel.setIcon(new ImageIcon("imgs/logo32.png"));
+        loginLabel.setFont(new Font("等线",Font.PLAIN,36));
+        loginLabel.setBounds(240,70,150,50);
         this.add(loginLabel);
         // 账号组件
         usernameLabel.setText(" 用户名：");

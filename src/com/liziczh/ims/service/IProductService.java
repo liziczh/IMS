@@ -9,5 +9,6 @@ public interface IProductService {
     public List<Product> queryProduct(String proName, int lowerCount, int upperCount, String dirName,int currentPage, int pageSize);
     public int getTotal(String proName, int lowerCount, int upperCount, String dirName);
     public List<Product> queryAll();
+    public Product queryProductById(int proId);
 
 }

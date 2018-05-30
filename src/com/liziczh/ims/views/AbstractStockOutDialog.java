@@ -2,6 +2,8 @@ package com.liziczh.ims.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -88,12 +90,21 @@ public abstract class AbstractStockOutDialog extends JDialog {
     }
 
     protected void addListener(){
+        // 输入ID自动补全
+        proIdText.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                autoComplete();
+            }
+        });
+        // 重置输入文本
         resetBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 reset();
             }
         });
+        // 出库
         outStockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -103,6 +114,7 @@ public abstract class AbstractStockOutDialog extends JDialog {
     }
     public abstract void reset();
     public abstract void stockOut();
+    public abstract void autoComplete();
 
 }
 

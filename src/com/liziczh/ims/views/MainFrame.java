@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
 
     private CardLayout card = new CardLayout(); // 卡片布局
     // 菜单栏组件
-    private JPanel menuPanel = new JPanel(); // 菜单栏
+    private BackImgPanel menuPanel = new BackImgPanel("imgs/mainbg4.jpg"); // 菜单栏
     private JLabel logoLabel = new JLabel(); // logo
     private JButton stockInBtn = new JButton(); // 进货管理选项
     private JButton stockOutBtn = new JButton(); // 销售管理选项
@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setBackground(Color.white);
+        this.getContentPane().setBackground(Color.white);
         this.setLayout(null);
         this.addComponent();
         this.addListener();
@@ -52,17 +52,16 @@ public class MainFrame extends JFrame {
         this.setMenuPanel();
         this.setContentPanel();
         // 主窗口添加面板
+        menuPanel.add(contentPanel);
         this.getContentPane().add(menuPanel);
-        this.getContentPane().add(contentPanel);
     }
 
     private void setMenuPanel(){
         // 菜单面板
         menuPanel.setLayout(null);
         menuPanel.setBackground(Color.white);
-        menuPanel.setBounds(0,0,800,100);
+        menuPanel.setBounds(0,0,800,600);
         menuPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        menuPanel.add(new BackgroundImgPanel("imgs/menu.jpg"));
         // logo
         logoLabel.setText(" IMS");
         logoLabel.setIcon(new ImageIcon("imgs/logo32.png"));
@@ -105,7 +104,7 @@ public class MainFrame extends JFrame {
         // 下方面板Panel
         contentPanel.setLayout(card);
         contentPanel.setBackground(Color.white);
-        contentPanel.setBounds(0,100,800,500);
+        contentPanel.setBounds(20,100,755,450);
         contentPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         // 进货管理

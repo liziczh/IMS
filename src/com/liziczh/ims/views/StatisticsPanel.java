@@ -1,7 +1,5 @@
 package com.liziczh.ims.views;
 
-import com.liziczh.ims.service.ILedgerService;
-import com.liziczh.ims.service.impl.LedgerServiceImpl;
 import com.liziczh.ims.tools.DateChooser;
 import com.liziczh.ims.tools.DateUtils;
 
@@ -47,15 +45,15 @@ public abstract class StatisticsPanel extends JPanel {
     private void addComponent() {
         // 页面标签
         titleLabel.setText("统计报表");
-        titleLabel.setBounds(50,20,120,40);
+        titleLabel.setBounds(30,20,120,40);
         titleLabel.setFont(new Font("微软雅黑",Font.BOLD,22));
         this.add(titleLabel);
         // 开始日期
         beginDateLabel.setText("日 期：");
         beginDateLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        beginDateLabel.setBounds(50, 70, 60, 25);
+        beginDateLabel.setBounds(30, 70, 60, 25);
         beginDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        beginDateText.setBounds(100, 70, 100, 25);
+        beginDateText.setBounds(80, 70, 100, 25);
         beginDateText.setText(String.format("%tF", DateUtils.getFirstDayOfMethod()));
         beginDateText.setEditable(true);
         DateChooser.getInstance().register(this.beginDateText);
@@ -64,9 +62,9 @@ public abstract class StatisticsPanel extends JPanel {
         // 结束日期
         endDateLabel.setText(" - ");
         endDateLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        endDateLabel.setBounds(200, 70, 20, 25);
+        endDateLabel.setBounds(180, 70, 20, 25);
         endDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        endDateText.setBounds(220, 70, 100, 25);
+        endDateText.setBounds(200, 70, 100, 25);
         endDateText.setEditable(true);
         endDateText.setText(String.format("%tF", new Date()));
         DateChooser.getInstance().register(this.endDateText);
@@ -75,18 +73,18 @@ public abstract class StatisticsPanel extends JPanel {
         // 分类
         dirLabel.setText("统计类型：");
         dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        dirLabel.setBounds(480, 70, 100, 25);
+        dirLabel.setBounds(460, 70, 100, 25);
         this.add(dirLabel);
         // 下拉框
         dirBox.setFont(new Font("微软雅黑", Font.BOLD, 14));
         dirBox.setBackground(Color.white);
-        dirBox.setBounds(580,70,60,25);
+        dirBox.setBounds(560,70,60,25);
         this.add(dirBox);
         // 统计按钮
         countBtn.setText("统计");
         countBtn.setBackground(Color.white);
         countBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        countBtn.setBounds(660,70,80,25);
+        countBtn.setBounds(640,70,80,25);
         this.add(countBtn);
 
         this.setShape();

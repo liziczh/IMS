@@ -14,7 +14,7 @@ public abstract class AbstractLoginFrame extends JFrame {
     private Font font = new Font("微软雅黑",Font.BOLD,16);
 
     private JPanel loginPanel = new JPanel(); // 登陆面板
-    private JLabel loginImg = new JLabel(new ImageIcon("imgs/loginbg.jpg")); // 登陆背景图
+    private JLabel loginImg = new JLabel(new ImageIcon("imgs/mainbg1.jpg")); // 登陆背景图
     private JLabel loginLabel = new JLabel();
     private JLabel usernameLabel = new JLabel(); // 用户名标签
     private JLabel passwordLabel = new JLabel(); // 密码标签

@@ -43,5 +43,15 @@ public class ProductServiceImpl implements IProductService {
         return proList;
     }
 
+    @Override
+    public Product queryProductById(int proId){
+        Product product = null;
+        try {
+            product = productDao.getProductById(proId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
 
 }

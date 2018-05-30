@@ -4,6 +4,8 @@ import com.liziczh.ims.domain.Product;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -120,8 +122,15 @@ public abstract class AbstractStockInDialog extends JDialog {
     }
 
     protected void addListener(){
+        // 输入ID自动补全
+        proIdText.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                autoComplete();
+            }
+        });
 
-        //重置所有输入信息为空
+        // 重置所有输入信息为空
         resetBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -129,7 +138,7 @@ public abstract class AbstractStockInDialog extends JDialog {
             }
         });
 
-        //进货入库页面提交后，数据内容保存到数据库中的商品表中，并转到入库记录界面
+        // 进货入库页面提交后，数据内容保存到数据库中的商品表中，并转到入库记录界面
         inStockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -140,6 +149,6 @@ public abstract class AbstractStockInDialog extends JDialog {
 
     public abstract void reset();
     public abstract void stockIn();
-
+    public abstract void autoComplete();
 }
 

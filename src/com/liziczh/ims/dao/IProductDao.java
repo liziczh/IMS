@@ -14,14 +14,14 @@ public interface IProductDao {
     public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName, int currentPage, int pageSize) throws SQLException;
 
     // 根据id查询
-    public Product getProductById(int id);
+    public Product getProductById(int id) throws SQLException;
     // 插入产品
-    public void insertProduct(Product product);
+    public void insertProduct(Product product) throws SQLException;
     // 更新产品库存
-    public void updateProductCountPlus(Product product);
-    public void updateProductCountSub(Product product,int count);
+    public void updateProductCountPlus(Product product) throws SQLException;
+    public void updateProductCountSub(Product product,int count) throws SQLException;
 
     // 更新产品信息
-    public void updateProduct(Product product);
+    public void updateProduct(Product product) throws SQLException;
 
 }

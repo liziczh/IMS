@@ -75,61 +75,61 @@ public abstract class AbstractInventoryPanel extends JPanel {
     private void addComponent() {
         // 页面标签 Label
         titleLabel.setText("出/入库管理");
-        titleLabel.setBounds(50,20,120,40);
+        titleLabel.setBounds(30,20,120,40);
         titleLabel.setFont(new Font("微软雅黑",Font.BOLD,22));
         this.add(titleLabel);
         // 商品管理按钮
         inventoryMngBtn.setText("商品管理");
         inventoryMngBtn.setIcon(new ImageIcon("imgs/management.png"));
-        inventoryMngBtn.setBounds(620,25,120,35);
+        inventoryMngBtn.setBounds(600,25,120,35);
         inventoryMngBtn.setBackground(Color.white);
         inventoryMngBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
         this.add(inventoryMngBtn);
         // 产品名称
         proNameLabel.setText("产品名称：");
         proNameLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        proNameLabel.setBounds(50, 70, 80, 25);
+        proNameLabel.setBounds(30, 70, 80, 25);
         proNameText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        proNameText.setBounds(130, 70, 120, 25);
+        proNameText.setBounds(110, 70, 120, 25);
         proNameText.setEditable(true);
         this.add(proNameLabel);
         this.add(proNameText);
         // 库存查询下限
         countLowerLabel.setText("库存：");
         countLowerLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        countLowerLabel.setBounds(290, 70, 60, 25);
+        countLowerLabel.setBounds(270, 70, 60, 25);
         this.add(countLowerLabel);
         // 库存查询下限数值
         countLowerText.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        countLowerText.setBounds(330, 70, 50, 25);
+        countLowerText.setBounds(310, 70, 50, 25);
         countLowerText.setEditable(true);
         this.add(countLowerText);
         // 库存查询上限
         countUpperLabel.setText(" - ");
         countUpperLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        countUpperLabel.setBounds(380, 70, 20, 25);
+        countUpperLabel.setBounds(360, 70, 20, 25);
         this.add(countUpperLabel);
         // 库存查询上限数值
         countUpperText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        countUpperText.setBounds(400, 70, 50, 25);
+        countUpperText.setBounds(380, 70, 50, 25);
         countUpperText.setEditable(true);
         this.add(countUpperText);
         // 分类
         dirLabel.setText("分类：");
         dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        dirLabel.setBounds(490, 70, 60, 25);
+        dirLabel.setBounds(470, 70, 60, 25);
         this.add(dirLabel);
         // 分类下拉框
         dirBox.setFont(new Font("微软雅黑", Font.BOLD, 14));
         dirBox.setBackground(Color.white);
-        dirBox.setBounds(540,70,100,25);
+        dirBox.setBounds(520,70,100,25);
         this.add(dirBox);
         // 查询按钮
         queryBtn.setText("查询");
         queryBtn.setIcon(new ImageIcon("imgs/soso.png"));
         queryBtn.setBackground(Color.white);
         queryBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        queryBtn.setBounds(650,70,90,25);
+        queryBtn.setBounds(630,70,90,25);
         this.add(queryBtn);
         // 添加表格
         this.setTable();
@@ -137,7 +137,7 @@ public abstract class AbstractInventoryPanel extends JPanel {
     }
     private void setTable(){
         // 表格
-        scrollPanel.setBounds(50,110,690,267);
+        scrollPanel.setBounds(30,110,690,267);
         try {
             stockTable.setModel(new ListTableModel<>(proList,Record.class,colNames,propNames));
         } catch (Exception e) {
@@ -162,38 +162,38 @@ public abstract class AbstractInventoryPanel extends JPanel {
         homePageBtn.setIcon(new ImageIcon("imgs/home.png"));
         homePageBtn.setBackground(Color.white);
         homePageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        homePageBtn.setBounds(50,390,50,25);
+        homePageBtn.setBounds(30,390,50,25);
         this.add(homePageBtn);
         // 上一页
         prevPageBtn.setIcon(new ImageIcon("imgs/left.png"));
         prevPageBtn.setBackground(Color.white);
         prevPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        prevPageBtn.setBounds(300,390,50,25);
+        prevPageBtn.setBounds(280,390,50,25);
         this.add(prevPageBtn);
         // 页数
         pageNumText.setText(String.valueOf(currentPage));
         pageNumText.setBackground(Color.white);
         pageNumText.setHorizontalAlignment(JTextField.CENTER);
         pageNumText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        pageNumText.setBounds(370,390,25,25);
+        pageNumText.setBounds(350,390,25,25);
         this.add(pageNumText);
         // Go
         goBtn.setIcon(new ImageIcon("imgs/jump.png"));
         goBtn.setBackground(Color.white);
         goBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-        goBtn.setBounds(393,390,30,25);
+        goBtn.setBounds(374,390,30,25);
         this.add(goBtn);
         // 下一页
         nextPageBtn.setIcon(new ImageIcon("imgs/right.png"));
         nextPageBtn.setBackground(Color.white);
         nextPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        nextPageBtn.setBounds(440,390,50,25);
+        nextPageBtn.setBounds(420,390,50,25);
         this.add(nextPageBtn);
         // 末页
         endPageBtn.setIcon(new ImageIcon("imgs/end.png"));
         endPageBtn.setBackground(Color.white);
         endPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        endPageBtn.setBounds(690,390,50,25);
+        endPageBtn.setBounds(670,390,50,25);
         this.add(endPageBtn);
     }
     private void addListener(){

@@ -13,6 +13,7 @@ public interface IRecordDao {
     public int getTotalByDateAndDirName(String beginDate, String endDate, String proName, String recordType, String dirName) throws SQLException;
     // 全部查询
     public List<Record> getAllRecord() throws SQLException;
+
     // 插入记录
     public void insertRecord(Product product,int count,String register,String recoryType);
 

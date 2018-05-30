@@ -48,55 +48,35 @@ public class ProductDaoImpl implements IProductDao {
     }
 
     @Override
-    public Product getProductById(int id) {
+    public Product getProductById(int id) throws SQLException {
         String sql = "select * from \"product\" where \"proId\" = ?";
         Product  product = null;
-        try {
-            product= queryRunner.query(sql,new BeanHandler<>(Product.class),id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        product= queryRunner.query(sql,new BeanHandler<>(Product.class),id);
         return product;
     }
 
     @Override
-    public void insertProduct(Product product) {
+    public void insertProduct(Product product) throws SQLException {
         String sql = "insert into \"product\" values(?,?,?,?,?,?)";
-        try {
-            queryRunner.update(sql,product.getProId(),product.getProName(), product.getDirName(),product.getSupplier(), product.getBrand(),product.getCount());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        queryRunner.update(sql,product.getProId(),product.getProName(), product.getDirName(),product.getSupplier(), product.getBrand(),product.getCount());
     }
 
     @Override
-    public void updateProductCountPlus(Product product) {
+    public void updateProductCountPlus(Product product) throws SQLException {
         String sql = "update \"product\" set \"count\"= nvl(\"count\",0) + ? where \"proId\" = ?";
-        try {
-            queryRunner.update(sql,product.getCount(),product.getProId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        queryRunner.update(sql,product.getCount(),product.getProId());
     }
 
     @Override
-    public void updateProductCountSub(Product product, int count) {
+    public void updateProductCountSub(Product product, int count) throws SQLException {
         String sql = "update \"product\" set \"count\"= \"count\" - ? where \"proId\" = ?";
-        try {
-            queryRunner.update(sql,count,product.getProId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        queryRunner.update(sql,count,product.getProId());
     }
 
     @Override
-    public void updateProduct(Product product) {
+    public void updateProduct(Product product) throws SQLException {
         String sql = "update \"product\" set \"proName\" = ?, \"dirName\" = ?, \"supplier\" = ?, \"brand\" = ? where \"proId\" = ?";
-        try {
-            queryRunner.update(sql,product.getProName(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        queryRunner.update(sql,product.getProName(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
 
     }
 

@@ -35,10 +35,10 @@ public class RecordDaoImpl implements IRecordDao {
         int total ;
         String sql = "select count(*) from \"record\" where (\"date\" between ? and ?) and (\"proName\" like '%' || ? || '%')  and \"recordType\" = ? ";
         if("全部".equals(dirName)){
-            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1), beginDate,endDate,proName,recordType).toString());
+            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1), beginDate,endDate,proName,recordType).toString().toString());
         }else{
             sql += " and \"proName\" in (select \"proName\" from \"product\" where \"dirName\" = ?)";
-            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1),beginDate,endDate,proName,recordType,dirName));
+            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1),beginDate,endDate,proName,recordType,dirName).toString());
         }
         return total;
     }

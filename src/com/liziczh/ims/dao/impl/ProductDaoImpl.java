@@ -35,7 +35,7 @@ public class ProductDaoImpl implements IProductDao {
             total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1), proName, lowerCount, upperCount).toString());
         }else{
             sql += " and \"dirName\" = ? ";
-            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1),proName,lowerCount,upperCount,dirName));
+            total = Integer.parseInt(queryRunner.query(sql,new ScalarHandler<>(1),proName,lowerCount,upperCount,dirName).toString());
         }
         return total;
     }

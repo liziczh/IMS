@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
     }
 
     private void init(){
-        this.setTitle("进销存管理系统");
+        this.setTitle("IMS");
         this.setIconImage(new ImageIcon("imgs/logo.png").getImage());
         this.setSize(800,600);
         this.setLocationRelativeTo(null);

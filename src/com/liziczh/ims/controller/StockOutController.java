@@ -37,11 +37,13 @@ public class StockOutController extends AbstractStockOutDialog {
 
     @Override
     public void autoComplete() {
-        Product product = productService.queryProductById(Integer.parseInt(proIdText.getText()));
-        if(product != null){
-            proNameText.setText(product.getProName());
-        }else{
-            proNameText.setText("");
+        if(!"".equals(proIdText.getText())){
+            Product product = productService.queryProductById(Integer.parseInt(proIdText.getText()));
+            if(product != null){
+                proNameText.setText(product.getProName());
+            }else{
+                proNameText.setText("");
+            }
         }
     }
 

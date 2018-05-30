@@ -41,7 +41,7 @@ public class StockInController extends AbstractStockInDialog {
 
     @Override
     public void autoComplete() {
-        if(proIdText.getText() != ""){
+        if(!"".equals(proIdText.getText())){
             Product product = productService.queryProductById(Integer.parseInt(proIdText.getText()));
             if(product != null){
                 proNameText.setText(product.getProName());

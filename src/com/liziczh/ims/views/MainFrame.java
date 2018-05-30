@@ -182,6 +182,7 @@ public class MainFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 card.show(contentPanel,"statisticsPanel");
+                statisticsPanel.setShape();
                 // 按钮变色
                 stockInBtn.setBackground(Color.white);
                 stockOutBtn.setBackground(Color.white);

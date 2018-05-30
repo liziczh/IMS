@@ -30,9 +30,11 @@ public abstract class AbstractStatisticsPanel extends JPanel {
     // 统计
     private JButton countBtn = new JButton();
     // record类型
-    protected String recordType = "in";
+    protected String recordType = null;
     // 统计图
     protected JPanel shapePanel = new JPanel();
+    //图片label
+    protected JLabel shapeLabel = new JLabel();
 
     public AbstractStatisticsPanel(){
         this.init();
@@ -97,22 +99,23 @@ public abstract class AbstractStatisticsPanel extends JPanel {
         shapePanel.setFont(new Font("微软雅黑", Font.BOLD, 14));
         shapePanel.setBounds(30,110,690,320);
         shapePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        shapePanel.setVisible(true);
         this.add(shapePanel);
-
+        //图片的显示
+        shapeLabel.setBounds(30,110,690,320);
+        shapePanel.add(shapeLabel);
     }
-
-
+    //添加监听事件
     public void addListener() {
 
         countBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                count();
+                setShape();
             }
         });
     }
-
-    public abstract void count();
+    //设置图片内容
     public abstract void setShape();
 
 }

@@ -23,6 +23,7 @@ public class InventoryMngController extends AbstractInventoryMngDialog {
             Product product = new Product(new Integer(proIdText.getText()),proNameText.getText(),(String) dirBox.getSelectedItem(),supplierText.getText(),brandText.getText(),0);
             modifyService.modify(product);
             JOptionPane.showMessageDialog(this,"修改成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         }
     }
 

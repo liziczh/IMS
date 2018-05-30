@@ -3,13 +3,17 @@ package com.liziczh.ims.views;
 import com.liziczh.ims.tools.DateChooser;
 import com.liziczh.ims.tools.DateUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public abstract class StatisticsPanel extends JPanel {
+public abstract class AbstractStatisticsPanel extends JPanel {
     // 页面标签
     protected JLabel titleLabel = new JLabel();
     // 开始时间
@@ -27,8 +31,10 @@ public abstract class StatisticsPanel extends JPanel {
     private JButton countBtn = new JButton();
     // record类型
     protected String recordType = "in";
+    // 统计图
+    protected JPanel shapePanel = new JPanel();
 
-    public StatisticsPanel(){
+    public AbstractStatisticsPanel(){
         this.init();
     }
 
@@ -86,13 +92,15 @@ public abstract class StatisticsPanel extends JPanel {
         countBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
         countBtn.setBounds(640,70,80,25);
         this.add(countBtn);
-
-        this.setShape();
+        // 统计图
+        shapePanel.setBackground(Color.white);
+        shapePanel.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        shapePanel.setBounds(30,110,690,320);
+        shapePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(shapePanel);
 
     }
-    private void setShape(){
 
-    }
 
     public void addListener() {
 
@@ -105,6 +113,6 @@ public abstract class StatisticsPanel extends JPanel {
     }
 
     public abstract void count();
-
+    public abstract void setShape();
 
 }

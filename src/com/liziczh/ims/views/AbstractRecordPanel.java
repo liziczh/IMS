@@ -261,4 +261,5 @@ public abstract class AbstractRecordPanel extends JPanel {
     public abstract void nextPage();
     public abstract void endPage();
     public abstract void jumpPage();
+
 }

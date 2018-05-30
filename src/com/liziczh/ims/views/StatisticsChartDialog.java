@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StatisticsChartDialog extends JDialog {
     public StatisticsChartDialog(String recordType) {
-        this.addComponent(recordType);
+        this.setShape(recordType);
         this.init();
     }
 
@@ -20,20 +20,16 @@ public class StatisticsChartDialog extends JDialog {
         GUITools.center(this);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-    public List<String> getImagePaths(String recordType){
-        String imgpath = "chart/" + recordType + "Stock.png";
-        List<String> imgList= new ArrayList<>();
-        imgList.add(imgpath);
-        return imgList;
-    };
 
     /*
-     * 调用子类重写方法getImagePaths,获取生成的图片的路径
      * 遍历集合List,获取所有的图片路径
      * 放到组件Label中
      */
-    private void addComponent(String recordType) {
-        List<String> imagePaths = getImagePaths(recordType);
+    public void setShape(String recordType){
+        String imgpath = "chart/" + recordType + "Stock.png";
+        List<String> imgList= new ArrayList<>();
+        imgList.add(imgpath);
+        List<String> imagePaths = imgList;
         if(imagePaths == null) {
             return;
         }

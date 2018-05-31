@@ -20,7 +20,7 @@ public abstract class AbstractStockOutDialog extends JDialog {
     private JLabel register = new JLabel();
     protected JTextField registerText = new JTextField();
     private JButton resetBtn = new JButton();
-    private JButton outStockBtn = new JButton();
+    private JButton stockOutBtn = new JButton();
     protected String recordType = "out";
 
     public AbstractStockOutDialog(){
@@ -81,19 +81,19 @@ public abstract class AbstractStockOutDialog extends JDialog {
         resetBtn.setBounds(40,260,100,30);
         resetBtn.setBackground(new Color(230,200,80));
         this.add(resetBtn);
-        outStockBtn.setText("出库");
-        outStockBtn.setFont(font);
-        outStockBtn.setBounds(200,260,100,30);
-        outStockBtn.setBackground(new Color(200,70,30));
-        this.add(outStockBtn);
+        stockOutBtn.setText("出库");
+        stockOutBtn.setFont(font);
+        stockOutBtn.setBounds(200,260,100,30);
+        stockOutBtn.setBackground(new Color(200,70,30));
+        this.add(stockOutBtn);
 
     }
 
     protected void addListener(){
         // 输入ID自动补全
-        proIdText.addFocusListener(new FocusAdapter() {
+        proIdText.addMouseListener(new MouseAdapter() {
             @Override
-            public void focusLost(FocusEvent e) {
+            public void mouseExited(MouseEvent e) {
                 autoComplete();
             }
         });
@@ -105,7 +105,7 @@ public abstract class AbstractStockOutDialog extends JDialog {
             }
         });
         // 出库
-        outStockBtn.addMouseListener(new MouseAdapter() {
+        stockOutBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 stockOut();

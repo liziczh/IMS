@@ -32,16 +32,7 @@ public class RecordServiceImpl implements IRecordService {
         return total;
     }
 
-    @Override
-    public List<Record> queryAll() {
-        List<Record> recordList = null;
-        try {
-            recordList = recordDao.getAllRecord();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return recordList;
-    }
+
 
 
 }

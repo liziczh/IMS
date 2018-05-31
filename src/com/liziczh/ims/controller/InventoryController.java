@@ -14,10 +14,12 @@ public class InventoryController extends AbstractInventoryPanel {
     // 库存上下限默认值
     private int lowerCount = 0;
     private int upperCount = 99999;
-    // 总记录数
 
     @Override
     public void queryProduct() {
+        // 将页数置1
+        currentPage = 1;
+        pageNumText.setText(String.valueOf(currentPage));
         // 判断库存下限值输入是否合法
         if("".equals(countLowerText.getText())){
             lowerCount = 0;

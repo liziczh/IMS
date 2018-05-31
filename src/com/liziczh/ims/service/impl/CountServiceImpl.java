@@ -1,18 +1,18 @@
 package com.liziczh.ims.service.impl;
 
-import com.liziczh.ims.dao.ILedgerDao;
-import com.liziczh.ims.dao.impl.LedgerDaoImpl;
-import com.liziczh.ims.service.ILedgerService;
+import com.liziczh.ims.dao.IRecordDao;
+import com.liziczh.ims.dao.impl.RecordDaoImpl;
+import com.liziczh.ims.service.ICountService;
 import com.liziczh.ims.tools.ChartUtil;
 import org.jfree.data.general.DefaultPieDataset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LedgerServiceImpl implements ILedgerService {
+public class CountServiceImpl implements ICountService {
 
     @Override
     public List<String> createPie(String recordType, String startTime, String endTime) {
-        ILedgerDao dao = new LedgerDaoImpl();
+        IRecordDao dao = new RecordDaoImpl();
         List<String> imgList = new ArrayList<>();
         String title;
         if(recordType == "in"){

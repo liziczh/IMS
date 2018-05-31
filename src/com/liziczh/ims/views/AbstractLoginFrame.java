@@ -130,7 +130,7 @@ public abstract class AbstractLoginFrame extends JFrame {
         registerBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new RegisterController();;
+                new RegisterController();
             }
         });
 

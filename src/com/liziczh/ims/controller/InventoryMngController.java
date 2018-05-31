@@ -17,15 +17,10 @@ public class InventoryMngController extends AbstractInventoryMngDialog {
 
     @Override
     public void modify() {
-        if(modifyService.getProductById(new Integer(proIdText.getText())) == null){
-            JOptionPane.showMessageDialog(this,"商品不存在","温馨提示",JOptionPane.WARNING_MESSAGE);
-        }else{
-            Product product = new Product(new Integer(proIdText.getText()),proNameText.getText(),(String) dirBox.getSelectedItem(),supplierText.getText(),brandText.getText(),0);
-            modifyService.modify(product);
-            JOptionPane.showMessageDialog(this,"修改成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-
-        }
+        Product product = new Product(new Integer(proIdText.getText()),proNameText.getText(),(String) dirBox.getSelectedItem(),supplierText.getText(),brandText.getText(),0);
+        modifyService.modify(product);
+        JOptionPane.showMessageDialog(this,"修改成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }
 
 }

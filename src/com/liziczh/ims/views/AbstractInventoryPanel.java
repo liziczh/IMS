@@ -36,11 +36,11 @@ public abstract class AbstractInventoryPanel extends JPanel {
     private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
     protected JComboBox dirBox = new JComboBox<>(def);
     // 表格
-    protected List<Product> proList = new ArrayList<>();
+    public List<Product> proList = new ArrayList<>();
     protected int total = 0; // 总记录数
-    protected String[] colNames = {"产品编号", "产品名称", "分类","供应商", "商标","数量"};
-    protected String[] propNames = {"proId", "proName", "dirName", "supplier", "brand","count"};
-    protected JTable stockTable = new JTable();
+    public String[] colNames = {"产品编号", "产品名称", "分类","供应商", "商标","数量"};
+    public String[] propNames = {"proId", "proName", "dirName", "supplier", "brand","count"};
+    public JTable stockTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();
     // 当前页数和页内数据行数
     protected int currentPage = 1;
@@ -55,8 +55,6 @@ public abstract class AbstractInventoryPanel extends JPanel {
     private JButton endPageBtn = new JButton();
     // 当前页数
     protected JTextField pageNumText = new JTextField();
-    // 跳转Btn
-    protected JButton goBtn = new JButton();
 
     public AbstractInventoryPanel(){
             this.init();
@@ -117,12 +115,12 @@ public abstract class AbstractInventoryPanel extends JPanel {
         // 分类
         dirLabel.setText("分类：");
         dirLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-        dirLabel.setBounds(470, 70, 60, 25);
+        dirLabel.setBounds(480, 70, 60, 25);
         this.add(dirLabel);
         // 分类下拉框
         dirBox.setFont(new Font("微软雅黑", Font.BOLD, 14));
         dirBox.setBackground(Color.white);
-        dirBox.setBounds(520,70,100,25);
+        dirBox.setBounds(525,70,100,25);
         this.add(dirBox);
         // 查询按钮
         queryBtn.setText("查询");
@@ -168,26 +166,20 @@ public abstract class AbstractInventoryPanel extends JPanel {
         prevPageBtn.setIcon(new ImageIcon("imgs/left.png"));
         prevPageBtn.setBackground(Color.white);
         prevPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        prevPageBtn.setBounds(280,390,50,25);
+        prevPageBtn.setBounds(300,390,50,25);
         this.add(prevPageBtn);
         // 页数
         pageNumText.setText(String.valueOf(currentPage));
         pageNumText.setBackground(Color.white);
         pageNumText.setHorizontalAlignment(JTextField.CENTER);
         pageNumText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        pageNumText.setBounds(350,390,25,25);
+        pageNumText.setBounds(360,390,30,25);
         this.add(pageNumText);
-        // Go
-        goBtn.setIcon(new ImageIcon("imgs/jump.png"));
-        goBtn.setBackground(Color.white);
-        goBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-        goBtn.setBounds(374,390,30,25);
-        this.add(goBtn);
         // 下一页
         nextPageBtn.setIcon(new ImageIcon("imgs/right.png"));
         nextPageBtn.setBackground(Color.white);
         nextPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        nextPageBtn.setBounds(420,390,50,25);
+        nextPageBtn.setBounds(400,390,50,25);
         this.add(nextPageBtn);
         // 末页
         endPageBtn.setIcon(new ImageIcon("imgs/end.png"));
@@ -200,8 +192,6 @@ public abstract class AbstractInventoryPanel extends JPanel {
         queryBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                currentPage = 1;
-                pageNumText.setText(String.valueOf(currentPage));
                 queryProduct();
             }
         });
@@ -229,20 +219,18 @@ public abstract class AbstractInventoryPanel extends JPanel {
                 endPage();
             }
         });
-        pageNumText.addKeyListener(new KeyAdapter() {
+        pageNumText.addMouseListener(new MouseAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_ENTER:
-                        currentPage = Integer.parseInt(pageNumText.getText());
-                        queryProduct();
-                }
+            public void mouseExited(MouseEvent e) {
+                jumpPage();
             }
         });
-        goBtn.addMouseListener(new MouseAdapter() {
+        pageNumText.addKeyListener(new KeyAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                jumpPage();
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    jumpPage();
+                }
             }
         });
     }

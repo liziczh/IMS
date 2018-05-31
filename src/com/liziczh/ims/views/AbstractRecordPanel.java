@@ -59,8 +59,6 @@ public abstract class AbstractRecordPanel extends JPanel {
     private JButton endPageBtn = new JButton();
     // 当前页数
     protected JTextField pageNumText = new JTextField();
-    // 跳转Btn
-    protected JButton goBtn = new JButton();
 
     public AbstractRecordPanel(){
         this.init();
@@ -140,7 +138,6 @@ public abstract class AbstractRecordPanel extends JPanel {
         this.setTable();
 
 
-
     }
     protected void setTable(){
         // 表格
@@ -175,26 +172,20 @@ public abstract class AbstractRecordPanel extends JPanel {
         prevPageBtn.setIcon(new ImageIcon("imgs/left.png"));
         prevPageBtn.setBackground(Color.white);
         prevPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        prevPageBtn.setBounds(280,390,50,25);
+        prevPageBtn.setBounds(300,390,50,25);
         this.add(prevPageBtn);
         // 页数
         pageNumText.setText(String.valueOf(currentPage));
         pageNumText.setBackground(Color.white);
         pageNumText.setHorizontalAlignment(JTextField.CENTER);
         pageNumText.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        pageNumText.setBounds(350,390,25,25);
+        pageNumText.setBounds(360,390,30,25);
         this.add(pageNumText);
-        // Go
-        goBtn.setIcon(new ImageIcon("imgs/jump.png"));
-        goBtn.setBackground(Color.white);
-        goBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-        goBtn.setBounds(374,390,30,25);
-        this.add(goBtn);
         // 下一页
         nextPageBtn.setIcon(new ImageIcon("imgs/right.png"));
         nextPageBtn.setBackground(Color.white);
         nextPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
-        nextPageBtn.setBounds(420,390,50,25);
+        nextPageBtn.setBounds(400,390,50,25);
         this.add(nextPageBtn);
         // 末页
         endPageBtn.setIcon(new ImageIcon("imgs/end.png"));
@@ -237,21 +228,13 @@ public abstract class AbstractRecordPanel extends JPanel {
                 endPage();
             }
         });
-        pageNumText.addKeyListener(new KeyAdapter() {
+        pageNumText.addMouseListener(new MouseAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_ENTER:
-                        jumpPage();
-                }
-            }
-        });
-        goBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseExited(MouseEvent e) {
                 jumpPage();
             }
         });
+
     }
 
 

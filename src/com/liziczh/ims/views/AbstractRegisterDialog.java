@@ -4,8 +4,7 @@ import jdk.nashorn.internal.scripts.JD;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public abstract class AbstractRegisterDialog extends JDialog {
     private Font font = new Font("微软雅黑",Font.BOLD,14);
@@ -16,6 +15,7 @@ public abstract class AbstractRegisterDialog extends JDialog {
     protected JPasswordField passwordText = new JPasswordField();
     private JLabel confirmLabel = new JLabel();
     protected JPasswordField confirmText = new JPasswordField();
+    protected JLabel promptLabel = new JLabel();
     private JButton resetBtn = new JButton();
     private JButton registerBtn = new JButton();
 
@@ -64,6 +64,10 @@ public abstract class AbstractRegisterDialog extends JDialog {
         confirmText.setBounds(110,160,200,30);
         confirmText.setFont(font);
         this.add(confirmText);
+        promptLabel.setText("");
+        promptLabel.setBounds(320,160,20,30);
+        promptLabel.setFont(font);
+        this.add(promptLabel);
 
         resetBtn.setText("重置");
         resetBtn.setFont(font);
@@ -79,6 +83,19 @@ public abstract class AbstractRegisterDialog extends JDialog {
     }
 
     protected void addListener(){
+        confirmText.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        confirmText.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                confirm();
+            }
+        });
+
         resetBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -91,8 +108,19 @@ public abstract class AbstractRegisterDialog extends JDialog {
                 register();
             }
         });
+        this.getContentPane().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                        register();
+                }
+            }
+        });
+
     }
     public abstract void reset();
     public abstract void register();
+    public abstract void confirm();
 
 }

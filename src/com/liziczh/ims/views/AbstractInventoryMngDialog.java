@@ -58,6 +58,8 @@ public abstract class AbstractInventoryMngDialog extends JDialog {
         this.add(proIdLabel);
         proIdText.setBounds(110,80,200,30);
         proIdText.setFont(font);
+        proIdText.setEditable(false);
+        proIdText.setBackground(Color.white);
         this.add(proIdText);
         proNameLabel.setText("产品名称:");
         proNameLabel.setFont(font);

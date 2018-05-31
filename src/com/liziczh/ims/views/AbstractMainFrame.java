@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MainFrame extends JFrame {
+public abstract class AbstractMainFrame extends JFrame {
 
     private CardLayout card = new CardLayout(); // 卡片布局
     // 菜单栏组件
@@ -24,11 +24,11 @@ public class MainFrame extends JFrame {
     private JPanel contentPanel = new JPanel(); // 下栏容器
     public AbstractRecordPanel stockInPanel = new RecordController();// 进货管理页面
     private AbstractRecordPanel stockOutPanel = new RecordController();// 销售管理页面
-    private AbstractInventoryPanel inventoryPanel = new InventoryController();// 库存管理页面
+    protected AbstractInventoryPanel inventoryPanel = new InventoryController();// 库存管理页面
     private AbstractStatisticsPanel statisticsPanel = new StatisticsController();// 统计报表
 
 
-    public MainFrame(){
+    public AbstractMainFrame(){
         this.init();
     }
 
@@ -142,7 +142,9 @@ public class MainFrame extends JFrame {
         stockInBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // 切换页面
                 card.show(contentPanel,"stockInPanel");
+                // 页面初始化
                 stockInPanel.queryRecord();
                 // 按钮变色
                 stockInBtn.setBackground(new Color(214,213,183));
@@ -155,7 +157,9 @@ public class MainFrame extends JFrame {
         stockOutBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // 切换页面
                 card.show(contentPanel,"stockOutPanel");
+                // 页面初始化
                 stockOutPanel.queryRecord();
                 // 按钮变色
                 stockInBtn.setBackground(Color.white);
@@ -168,7 +172,9 @@ public class MainFrame extends JFrame {
         inventoryBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // 切换页面
                 card.show(contentPanel,"inventoryPanel");
+                // 页面初始化
                 inventoryPanel.queryProduct();
                 // 按钮变色
                 stockInBtn.setBackground(Color.white);
@@ -181,7 +187,9 @@ public class MainFrame extends JFrame {
         statisticsBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // 切换页面
                 card.show(contentPanel,"statisticsPanel");
+                // 页面初始化
                 statisticsPanel.setShape();
                 // 按钮变色
                 stockInBtn.setBackground(Color.white);
@@ -207,22 +215,13 @@ public class MainFrame extends JFrame {
         // 商品管理
         inventoryPanel.inventoryMngBtn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if(inventoryPanel.stockTable.getSelectedRow() == -1){
-                    JOptionPane.showMessageDialog(null,"未选中任何商品","温馨提示",JOptionPane.WARNING_MESSAGE);
-                }else{
-                    AbstractInventoryMngDialog inventoryMngDialog= new InventoryMngController();
-                    try {
-                        inventoryMngDialog.product = new ListTableModel<>(inventoryPanel.proList,Product.class,inventoryPanel.colNames,inventoryPanel.propNames).getInstance(inventoryPanel.stockTable.getSelectedRow());
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                    inventoryMngDialog.setText(inventoryMngDialog.product);
-                }
+                inventoryMng();
             }
         });
 
     }
 
+    public abstract void inventoryMng();
 
 
 }

@@ -23,15 +23,23 @@ public class RegisterController extends AbstractRegisterDialog {
         String confirm = String.valueOf(confirmText.getPassword());
         if(username != null && password != null && confirm != null ){
             if(!"".equals(username) && !"".equals(password) && !"".equals(confirm)){
-                if(password.equals(confirm)){
-                    userService.register(username,password);
-                    JOptionPane.showMessageDialog(this,"注册成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(this,"请确认两次密码输入一致---","温馨提示",JOptionPane.WARNING_MESSAGE);
-                }
+                userService.register(username,password);
+                JOptionPane.showMessageDialog(this,"注册成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
             }else{
-                    JOptionPane.showMessageDialog(this,"用户名或密码不能为空","温馨提示",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,"用户名或密码不能为空","温馨提示",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+
+    @Override
+    public void confirm() {
+        // 判断密码与确认密码是否一致
+        if(String.valueOf(passwordText.getPassword()) != "" && String.valueOf(confirmText.getPassword()) != ""){
+            if(String.valueOf(passwordText.getPassword()).equals(String.valueOf(confirmText.getPassword()))) {
+                promptLabel.setText("√");
+            }else{
+                promptLabel.setText("×");
             }
         }
     }

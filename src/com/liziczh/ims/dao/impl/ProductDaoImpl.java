@@ -4,6 +4,7 @@ import com.liziczh.ims.dao.IProductDao;
 import com.liziczh.ims.domain.Product;
 import com.liziczh.ims.tools.JDBCUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -79,6 +80,9 @@ public class ProductDaoImpl implements IProductDao {
         queryRunner.update(sql,product.getProName(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
 
     }
+
+
+
 
 
 }

@@ -30,7 +30,7 @@ public abstract class AbstractStockInDialog extends JDialog {
     private JLabel registerLabel = new JLabel();
     protected JTextField registerText = new JTextField();
     protected JButton resetBtn = new JButton();
-    protected JButton inStockBtn = new JButton();
+    protected JButton stockInBtn = new JButton();
     protected String recordType = "in";
 
     public AbstractStockInDialog(){
@@ -113,19 +113,19 @@ public abstract class AbstractStockInDialog extends JDialog {
         resetBtn.setBounds(40,380,100,30);
         resetBtn.setBackground(new Color(230,200,80));
         this.add(resetBtn);
-        inStockBtn.setText("入库");
-        inStockBtn.setFont(font);
-        inStockBtn.setBounds(200,380,100,30);
-        inStockBtn.setBackground(new Color(80,150,230));
-        this.add(inStockBtn);
+        stockInBtn.setText("入库");
+        stockInBtn.setFont(font);
+        stockInBtn.setBounds(200,380,100,30);
+        stockInBtn.setBackground(new Color(80,150,230));
+        this.add(stockInBtn);
 
     }
 
     protected void addListener(){
         // 输入ID自动补全
-        proIdText.addFocusListener(new FocusAdapter() {
+        proIdText.addMouseListener(new MouseAdapter() {
             @Override
-            public void focusLost(FocusEvent e) {
+            public void mouseExited(MouseEvent e) {
                 autoComplete();
             }
         });
@@ -139,7 +139,7 @@ public abstract class AbstractStockInDialog extends JDialog {
         });
 
         // 进货入库页面提交后，数据内容保存到数据库中的商品表中，并转到入库记录界面
-        inStockBtn.addMouseListener(new MouseAdapter() {
+        stockInBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 stockIn();

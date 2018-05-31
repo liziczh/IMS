@@ -19,6 +19,7 @@ public interface IRecordDao {
 
     // 更新记录信息
     public void updateRecord(int proId,String proName);
-
-
+    // 获取统计信息
+    public int getTotalCount(String recordType);
+    public List<Object[]> getSumCountByDirName(String recordType, String startTime, String endTime);
 }

@@ -63,7 +63,8 @@ public abstract class AbstractStatisticsPanel extends JPanel {
         beginDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
         beginDateText.setBounds(80, 70, 100, 25);
         beginDateText.setText(String.format("%tF", DateUtils.getFirstDayOfMethod()));
-        beginDateText.setEditable(true);
+        beginDateText.setBackground(Color.white);
+        beginDateText.setEditable(false);
         DateChooser.getInstance().register(this.beginDateText);
         this.add(beginDateLabel);
         this.add(beginDateText);
@@ -73,7 +74,8 @@ public abstract class AbstractStatisticsPanel extends JPanel {
         endDateLabel.setBounds(180, 70, 20, 25);
         endDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
         endDateText.setBounds(200, 70, 100, 25);
-        endDateText.setEditable(true);
+        endDateText.setBackground(Color.white);
+        endDateText.setEditable(false);
         endDateText.setText(String.format("%tF", new Date()));
         DateChooser.getInstance().register(this.endDateText);
         this.add(endDateLabel);

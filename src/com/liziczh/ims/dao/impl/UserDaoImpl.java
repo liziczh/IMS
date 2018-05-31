@@ -18,8 +18,8 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public void insertUser(String username, String password) throws SQLException {
-        String sql = "insert into \"user\" values(id_seq.nextval, ?,FN_MD5(?))";
-        queryRunner.update(sql,username,password);
+    public void insertUser(User user) throws SQLException {
+        String sql = "insert into \"user\" values(id_seq.nextval, ?, FN_MD5(?), ?, ?)";
+        queryRunner.update(sql,user.getUsername(),user.getPassword(),user.getMobileNumber(),user.getEmail());
     }
 }

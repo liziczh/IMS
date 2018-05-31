@@ -1,22 +1,36 @@
 package com.liziczh.ims.views;
 
-import jdk.nashorn.internal.scripts.JD;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public abstract class AbstractRegisterDialog extends JDialog {
     private Font font = new Font("微软雅黑",Font.BOLD,14);
+    // 标题
     private JLabel titleLabel = new JLabel();
+    // 用户名
     private JLabel usernameLabel = new JLabel();
     protected JTextField usernameText = new JTextField();
+    private JLabel usernameTipsLabel = new JLabel();
+    // 密码
     private JLabel passwordLabel = new JLabel();
     protected JPasswordField passwordText = new JPasswordField();
+    private JLabel passwordTipsLabel = new JLabel();
+    // 确认密码
     private JLabel confirmLabel = new JLabel();
     protected JPasswordField confirmText = new JPasswordField();
-    protected JLabel promptLabel = new JLabel();
+    private JLabel confirmTipsLabel = new JLabel();
+    // 手机号
+    private JLabel mobileNumberLabel = new JLabel();
+    protected JTextField mobileNumberText = new JTextField();
+    private JLabel mobileNumberTipsLabel = new JLabel();
+    // 邮箱
+    private JLabel emailLabel = new JLabel();
+    protected JTextField emailText = new JTextField();
+    private JLabel emailTipsLabel = new JLabel();
+    // 重置按钮
     private JButton resetBtn = new JButton();
+    // 注册按钮
     private JButton registerBtn = new JButton();
 
     public AbstractRegisterDialog(){
@@ -27,7 +41,7 @@ public abstract class AbstractRegisterDialog extends JDialog {
         this.setTitle("进货入库");
         this.getContentPane().setBackground(Color.white);
         this.setIconImage(new ImageIcon("imgs/logo.png").getImage());
-        this.setBounds(0,0,360,400);
+        this.setBounds(0,0,360,480);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -38,89 +52,160 @@ public abstract class AbstractRegisterDialog extends JDialog {
     }
 
     private void addComponent(){
+        // 标题
         titleLabel.setText("注册账号");
         titleLabel.setIcon(new ImageIcon("imgs/username.png"));
         titleLabel.setFont(new Font("微软雅黑",Font.PLAIN,20));
         titleLabel.setBounds(120,20,120,40);
         this.add(titleLabel);
+        // 用户名
         usernameLabel.setText("用户名:");
         usernameLabel.setFont(font);
         usernameLabel.setBounds(40,80,100,30);
         this.add(usernameLabel);
-        usernameText.setBounds(110,80,200,30);
         usernameText.setFont(font);
+        usernameText.setBounds(110,80,200,30);
         this.add(usernameText);
-        passwordLabel.setText("密码:");
+        usernameTipsLabel.setFont(font);
+        usernameTipsLabel.setBounds(320,80,40,30);
+        this.add(usernameTipsLabel);
+        // 密码
+        passwordLabel.setText("密   码:");
         passwordLabel.setFont(font);
         passwordLabel.setBounds(40,120,100,30);
         this.add(passwordLabel);
         passwordText.setBounds(110,120,200,30);
         passwordText.setFont(font);
         this.add(passwordText);
+        passwordTipsLabel.setFont(font);
+        passwordTipsLabel.setBounds(320,120,40,30);
+        this.add(passwordTipsLabel);
+
+        // 确认密码
         confirmLabel.setText("确认密码:");
         confirmLabel.setFont(font);
         confirmLabel.setBounds(40,160,100,30);
         this.add(confirmLabel);
         confirmText.setBounds(110,160,200,30);
         confirmText.setFont(font);
+        confirmText.setBackground(Color.white);
         this.add(confirmText);
-        promptLabel.setText("");
-        promptLabel.setBounds(320,160,20,30);
-        promptLabel.setFont(font);
-        this.add(promptLabel);
+        confirmTipsLabel.setFont(font);
+        confirmTipsLabel.setBounds(320,160,40,30);
+        this.add(confirmTipsLabel);
+        // 手机号
+        mobileNumberLabel.setText("手 机 号：");
+        mobileNumberLabel.setFont(font);
+        mobileNumberLabel.setBounds(40,200,100,30);
+        this.add(mobileNumberLabel);
+        mobileNumberText.setBounds(110,200,200,30);
+        mobileNumberText.setFont(font);
+        this.add(mobileNumberText);
+        mobileNumberTipsLabel.setFont(font);
+        mobileNumberTipsLabel.setBounds(320,200,40,30);
+        this.add(mobileNumberTipsLabel);
+        // 邮箱
+        emailLabel.setText("邮   箱:");
+        emailLabel.setFont(font);
+        emailLabel.setBounds(40,240,100,30);
+        this.add(emailLabel);
+        emailText.setBounds(110,240,200,30);
+        emailText.setFont(font);
+        this.add(emailText);
+        emailTipsLabel.setFont(font);
+        emailTipsLabel.setBounds(320,240,40,30);
+        this.add(emailTipsLabel);
 
+        // 重置按钮
         resetBtn.setText("重置");
         resetBtn.setFont(font);
-        resetBtn.setBounds(40,260,100,30);
+        resetBtn.setBounds(40,360,100,30);
         resetBtn.setBackground(new Color(230,200,80));
         this.add(resetBtn);
+        // 注册按钮
         registerBtn.setText("注册");
         registerBtn.setFont(font);
-        registerBtn.setBounds(200,260,100,30);
+        registerBtn.setBounds(200,360,100,30);
         registerBtn.setBackground(new Color(80,150,230));
         this.add(registerBtn);
 
     }
 
-    protected void addListener(){
-        confirmText.addMouseListener(new MouseAdapter() {
+    private void addListener(){
+        // 验证用户名：/^[a-zA-Z0-9_-]{4,16}$/
+        usernameText.addFocusListener(new FocusAdapter() {
             @Override
-            public void mouseExited(MouseEvent e) {
-
+            public void focusLost(FocusEvent e) {
+                if(usernameText.getText().matches("^[a-zA-Z0-9_-]{4,16}$")) {
+                    usernameTipsLabel.setText("√");
+                }else{
+                    usernameTipsLabel.setText("×");
+                }
             }
         });
+        // 验证密码：/^[a-z0-9_-]{6,18}$/
+        passwordText.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(String.valueOf(passwordText.getPassword()).matches("^[a-zA-Z0-9_-]{6,18}$")) {
+                    passwordTipsLabel.setText("√");
+                }else{
+                    passwordTipsLabel.setText("×");
+                }
+            }
+        });
+        // 验证确认密码
         confirmText.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                confirm();
+                if(!"".equals(String.valueOf(passwordText.getPassword())) && !"".equals(String.valueOf(confirmText.getPassword()))){
+                    if(String.valueOf(passwordText.getPassword()).equals(String.valueOf(confirmText.getPassword()))) {
+                        confirmTipsLabel.setText("√");
+                    }else{
+                        confirmTipsLabel.setText("×");
+                    }
+                }
             }
         });
 
+        // 验证手机号
+        mobileNumberText.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(mobileNumberText.getText().matches("^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$")) {
+                    mobileNumberTipsLabel.setText("√");
+                }else{
+                    mobileNumberTipsLabel.setText("×");
+                }
+            }
+        });
+        // 验证邮箱：/^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/
+        emailText.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(emailText.getText().matches("^[a-z\\d]+(\\.[a-z\\d]+)*@([\\da-z](-[\\da-z])?)+(\\.{1,2}[a-z]+)+$")) {
+                    emailTipsLabel.setText("√");
+                }else{
+                    emailTipsLabel.setText("×");
+                }
+            }
+        });
+        // 重置
         resetBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 reset();
             }
         });
+        // 注册
         registerBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 register();
             }
         });
-        this.getContentPane().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_ENTER:
-                        register();
-                }
-            }
-        });
 
     }
     public abstract void reset();
     public abstract void register();
-    public abstract void confirm();
-
 }

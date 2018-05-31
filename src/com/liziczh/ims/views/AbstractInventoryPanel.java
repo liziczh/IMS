@@ -192,6 +192,9 @@ public abstract class AbstractInventoryPanel extends JPanel {
         queryBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // 先将页数置1
+                currentPage = 1;
+                pageNumText.setText(String.valueOf(currentPage));
                 queryProduct();
             }
         });

@@ -15,7 +15,7 @@ public class CountServiceImpl implements ICountService {
         IRecordDao dao = new RecordDaoImpl();
         List<String> imgList = new ArrayList<>();
         String title;
-        if(recordType == "in"){
+        if("in".equals(recordType)){
             title = "入库商品各分类占比统计图（"+ dao.getTotalCount(recordType)+")"+ startTime + "至" + endTime;
         }else{
             title = "出库商品各分类占比统计图（"+ dao.getTotalCount(recordType)+")"+ startTime + "至" + endTime;

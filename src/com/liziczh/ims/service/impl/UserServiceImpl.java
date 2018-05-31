@@ -24,9 +24,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void register(String username, String password) {
+    public void register(User user) {
         try {
-            userDao.insertUser(username, password);
+            userDao.insertUser(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }

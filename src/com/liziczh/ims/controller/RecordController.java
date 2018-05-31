@@ -12,7 +12,7 @@ public class RecordController extends AbstractRecordPanel {
 
     @Override
     public void queryRecord() {
-        recordList = recordService.queryRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),recordType,(String)dirBox.getSelectedItem(),currentPage,pageSize);
+        recordList = recordService.queryRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),this.recordType,(String)dirBox.getSelectedItem(),currentPage,pageSize);
         total = recordService.getTotal(beginDateText.getText(),endDateText.getText(),proNameText.getText(),recordType,(String) dirBox.getSelectedItem());
         try {
             recordTable.setModel(new ListTableModel<Record>(recordList,Record.class,colNames,propNames));

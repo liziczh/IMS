@@ -202,14 +202,23 @@ public abstract class AbstractMainFrame extends JFrame {
         stockInPanel.stockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new StockInController();
+                // 入库表单初始化
+                AbstractStockIODialog stockInDialog =  new StockIOController();
+                stockInDialog.titleLabel.setText("进货入库");
+                stockInDialog.recordType = "in";
+                stockInDialog.add(stockInDialog.stockInBtn);
+
             }
         });
         // 销售出库
         stockOutPanel.stockBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new StockOutController();
+                // 出库表单初始化
+                AbstractStockIODialog stockOutDialog =  new StockIOController();
+                stockOutDialog.titleLabel.setText("销售出库");
+                stockOutDialog.recordType = "out";
+                stockOutDialog.add(stockOutDialog.stockOutBtn);
             }
         });
         // 商品管理

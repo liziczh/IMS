@@ -9,10 +9,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public abstract class AbstractStockInDialog extends JDialog {
+public abstract class AbstractStockIODialog extends JDialog {
 
     private Font font = new Font("微软雅黑",Font.BOLD,14);
-    private JLabel titleLabel = new JLabel();
+    protected JLabel titleLabel = new JLabel();
     private JLabel proIdLabel = new JLabel();
     protected JTextField proIdText = new JTextField();
     private JLabel proNameLabel = new JLabel();
@@ -31,14 +31,15 @@ public abstract class AbstractStockInDialog extends JDialog {
     protected JTextField registerText = new JTextField();
     protected JButton resetBtn = new JButton();
     protected JButton stockInBtn = new JButton();
+    protected JButton stockOutBtn = new JButton();
     protected String recordType = "in";
 
-    public AbstractStockInDialog(){
+    public AbstractStockIODialog(){
         this.init();
     }
 
     private void init(){
-        this.setTitle("进货入库");
+        this.setTitle("进货入库/销售出库");
         this.getContentPane().setBackground(Color.white);
         this.setIconImage(new ImageIcon("imgs/logo.png").getImage());
         this.setBounds(0,0,360,480);
@@ -52,7 +53,7 @@ public abstract class AbstractStockInDialog extends JDialog {
     }
 
     private void addComponent(){
-        titleLabel.setText("进货入库");
+        titleLabel.setText("进货入库/销售出库");
         titleLabel.setIcon(new ImageIcon("imgs/in.png"));
         titleLabel.setFont(new Font("微软雅黑",Font.PLAIN,20));
         titleLabel.setBounds(120,20,120,40);
@@ -117,7 +118,13 @@ public abstract class AbstractStockInDialog extends JDialog {
         stockInBtn.setFont(font);
         stockInBtn.setBounds(200,380,100,30);
         stockInBtn.setBackground(new Color(80,150,230));
-        this.add(stockInBtn);
+//        this.add(stockInBtn);
+
+        stockOutBtn.setText("出库");
+        stockOutBtn.setFont(font);
+        stockOutBtn.setBounds(200,380,100,30);
+        stockOutBtn.setBackground(new Color(200,70,30));
+//        this.add(stockOutBtn);
 
     }
 
@@ -145,10 +152,18 @@ public abstract class AbstractStockInDialog extends JDialog {
                 stockIn();
             }
         });
+        // 出库
+        stockOutBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                stockOut();
+            }
+        });
     }
 
     public abstract void reset();
     public abstract void stockIn();
+    public abstract void stockOut();
     public abstract void autoComplete();
 }
 

@@ -44,13 +44,6 @@ public class RecordDaoImpl implements IRecordDao {
         return total;
     }
 
-    @Override
-    public List<Record> getAllRecord() throws SQLException {
-        String sql = "select * from \"record\" ";
-        List<Record> recordList = queryRunner.query(sql,new BeanListHandler<Record>(Record.class));
-        return recordList;
-    }
-
 
     @Override
     public void insertRecord(Product product,int count, String register,String recordType) {

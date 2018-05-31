@@ -17,9 +17,6 @@ public class InventoryController extends AbstractInventoryPanel {
 
     @Override
     public void queryProduct() {
-        // 将页数置1
-        currentPage = 1;
-        pageNumText.setText(String.valueOf(currentPage));
         // 判断库存下限值输入是否合法
         if("".equals(countLowerText.getText())){
             lowerCount = 0;

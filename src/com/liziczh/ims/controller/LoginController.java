@@ -38,7 +38,7 @@ public class LoginController extends AbstractLoginFrame {
         if(isUser && isCode){
             JOptionPane.showMessageDialog(this,"登陆成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            new MainController().stockInPanel.queryRecord();
+            new MainController(usernameText.getText()).stockInPanel.queryRecord();
         }
     }
 

@@ -8,6 +8,16 @@ import com.liziczh.ims.views.AbstractMainFrame;
 import javax.swing.*;
 
 public class MainController extends AbstractMainFrame {
+    public MainController(String username) {
+        super(username);
+    }
+
+    @Override
+    public void exit() {
+        this.dispose();
+        new LoginController();
+    }
+
     @Override
     public void inventoryMng() {
         Product product = null;

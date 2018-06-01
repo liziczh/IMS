@@ -91,7 +91,7 @@ public abstract class AbstractRecordPanel extends JPanel {
         beginDateLabel.setBounds(30, 70, 60, 25);
         beginDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
         beginDateText.setBounds(75, 70, 90, 25);
-        beginDateText.setText(String.format("%tF", DateUtils.getFirstDayOfMethod()));
+        beginDateText.setText(DateUtils.firstdayByYear());
         beginDateText.setBackground(Color.white);
         beginDateText.setEditable(false);
         DateChooser.getInstance().register(this.beginDateText);

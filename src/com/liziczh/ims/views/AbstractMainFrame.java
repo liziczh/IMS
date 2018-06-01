@@ -15,6 +15,10 @@ public abstract class AbstractMainFrame extends JFrame {
     // 菜单栏组件
     private BackImgPanel menuPanel = new BackImgPanel("imgs/mainbg4.jpg"); // 菜单栏
     private JLabel logoLabel = new JLabel(); // logo
+    private JLabel logoTestLabel = new JLabel(); // logo文本
+    private JLabel userLabel = new JLabel(); // 当前账户
+    private String username; // 用户名
+    private JLabel exitLabel = new JLabel(); // 退出登录
     private JButton stockInBtn = new JButton(); // 进货管理选项
     private JButton stockOutBtn = new JButton(); // 销售管理选项
     private JButton inventoryBtn = new JButton(); // 库存管理选项
@@ -28,7 +32,8 @@ public abstract class AbstractMainFrame extends JFrame {
     private AbstractStatisticsPanel statisticsPanel = new StatisticsController();// 统计报表
 
 
-    public AbstractMainFrame(){
+    public AbstractMainFrame(String username){
+        this.username = username;
         this.init();
     }
 
@@ -62,12 +67,28 @@ public abstract class AbstractMainFrame extends JFrame {
         menuPanel.setBackground(Color.white);
         menuPanel.setBounds(0,0,800,600);
         menuPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
         // logo
-        logoLabel.setText(" IMS");
         logoLabel.setIcon(new ImageIcon("imgs/logo32.png"));
-        logoLabel.setFont(new Font("微软雅黑",Font.BOLD,30));
-        logoLabel.setBounds(50,30,200,50);
+        logoLabel.setBounds(50,30,50,50);
         menuPanel.add(logoLabel);
+
+        // logo文本
+        logoTestLabel.setText("IMS");
+        logoTestLabel.setFont(new Font("微软雅黑",Font.BOLD,30));
+        logoTestLabel.setBounds(110,30,80,50);
+        menuPanel.add(logoTestLabel);
+
+        // 当前账户
+        userLabel.setText("用户："+username);
+        userLabel.setFont(new Font("微软雅黑",Font.BOLD,14));
+        userLabel.setBounds(730-username.length()*10,2,50+username.length()*10,20);
+        menuPanel.add(userLabel);
+
+        // 退出登录
+        exitLabel.setIcon(new ImageIcon("imgs/exit.png"));
+        exitLabel.setBounds(770,2,20,20);
+        menuPanel.add(exitLabel);
 
         // 进货管理
         stockInBtn.setText("进货管理");
@@ -228,8 +249,16 @@ public abstract class AbstractMainFrame extends JFrame {
             }
         });
 
-    }
+        // 退出登录
+        exitLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                exit();
+            }
+        });
 
+    }
+    public abstract void exit();
     public abstract void inventoryMng();
 
 

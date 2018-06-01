@@ -48,7 +48,7 @@ public abstract class AbstractLoginFrame extends JFrame {
         loginPanel.setLayout(null);
         loginPanel.setBackground(Color.white);
         // 登陆标签
-        loginLabel.setText("  IMS");
+        loginLabel.setText(" IMS");
         loginLabel.setIcon(new ImageIcon("imgs/logo32.png"));
         loginLabel.setFont(new Font("等线",Font.PLAIN,36));
         loginLabel.setBounds(240,70,150,50);

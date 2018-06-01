@@ -58,21 +58,21 @@ public abstract class AbstractStockIODialog extends JDialog {
         titleLabel.setFont(new Font("微软雅黑",Font.PLAIN,20));
         titleLabel.setBounds(120,20,120,40);
         this.add(titleLabel);
-        proIdLabel.setText("产品编号:");
+        proIdLabel.setText("商品编号:");
         proIdLabel.setFont(font);
         proIdLabel.setBounds(40,80,100,30);
         this.add(proIdLabel);
         proIdText.setBounds(110,80,200,30);
         proIdText.setFont(font);
         this.add(proIdText);
-        proNameLabel.setText("产品名称:");
+        proNameLabel.setText("商品名称:");
         proNameLabel.setFont(font);
         proNameLabel.setBounds(40,120,100,30);
         this.add(proNameLabel);
         proNameText.setBounds(110,120,200,30);
         proNameText.setFont(font);
         this.add(proNameText);
-        dirNameLabel.setText("分   类 :");
+        dirNameLabel.setText("分   类:");
         dirNameLabel.setFont(font);
         dirNameLabel.setBounds(40,160,100,30);
         this.add(dirNameLabel);
@@ -87,7 +87,7 @@ public abstract class AbstractStockIODialog extends JDialog {
         supplierText.setBounds(110,200,200,30);
         supplierText.setFont(font);
         this.add(supplierText);
-        brandLabel.setText("产品商标:");
+        brandLabel.setText("商   标:");
         brandLabel.setFont(font);
         brandLabel.setBounds(40,240,100,30);
         this.add(brandLabel);
@@ -118,13 +118,11 @@ public abstract class AbstractStockIODialog extends JDialog {
         stockInBtn.setFont(font);
         stockInBtn.setBounds(200,380,100,30);
         stockInBtn.setBackground(new Color(80,150,230));
-//        this.add(stockInBtn);
 
         stockOutBtn.setText("出库");
         stockOutBtn.setFont(font);
         stockOutBtn.setBounds(200,380,100,30);
         stockOutBtn.setBackground(new Color(200,70,30));
-//        this.add(stockOutBtn);
 
     }
 

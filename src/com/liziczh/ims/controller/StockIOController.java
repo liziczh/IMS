@@ -24,13 +24,45 @@ public class StockIOController extends AbstractStockIODialog {
     }
     @Override
     public void stockIn() {
-        if(proIdText.getText() == null && proNameText.getText() == null && dirBox.getSelectedItem() == "全部" && supplierText == null && brandText == null && countText == null && registerText == null){
-            JOptionPane.showMessageDialog(this,"请确认所有选项都已填写完成","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        if(proIdText.getText() != null && proNameText.getText() != null && dirBox.getSelectedItem() != "全部" && supplierText != null && brandText != null && countText != null && registerText != null){
+            if(proIdText.getText().matches("[0-9]+")){
+                if(countText.getText().matches("[0-9]+")){
+                    Product product = new Product(new Integer(proIdText.getText()),proNameText.getText(), (String) dirBox.getSelectedItem(),supplierText.getText(),brandText.getText(),new Integer(countText.getText()));
+                    stockIOService.stockIn(product,registerText.getText(),recordType);
+                    JOptionPane.showMessageDialog(this,"成功入库","温馨提示",JOptionPane.WARNING_MESSAGE);
+                    reset();
+                }else{
+                    JOptionPane.showMessageDialog(this,"商品数量输入有误","温馨提示",JOptionPane.WARNING_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"商品编号输入有误","温馨提示",JOptionPane.WARNING_MESSAGE);
+            }
         }else{
-            Product product = new Product(new Integer(proIdText.getText()),proNameText.getText(), (String) dirBox.getSelectedItem(),supplierText.getText(),brandText.getText(),new Integer(countText.getText()));
-            stockIOService.stockIn(product,registerText.getText(),recordType);
-            JOptionPane.showMessageDialog(this,"成功入库","温馨提示",JOptionPane.INFORMATION_MESSAGE);
-            reset();
+            JOptionPane.showMessageDialog(this,"请确认所有选项都已填写完成","温馨提示",JOptionPane.WARNING_MESSAGE);
+        }
+
+    }
+
+    @Override
+    public void stockOut() {
+        if(proIdText.getText() != null && proNameText.getText() != null && dirBox.getSelectedItem() != "全部" && supplierText != null && brandText != null && countText != null && registerText != null){
+            if(proIdText.getText().matches("[0-9]+")){
+                if(countText.getText().matches("[0-9]+")){
+                    if(stockIOService.checkProduct(new Integer(proIdText.getText()),new Integer(countText.getText())) == null){
+                        JOptionPane.showMessageDialog(this,"商品不存在或库存不足，无法出库","温馨提示",JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        stockIOService.stockOut(new Integer(proIdText.getText()),new Integer(countText.getText()),registerText.getText(),recordType);
+                        JOptionPane.showMessageDialog(this,"成功出库","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+                        reset();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this,"商品数量输入有误","温馨提示",JOptionPane.WARNING_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"商品编号输入有误","温馨提示",JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this,"请确认所有选项都已填写完成","温馨提示",JOptionPane.WARNING_MESSAGE);
         }
 
     }
@@ -53,15 +85,5 @@ public class StockIOController extends AbstractStockIODialog {
         }
     }
 
-    @Override
-    public void stockOut() {
-        if(stockIOService.checkProduct(new Integer(proIdText.getText()),new Integer(countText.getText())) == null){
-            JOptionPane.showMessageDialog(this,"商品不存在或库存不足，无法出库","温馨提示",JOptionPane.WARNING_MESSAGE);
-        }else{
-            stockIOService.stockOut(new Integer(proIdText.getText()),new Integer(countText.getText()),registerText.getText(),recordType);
-            JOptionPane.showMessageDialog(this,"成功出库","温馨提示",JOptionPane.INFORMATION_MESSAGE);
-            reset();
-        }
-    }
 
 }

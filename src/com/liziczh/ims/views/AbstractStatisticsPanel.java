@@ -109,7 +109,6 @@ public abstract class AbstractStatisticsPanel extends JPanel {
     }
     //添加监听事件
     public void addListener() {
-
         countBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

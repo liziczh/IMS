@@ -42,7 +42,7 @@ public abstract class AbstractRecordPanel extends JPanel {
     // 表格
     protected List<Record> recordList = new ArrayList<>(); // 结果集
     protected int total = 0; // 总记录数
-    protected String[] colNames = {"日期", "产品编号", "产品名称", "数量", "登记人"}; // 列名
+    protected String[] colNames = {"日期", "商品编号", "商品名称", "数量", "登记人"}; // 列名
     protected String[] propNames = {"date", "proId", "proName", "count", "register"}; // Record属性
     protected JTable recordTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();

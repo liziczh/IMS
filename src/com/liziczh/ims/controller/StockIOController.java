@@ -25,7 +25,7 @@ public class StockIOController extends AbstractStockIODialog {
     @Override
     public void stockIn() {
         if(proIdText.getText() != null && proNameText.getText() != null && dirBox.getSelectedItem() != "全部" && supplierText != null && brandText != null && countText != null && registerText != null){
-            if(proIdText.getText().matches("[0-9]+")){
+            if(proIdText.getText().matches("[0-9A-Za-z]+")){
                 if(countText.getText().matches("[0-9]+")){
                     Product product = new Product(new Integer(proIdText.getText()),proNameText.getText(), (String) dirBox.getSelectedItem(),supplierText.getText(),brandText.getText(),new Integer(countText.getText()));
                     stockIOService.stockIn(product,registerText.getText(),recordType);

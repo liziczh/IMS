@@ -38,7 +38,7 @@ public abstract class AbstractInventoryPanel extends JPanel {
     // 表格
     public List<Product> proList = new ArrayList<>();
     protected int total = 0; // 总记录数
-    public String[] colNames = {"产品编号", "产品名称", "分类","供应商", "商标","数量"};
+    public String[] colNames = {"商品编号", "商品名称", "分类","供应商", "商标","数量"};
     public String[] propNames = {"proId", "proName", "dirName", "supplier", "brand","count"};
     public JTable stockTable = new JTable();
     private JScrollPane scrollPanel = new JScrollPane();
@@ -84,7 +84,7 @@ public abstract class AbstractInventoryPanel extends JPanel {
         inventoryMngBtn.setFont(new Font("微软雅黑", Font.BOLD, 16));
         this.add(inventoryMngBtn);
         // 产品名称
-        proNameLabel.setText("产品名称：");
+        proNameLabel.setText("商品名称：");
         proNameLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
         proNameLabel.setBounds(30, 70, 80, 25);
         proNameText.setFont(new Font("微软雅黑", Font.BOLD, 14));

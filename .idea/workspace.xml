@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85d5d2e0-d6b3-43a3-8459-6f91ff360ee1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryMngController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryMngController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/controller/StockIOController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/controller/StockIOController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractInventoryPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractRecordPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/views/AbstractRecordPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/liziczh/ims/tools/JDBCUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/liziczh/ims/tools/JDBCUtils.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +18,21 @@
     </SUITE>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="JDBCUtils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/tools/JDBCUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <folding>
+                <element signature="e#1004#1005#0" expanded="true" />
+                <element signature="e#1028#1029#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -48,7 +58,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/liziczh/ims/dao/impl/LedgerDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/service/ILedgerService.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/service/impl/LedgerServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/tools/DateUtils.java" />
@@ -99,6 +108,7 @@
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/StockIOController.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryController.java" />
         <option value="$PROJECT_DIR$/src/com/liziczh/ims/controller/InventoryMngController.java" />
+        <option value="$PROJECT_DIR$/src/com/liziczh/ims/tools/JDBCUtils.java" />
       </list>
     </option>
   </component>
@@ -112,8 +122,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="190" />
-    <option name="y" value="25" />
+    <option name="x" value="131" />
+    <option name="y" value="15" />
     <option name="width" value="1117" />
     <option name="height" value="673" />
   </component>
@@ -148,14 +158,7 @@
               <item name="IMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ims" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ims" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -375,15 +378,16 @@
       <workItem from="1527729530821" duration="10457000" />
       <workItem from="1527746781322" duration="13828000" />
       <workItem from="1527821549075" duration="695000" />
-      <workItem from="1527824393142" duration="10289000" />
+      <workItem from="1527824393142" duration="10945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="335108000" />
+    <option name="totallyTimeSpent" value="335764000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-5" y="13" width="1117" height="673" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -395,11 +399,11 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8779264" visible="true" weight="0.21451104" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8779264" visible="true" weight="0.24156305" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19838946" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24613987" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -441,20 +445,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../../JDK/src.zip!/java/awt/event/FocusAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="51" column="46" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../JDK/src.zip!/java/awt/AWTEventMulticaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="310" column="5" lean-forward="true" selection-start-line="310" selection-start-column="5" selection-end-line="310" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../../JDK/src.zip!/javax/swing/JComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -769,6 +759,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
           <caret line="40" column="12" selection-start-line="40" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dbcp.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="11" selection-start-line="8" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/liziczh/ims/tools/JDBCUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#1004#1005#0" expanded="true" />
+            <element signature="e#1028#1029#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

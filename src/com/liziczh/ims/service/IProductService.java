@@ -12,6 +12,8 @@ public interface IProductService {
     public int getTotal(String proName, int lowerCount, int upperCount, String dirName);
     // 通过ID查询一件商品
     public Product queryProductById(int proId);
+    // 通过查询条件查询产品
+    public List<Product> queryAllProduct(String proName, int lowerCount, int upperCount, String dirName);
 
     // 获取商品
     public List<Product> getAllProduct();

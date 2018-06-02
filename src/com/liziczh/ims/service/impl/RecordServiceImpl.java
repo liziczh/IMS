@@ -10,16 +10,16 @@ import java.util.List;
 
 public class RecordServiceImpl implements IRecordService {
     private IRecordDao recordDao = new RecordDaoImpl();
-        @Override
-        public List<Record> queryRecord(String beginDate, String endDate, String proName, String recordType, String dirName,int currentPage, int pageSize) {
-            List<Record> recordList = null;
-            try {
-                recordList = recordDao.getRecordByDateAndDirName(beginDate,endDate,proName,recordType,dirName,currentPage,pageSize);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return recordList;
+    @Override
+    public List<Record> queryRecord(String beginDate, String endDate, String proName, String recordType, String dirName,int currentPage, int pageSize) {
+        List<Record> recordList = null;
+        try {
+            recordList = recordDao.getRecordByDateAndDirName(beginDate,endDate,proName,recordType,dirName,currentPage,pageSize);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return recordList;
+    }
 
     @Override
     public int getTotal(String beginDate, String endDate, String proName, String recordType, String dirName) {
@@ -30,6 +30,17 @@ public class RecordServiceImpl implements IRecordService {
             e.printStackTrace();
         }
         return total;
+    }
+
+    @Override
+    public List<Record> queryAllRecord(String beginDate, String endDate, String proName, String recordType, String dirName) {
+        List<Record> recordList = null;
+        try {
+            recordList = recordDao.getAllRecordByDateAndDirName(beginDate,endDate,proName,recordType,dirName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recordList;
     }
 
     @Override

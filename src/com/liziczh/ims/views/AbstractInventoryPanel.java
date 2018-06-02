@@ -57,6 +57,8 @@ public abstract class AbstractInventoryPanel extends JPanel {
     protected JTextField pageNumText = new JTextField();
     // 导出
     private JButton exportBtn = new JButton();
+    // 导入
+    private JButton importBtn = new JButton();
 
     public AbstractInventoryPanel(){
             this.init();
@@ -195,6 +197,12 @@ public abstract class AbstractInventoryPanel extends JPanel {
         exportBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
         exportBtn.setBounds(720,110,25,25);
         this.add(exportBtn);
+        // 导入
+        importBtn.setIcon(new ImageIcon("imgs/import.png"));
+        importBtn.setBackground(Color.white);
+        importBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        importBtn.setBounds(720,135,25,25);
+        this.add(importBtn);
     }
     private void addListener(){
         queryBtn.addMouseListener(new MouseAdapter() {
@@ -250,6 +258,13 @@ public abstract class AbstractInventoryPanel extends JPanel {
                 exportProduct();
             }
         });
+        importBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                importRecord();
+            }
+        });
+
     }
 
     public abstract void queryProduct();
@@ -259,5 +274,6 @@ public abstract class AbstractInventoryPanel extends JPanel {
     public abstract void endPage();
     public abstract void jumpPage();
     public abstract void exportProduct();
+    public abstract void importRecord();
 }
 

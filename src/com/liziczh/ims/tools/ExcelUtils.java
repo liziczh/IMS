@@ -1,5 +1,6 @@
 package com.liziczh.ims.tools;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -21,9 +22,6 @@ public class ExcelUtils {
      */
     public static List<List<List<Object>>> readExcel(File file){
         try {
-            if(!file.exists()){
-                throw new Exception("找不到文件");
-            }
             List<List<List<Object>>> wbList = new LinkedList<>();
             // 工作簿
             Workbook xwb = new XSSFWorkbook(new FileInputStream(file));
@@ -72,14 +70,23 @@ public class ExcelUtils {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("0");
         Row row = null;
-        // 表样式
-        CellStyle cellStyle = workbook.createCellStyle();
+        Cell cell = null;
+        // 表头样式
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setAlignment(HorizontalAlignment.CENTER);
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerStyle.setFont(headerFont);
         // 表头
         row = sheet.createRow(0);
         for(int c = 0 ; c < colNames.length ; c++){
-            row.createCell(c).setCellValue(colNames[c]);
+            cell = row.createCell(c);
+            cell.setCellValue(colNames[c]);
+            cell.setCellStyle(headerStyle);
         }
-
+        // 单元格样式
+        CellStyle cellStyle = workbook.createCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
         // 表数据
         for(int r = 0 ; r < list.size(); r++){
             T t = list.get(r);

@@ -40,6 +40,21 @@ public class ProductDaoImpl implements IProductDao {
         }
         return total;
     }
+
+    @Override
+    public List<Product> getAllProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName) throws SQLException {
+        List<Product>  proList = null;
+        String sql = "select * from \"product\" where \"proName\" like '%' || ? || '%' and \"count\" between ? and ? ";
+        String order = "order by \"proId\" ";
+        if("全部".equals(dirName)){
+            proList = queryRunner.query(sql+order,new BeanListHandler<>(Product.class), proName, lowerCount, upperCount);
+        }else{
+            sql += " and \"dirName\" = ? ";
+            proList = queryRunner.query(sql+order,new BeanListHandler<>(Product.class),proName,lowerCount,upperCount,dirName);
+        }
+        return proList;
+    }
+
     @Override
     public List<Product> getAllProduct() throws SQLException {
         String sql = "select * from \"product\" order by \"proId\" ";

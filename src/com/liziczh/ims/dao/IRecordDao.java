@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IRecordDao {
-    // 根据date查询
+    // 根据date分页查询
     public List<Record> getRecordByDateAndDirName(String beginDate, String endDate, String proName, String recordType, String dirName, int currentPage, int pageSize) throws SQLException;
     // 获取记录总数
     public int getTotalByDateAndDirName(String beginDate, String endDate, String proName, String recordType, String dirName) throws SQLException;
+    // 根据date查询所有
+    public List<Record> getAllRecordByDateAndDirName(String beginDate, String endDate, String proName, String recordType, String dirName) throws SQLException;
+
     // 获取全部
     public List<Record> getAllRecord() throws SQLException;
 

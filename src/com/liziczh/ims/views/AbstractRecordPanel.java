@@ -266,6 +266,13 @@ public abstract class AbstractRecordPanel extends JPanel {
                 exportRecord();
             }
         });
+        importBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                importRecord();
+            }
+        });
+
     }
 
 
@@ -276,4 +283,5 @@ public abstract class AbstractRecordPanel extends JPanel {
     public abstract void endPage();
     public abstract void jumpPage();
     public abstract void exportRecord();
+    public abstract void importRecord();
 }

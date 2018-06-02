@@ -33,6 +33,17 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    public List<Product> queryAllProduct(String proName, int lowerCount, int upperCount, String dirName) {
+        List<Product> proList = null;
+        try {
+            proList = productDao.getAllProductByCountAndDirName(proName,lowerCount,upperCount,dirName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return proList;
+    }
+
+    @Override
     public Product queryProductById(int proId){
         Product product = null;
         try {

@@ -8,9 +8,10 @@ import java.util.List;
 public interface IProductDao {
     // 获取记录总数
     public int getTotalByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName) throws SQLException;
-    // 根据Count&Name查询
+    // 根据Count&Name分页查询
     public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName, int currentPage, int pageSize) throws SQLException;
-
+    // 根据Count&Name查询所有
+    public List<Product> getAllProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName) throws SQLException;
     // 获取全部
     public List<Product> getAllProduct() throws SQLException;
 

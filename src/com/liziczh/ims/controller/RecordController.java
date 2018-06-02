@@ -7,6 +7,7 @@ import com.liziczh.ims.tools.ExcelUtils;
 import com.liziczh.ims.tools.ListTableModel;
 import com.liziczh.ims.views.AbstractRecordPanel;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.List;
 
@@ -91,9 +92,14 @@ public class RecordController extends AbstractRecordPanel {
 
     @Override
     public void exportRecord() {
-        List<Record> proList =  recordService.getRecordByType(recordType);
+        List<Record> proList =  recordService.queryAllRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),this.recordType,(String)dirBox.getSelectedItem());
         ExcelUtils.writeExcel(proList,Record.class,colNames,new File("data/Stock"+recordType+"Record.xlsx"));
+        JOptionPane.showMessageDialog(this,"导出成功，请前往IMS/data/Stock"+recordType+"Record.xlsx查看","温馨提示",JOptionPane.INFORMATION_MESSAGE);
     }
 
+    @Override
+    public void importRecord() {
+
+    }
 
 }

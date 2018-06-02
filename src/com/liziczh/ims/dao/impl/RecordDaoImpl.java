@@ -45,6 +45,20 @@ public class RecordDaoImpl implements IRecordDao {
     }
 
     @Override
+    public List<Record> getAllRecordByDateAndDirName(String beginDate,String endDate, String proName, String recordType,String dirName) throws SQLException {
+        List<Record> recordList = null;
+        String sql = "select \"date\",\"proId\",\"proName\",\"count\",\"register\" from \"record\" where (\"date\" between ? and ?) and (\"proName\" like '%' || ? || '%') and \"recordType\" = ?";
+        String order = " order by \"date\" desc";
+        if("全部".equals(dirName)){
+            recordList = queryRunner.query(sql+order,new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType);
+        }else{
+            sql += " and \"proName\" in (select \"proName\" from \"product\" where \"dirName\" = ?)";
+            recordList = queryRunner.query(sql+order,new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType,dirName);
+        }
+        return recordList;
+    }
+
+    @Override
     public List<Record> getAllRecord() throws SQLException {
         String sql = "select * from \"record\" order by \"date\" desc ";
         List<Record>  recordList = queryRunner.query(sql,new BeanListHandler<>(Record.class));

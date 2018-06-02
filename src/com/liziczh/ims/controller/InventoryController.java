@@ -5,7 +5,6 @@ import com.liziczh.ims.service.IProductService;
 import com.liziczh.ims.service.impl.ProductServiceImpl;
 import com.liziczh.ims.tools.ExcelUtils;
 import com.liziczh.ims.tools.ListTableModel;
-import com.liziczh.ims.views.AbstractInventoryMngDialog;
 import com.liziczh.ims.views.AbstractInventoryPanel;
 
 import javax.swing.*;
@@ -113,8 +112,14 @@ public class InventoryController extends AbstractInventoryPanel {
 
     @Override
     public void exportProduct() {
-        List<Product> proList =  productService.getAllProduct();
+        List<Product> proList = productService.queryAllProduct(proNameText.getText(),lowerCount,upperCount, (String) dirBox.getSelectedItem());
         ExcelUtils.writeExcel(proList,Product.class,colNames,new File("data/Product.xlsx"));
+        JOptionPane.showMessageDialog(this,"导出成功，请前往IMS/data/Product.xlsx查看","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void importRecord() {
+
     }
 
 

@@ -123,18 +123,26 @@ public class InventoryController extends AbstractInventoryPanel {
         int n = JOptionPane.showConfirmDialog(null, "是否清空已有数据", "请确认",JOptionPane.YES_NO_OPTION);
         if(n == 0){
             productService.clear();
-            for(int i = 1 ; i < proList.size() ; i++) {
-                List<Object> l = proList.get(i);
-                Product product = new Product(Integer.parseInt(l.get(0).toString()), (String) l.get(1), (String) l.get(2), (String) l.get(3), (String) l.get(4), Integer.parseInt(l.get(5).toString()));
-                productService.insertProduct(product);
+        }
+        for(List<Object> l : proList){
+            int proId;
+            if(l.get(0).toString() == ""){
+                proId = Integer.parseInt(l.get(0).toString());
+            }else{
+                break;
             }
-        }else{
-            for(int i = 1 ; i < proList.size() ; i++){
-                List<Object> l = proList.get(i);
-                Product product = new Product(Integer.parseInt(l.get(0).toString()),(String)l.get(1),(String)l.get(2),(String)l.get(3),(String)l.get(4),Integer.parseInt(l.get(5).toString()));
+            String proName = (String)l.get(1);
+            String dirName = (String)l.get(2);
+            String supplier = (String)l.get(3);
+            String brand = (String)l.get(4);
+            int count = Integer.parseInt(l.get(5).toString());
+            Product product = new Product(proId,proName,dirName,supplier,brand,count);
+            if(product != null){
                 if(productService.queryProductById(product.getProId()) == null){
                     productService.insertProduct(product);
                 }
+            }else{
+                JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
             }
         }
     }

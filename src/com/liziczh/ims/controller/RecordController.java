@@ -104,13 +104,33 @@ public class RecordController extends AbstractRecordPanel {
         if(n == 0){
             recordService.clear(recordType);
             for(List<Object> l : recordList) {
-                Record record = new Record((String) l.get(0), Integer.parseInt(l.get(1).toString()), (String) l.get(2), Integer.parseInt(l.get(3).toString()), (String) l.get(4), (String) l.get(5));
-                recordService.insertRecord(record);
+                Record record = new Record();
+                record.setDate((String) l.get(0));
+                record.setProId(Integer.parseInt(l.get(1).toString()));
+                record.setProName((String)l.get(2));
+                record.setCount(Integer.parseInt(l.get(3).toString()));
+                record.setRegister((String)l.get(4));
+                record.setRecordType((String)l.get(5));
+                if(record != null){
+                    recordService.insertRecord(record);
+                }else{
+                    JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
+                }
             }
         }else{
             for(List<Object> l : recordList){
-                Record record = new Record((String) l.get(0),Integer.parseInt(l.get(1).toString()),(String)l.get(2),Integer.parseInt(l.get(3).toString()),(String)l.get(4),(String)l.get(5));
-                recordService.insertRecord(record);
+                String date = (String) l.get(0);
+                int proId = Integer.parseInt(l.get(1).toString());
+                String proName = (String)l.get(2);
+                int count = Integer.parseInt(l.get(3).toString());
+                String register = (String)l.get(4);
+                String recordType = (String)l.get(5);
+                Record record = new Record(date,proId,proName,count,register,recordType);
+                if(record != null){
+                    recordService.insertRecord(record);
+                }else{
+                    JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
 

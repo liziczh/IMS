@@ -41,6 +41,7 @@ public class ExcelUtils {
                 for (int j = row.getFirstCellNum(); j < row.getPhysicalNumberOfCells(); j++) {
                     // 通过 row.getCell(j).toString() 获取单元格内容，
                     cell = row.getCell(j).toString();
+                    System.out.println(cell);
                     rowList.add(cell);
                 }
                 sheetList.add(rowList);
@@ -97,11 +98,12 @@ public class ExcelUtils {
                     }else{
                         cellValue = "";
                     }
+                    cell = row.createCell(c);
+                    cell.setCellValue(cellValue);
+                    cell.setCellStyle(cellStyle);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                row.createCell(c).setCellValue(cellValue);
-                row.createCell(c).setCellStyle(cellStyle);
             }
         }
 

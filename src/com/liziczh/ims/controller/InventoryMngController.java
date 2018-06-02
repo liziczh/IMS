@@ -23,6 +23,7 @@ public class InventoryMngController extends AbstractInventoryMngDialog {
                 modifyService.modify(product);
                 JOptionPane.showMessageDialog(this, "修改成功", "温馨提示", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
+
             }else{
                 JOptionPane.showMessageDialog(this,"商品编号输入有误","温馨提示",JOptionPane.WARNING_MESSAGE);
             }

@@ -65,6 +65,7 @@ public abstract class AbstractRegisterDialog extends JDialog {
         this.add(usernameLabel);
         usernameText.setFont(font);
         usernameText.setBounds(110,80,200,30);
+        usernameText.setToolTipText("使用字母和数字，长度为4-16个字符");
         this.add(usernameText);
         usernameTipsLabel.setFont(font);
         usernameTipsLabel.setBounds(320,80,40,30);
@@ -76,6 +77,7 @@ public abstract class AbstractRegisterDialog extends JDialog {
         this.add(passwordLabel);
         passwordText.setBounds(110,120,200,30);
         passwordText.setFont(font);
+        passwordText.setToolTipText("使用字母和数字，长度为6-18个字符");
         this.add(passwordText);
         passwordTipsLabel.setFont(font);
         passwordTipsLabel.setBounds(320,120,40,30);
@@ -88,7 +90,7 @@ public abstract class AbstractRegisterDialog extends JDialog {
         this.add(confirmLabel);
         confirmText.setBounds(110,160,200,30);
         confirmText.setFont(font);
-        confirmText.setBackground(Color.white);
+        confirmText.setToolTipText("再次输入密码以保证密码无误");
         this.add(confirmText);
         confirmTipsLabel.setFont(font);
         confirmTipsLabel.setBounds(320,160,40,30);
@@ -100,6 +102,7 @@ public abstract class AbstractRegisterDialog extends JDialog {
         this.add(mobileNumberLabel);
         mobileNumberText.setBounds(110,200,200,30);
         mobileNumberText.setFont(font);
+        mobileNumberText.setToolTipText("请输入您的联系方式");
         this.add(mobileNumberText);
         mobileNumberTipsLabel.setFont(font);
         mobileNumberTipsLabel.setBounds(320,200,40,30);
@@ -111,6 +114,7 @@ public abstract class AbstractRegisterDialog extends JDialog {
         this.add(emailLabel);
         emailText.setBounds(110,240,200,30);
         emailText.setFont(font);
+        emailText.setToolTipText("如：example@gmail.com");
         this.add(emailText);
         emailTipsLabel.setFont(font);
         emailTipsLabel.setBounds(320,240,40,30);

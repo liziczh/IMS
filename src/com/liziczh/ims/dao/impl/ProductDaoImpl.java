@@ -72,7 +72,6 @@ public class ProductDaoImpl implements IProductDao {
     public void updateProduct(Product product) throws SQLException {
         String sql = "update \"product\" set \"proName\" = ?, \"dirName\" = ?, \"supplier\" = ?, \"brand\" = ? where \"proId\" = ?";
         queryRunner.update(sql,product.getProName(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
-
     }
 
 

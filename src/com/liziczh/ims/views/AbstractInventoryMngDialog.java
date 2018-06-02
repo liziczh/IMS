@@ -17,7 +17,7 @@ public abstract class AbstractInventoryMngDialog extends JDialog {
     protected JTextField proNameText = new JTextField();
     private JLabel dirNameLabel = new JLabel();
     // 分类下拉框
-    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
+    private String[] def = {"全部","食品酒水","家用电器","电脑办公","手机数码","家装厨具","图书音像","生活用品","其他"};
     protected JComboBox dirBox = new JComboBox<>(def);
     private JLabel supplierLabel = new JLabel();
     protected JTextField supplierText = new JTextField();

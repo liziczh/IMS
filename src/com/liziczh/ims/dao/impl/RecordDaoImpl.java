@@ -87,7 +87,8 @@ public class RecordDaoImpl implements IRecordDao {
                 "AND \"record\".\"date\" BETWEEN ? AND ? " +
                 "GROUP BY \"product\".\"dirName\"";
         try {
-            return queryRunner.query(sql,new ArrayListHandler(),recordType,startTime,endTime);
+            List<Object[]> list = queryRunner.query(sql,new ArrayListHandler(),recordType,startTime,endTime);
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

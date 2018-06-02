@@ -62,7 +62,7 @@ public abstract class AbstractStatisticsPanel extends JPanel {
         beginDateLabel.setBounds(30, 70, 60, 25);
         beginDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
         beginDateText.setBounds(80, 70, 100, 25);
-        beginDateText.setText(DateUtils.firstdayByYear());
+        beginDateText.setText(String.format("%tF", DateUtils.getFirstDayOfMethod()));
         beginDateText.setBackground(Color.white);
         beginDateText.setEditable(false);
         DateChooser.getInstance().register(this.beginDateText);

@@ -33,7 +33,7 @@ public abstract class AbstractInventoryPanel extends JPanel {
     // 查询
     private JButton queryBtn = new JButton();
     // 分类
-    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
+    private String[] def = {"全部","食品酒水","家用电器","电脑办公","手机数码","家装厨具","图书音像","生活用品","其他"};
     protected JComboBox dirBox = new JComboBox<>(def);
     // 表格
     public List<Product> proList = new ArrayList<>();

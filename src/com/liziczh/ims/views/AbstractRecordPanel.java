@@ -33,7 +33,7 @@ public abstract class AbstractRecordPanel extends JPanel {
     // 分类
     private JLabel dirLabel = new JLabel();
     // 下拉框
-    private String[] def = {"全部","家用电器","数码产品","电脑/办公","家居/家具","食品","图书","其他"};
+    private String[] def = {"全部","食品酒水","家用电器","电脑办公","手机数码","家装厨具","图书音像","生活用品","其他"};
     protected JComboBox dirBox = new JComboBox<>(def);
     // 查询
     private JButton queryBtn = new JButton();
@@ -91,7 +91,7 @@ public abstract class AbstractRecordPanel extends JPanel {
         beginDateLabel.setBounds(30, 70, 60, 25);
         beginDateText.setFont(new Font("微软雅黑", Font.BOLD, 14));
         beginDateText.setBounds(75, 70, 90, 25);
-        beginDateText.setText(DateUtils.firstdayByYear());
+        beginDateText.setText(String.format("%tF", DateUtils.getFirstDayOfMethod()));
         beginDateText.setBackground(Color.white);
         beginDateText.setEditable(false);
         DateChooser.getInstance().register(this.beginDateText);

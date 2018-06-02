@@ -17,7 +17,10 @@ public interface IProductService {
 
     // 获取商品
     public List<Product> getAllProduct();
-    // 导入商品信息
-    public void insertAllProduct();
+    // 插入一件商品
+    public void insertProduct(Product product);
+
+    // 删除所有记录
+    public void clear();
 
 }

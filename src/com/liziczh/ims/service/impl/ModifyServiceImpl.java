@@ -28,9 +28,9 @@ public class ModifyServiceImpl implements IModifyService {
     public void modify(Product product) {
         try {
             productDao.updateProduct(product);
+            recordDao.updateRecord(product.getProId(),product.getProName());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        recordDao.updateRecord(product.getProId(),product.getProName());
     }
 }

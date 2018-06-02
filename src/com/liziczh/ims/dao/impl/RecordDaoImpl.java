@@ -47,7 +47,7 @@ public class RecordDaoImpl implements IRecordDao {
     @Override
     public List<Record> getAllRecordByDateAndDirName(String beginDate,String endDate, String proName, String recordType,String dirName) throws SQLException {
         List<Record> recordList = null;
-        String sql = "select \"date\",\"proId\",\"proName\",\"count\",\"register\" from \"record\" where (\"date\" between ? and ?) and (\"proName\" like '%' || ? || '%') and \"recordType\" = ?";
+        String sql = "select * from \"record\" where (\"date\" between ? and ?) and (\"proName\" like '%' || ? || '%') and \"recordType\" = ?";
         String order = " order by \"date\" desc";
         if("全部".equals(dirName)){
             recordList = queryRunner.query(sql+order,new BeanListHandler<Record>(Record.class),beginDate,endDate,proName,recordType);
@@ -73,53 +73,46 @@ public class RecordDaoImpl implements IRecordDao {
     }
 
     @Override
-    public void insertRecord(Product product,int count, String register,String recordType) {
+    public void insertRecord(Product product,int count, String register,String recordType) throws SQLException {
         String sql = "insert into \"record\" values(?,?,?,?,?,?)";
-        try {
-            queryRunner.update(sql,DateUtils.date2String(new Date()),product.getProId(), product.getProName(),count,register,recordType);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        queryRunner.update(sql,DateUtils.date2String(new Date()),product.getProId(), product.getProName(),count,register,recordType);
     }
 
     @Override
-    public void updateRecord(int proId,String proName) {
+    public void insertRecord(Record record) throws SQLException {
+        String sql = "insert into \"record\" values(?,?,?,?,?,?)";
+        queryRunner.update(sql,record.getDate(),record.getProId(),record.getProName(),record.getCount(),record.getRegister(),record.getRecordType());
+    }
+
+    @Override
+    public void updateRecord(int proId,String proName) throws SQLException {
         String sql = "update \"record\" set \"proName\" = ? where \"proId\" = ?";
-        try {
-            queryRunner.update(sql,proName,proId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        queryRunner.update(sql,proName,proId);
     }
 
     @Override
-    public int getTotalCount(String recordType) {
+    public int getTotalCount(String recordType) throws SQLException {
         String sql = "select sum(\"count\") from \"record\" WHERE \"recordType\" = ?";
-        int res = 0;
-        try {
-            res = new Integer(queryRunner.query(sql,new ScalarHandler<>(1),recordType).toString());
-            return res;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
+        return  new Integer(queryRunner.query(sql,new ScalarHandler<>(1),recordType).toString());
     }
 
     @Override
-    public List<Object[]> getSumCountByDirName(String recordType, String startTime, String endTime) {
+    public List<Object[]> getSumCountByDirName(String recordType, String startTime, String endTime) throws SQLException {
         String sql = "select sum(\"record\".\"count\"),\"product\".\"dirName\" " +
                 "from \"record\",\"product\" " +
                 "WHERE \"record\".\"proId\" = \"product\".\"proId\" " +
                 "AND \"recordType\" = ? " +
                 "AND \"record\".\"date\" BETWEEN ? AND ? " +
                 "GROUP BY \"product\".\"dirName\"";
-        try {
-            List<Object[]> list = queryRunner.query(sql,new ArrayListHandler(),recordType,startTime,endTime);
-            return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<Object[]> list = null;
+        list = queryRunner.query(sql,new ArrayListHandler(),recordType,startTime,endTime);
+        return list;
+    }
+
+    @Override
+    public void deleteAllRecord(String recordType) throws SQLException {
+        String sql = "delete from \"record\" where recordType = ? ";
+        queryRunner.update(sql,recordType);
     }
 
 

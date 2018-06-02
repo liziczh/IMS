@@ -55,8 +55,21 @@ public class RecordServiceImpl implements IRecordService {
     }
 
     @Override
-    public void insertAllRecord() {
+    public void insertRecord(Record record) {
+        try {
+            recordDao.insertRecord(record);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public void clear(String recordType) {
+        try {
+            recordDao.deleteAllRecord(recordType);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

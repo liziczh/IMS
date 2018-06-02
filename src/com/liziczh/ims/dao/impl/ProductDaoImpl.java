@@ -65,8 +65,7 @@ public class ProductDaoImpl implements IProductDao {
     @Override
     public Product getProductById(int id) throws SQLException {
         String sql = "select * from \"product\" where \"proId\" = ?";
-        Product  product = null;
-        product= queryRunner.query(sql,new BeanHandler<>(Product.class),id);
+        Product  product = queryRunner.query(sql,new BeanHandler<>(Product.class),id);
         return product;
     }
 
@@ -94,8 +93,11 @@ public class ProductDaoImpl implements IProductDao {
         queryRunner.update(sql,product.getProName(),product.getDirName(),product.getSupplier(),product.getBrand(),product.getProId());
     }
 
-
-
+    @Override
+    public void deleteAllProduct() throws SQLException {
+        String sql = "delete from \"product\" ";
+        queryRunner.update(sql);
+    }
 
 
 }

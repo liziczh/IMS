@@ -66,8 +66,22 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public void insertAllProduct() {
-
+    public void insertProduct(Product product) {
+        try {
+            productDao.insertProduct(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    @Override
+    public void clear() {
+        try {
+            productDao.deleteAllProduct();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

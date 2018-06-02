@@ -15,8 +15,8 @@ public class StockIOServiceImpl implements IStockIOService {
 
     @Override
     public void stockIn(Product product, String register, String recordType) {
-        recordDao.insertRecord(product,product.getCount(),register,recordType);
         try {
+            recordDao.insertRecord(product,product.getCount(),register,recordType);
             if(productDao.getProductById(product.getProId()) != null){
                 productDao.updateProductCountPlus(product);
             }else{

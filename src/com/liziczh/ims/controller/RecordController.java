@@ -99,6 +99,20 @@ public class RecordController extends AbstractRecordPanel {
 
     @Override
     public void importRecord() {
+        List<List<Object>> recordList = ExcelUtils.readExcel(new File("data/Stock"+recordType+"Record.xlsx"));
+        int n = JOptionPane.showConfirmDialog(null, "是否清空已有数据", "请确认",JOptionPane.YES_NO_OPTION);
+        if(n == 0){
+            recordService.clear(recordType);
+            for(List<Object> l : recordList) {
+                Record record = new Record((String) l.get(0), Integer.parseInt(l.get(1).toString()), (String) l.get(2), Integer.parseInt(l.get(3).toString()), (String) l.get(4), (String) l.get(5));
+                recordService.insertRecord(record);
+            }
+        }else{
+            for(List<Object> l : recordList){
+                Record record = new Record((String) l.get(0),Integer.parseInt(l.get(1).toString()),(String)l.get(2),Integer.parseInt(l.get(3).toString()),(String)l.get(4),(String)l.get(5));
+                recordService.insertRecord(record);
+            }
+        }
 
     }
 

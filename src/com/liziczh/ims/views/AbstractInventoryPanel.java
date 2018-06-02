@@ -238,12 +238,12 @@ public abstract class AbstractInventoryPanel extends JPanel {
                 endPage();
             }
         });
-        pageNumText.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                jumpPage();
-            }
-        });
+//        pageNumText.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//                jumpPage();
+//            }
+//        });
         pageNumText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -261,7 +261,7 @@ public abstract class AbstractInventoryPanel extends JPanel {
         importBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                importRecord();
+                importProduct();
             }
         });
 
@@ -274,6 +274,6 @@ public abstract class AbstractInventoryPanel extends JPanel {
     public abstract void endPage();
     public abstract void jumpPage();
     public abstract void exportProduct();
-    public abstract void importRecord();
+    public abstract void importProduct();
 }
 

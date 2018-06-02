@@ -14,7 +14,11 @@ public interface IRecordService {
 
     // 获取记录
     public List<Record> getRecordByType (String recordType);
-    // 导入记录
-    public void insertAllRecord();
+
+    // 插入一条记录
+    public void insertRecord(Record record);
+
+    // 删除所有记录
+    public void clear(String recordType);
 
 }

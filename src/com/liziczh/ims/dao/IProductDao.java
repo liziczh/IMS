@@ -26,4 +26,6 @@ public interface IProductDao {
     // 更新产品信息
     public void updateProduct(Product product) throws SQLException;
 
+    // 删除全部商品
+    public void deleteAllProduct() throws SQLException;
 }

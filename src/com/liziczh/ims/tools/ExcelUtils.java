@@ -20,7 +20,7 @@ public class ExcelUtils {
      * @return
      * @throws Exception
      */
-    public static List<List<List<Object>>> readExcel(File file){
+    public static List<List<Object>> readExcel(File file){
         try {
             List<List<List<Object>>> wbList = new LinkedList<>();
             // 工作簿
@@ -31,25 +31,21 @@ public class ExcelUtils {
             Row row = null;
             // 单元格
             String cell = null;
-            for(int s = xwb.getFirstVisibleTab(); s < xwb.getNumberOfSheets(); s++){
-                // 表
-                sheet = xwb.getSheetAt(0);
-                List<List<Object>> sheetList = new LinkedList<>();
-                for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {
-                    // 行
-                    row = sheet.getRow(i);
-                    List<Object> rowList = new LinkedList<>();
-                    for (int j = row.getFirstCellNum(); j < row.getPhysicalNumberOfCells(); j++) {
-                        // 通过 row.getCell(j).toString() 获取单元格内容，
-                        cell = row.getCell(j).toString();
-                        rowList.add(cell);
-                    }
-                    sheetList.add(rowList);
-                    System.out.println(sheetList);
+            // 表
+            sheet = xwb.getSheetAt(0);
+            List<List<Object>> sheetList = new LinkedList<>();
+            for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {
+                // 行
+                row = sheet.getRow(i);
+                List<Object> rowList = new LinkedList<>();
+                for (int j = row.getFirstCellNum(); j < row.getPhysicalNumberOfCells(); j++) {
+                    // 通过 row.getCell(j).toString() 获取单元格内容，
+                    cell = row.getCell(j).toString();
+                    rowList.add(cell);
                 }
-                wbList.add(sheetList);
+                sheetList.add(rowList);
             }
-            return wbList;
+            return sheetList;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,15 +92,20 @@ public class ExcelUtils {
                 String cellValue = null;
                 try {
                     fs[c].setAccessible(true);
-                    cellValue = fs[c].get(t).toString();
+                    if(fs[c].get(t) != null){
+                        cellValue = fs[c].get(t).toString();
+                    }else{
+                        cellValue = "";
+                    }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
                 row.createCell(c).setCellValue(cellValue);
+                row.createCell(c).setCellStyle(cellStyle);
             }
         }
 
-        workbook.setSheetName(0, "信息");
+        workbook.setSheetName(0, T.getName());
 
         try {
             FileOutputStream fileoutputStream = new FileOutputStream(file);

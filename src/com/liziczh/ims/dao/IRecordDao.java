@@ -20,11 +20,15 @@ public interface IRecordDao {
     // 获取入库记录
     public List<Record> getRecordByType(String recordType) throws SQLException;
     // 插入记录
-    public void insertRecord(Product product,int count,String register,String recoryType);
-
+    public void insertRecord(Product product,int count,String register,String recoryType) throws SQLException;
+    // 插入记录
+    public void insertRecord(Record record) throws SQLException;
     // 更新记录信息
-    public void updateRecord(int proId,String proName);
+    public void updateRecord(int proId,String proName) throws SQLException;
     // 获取统计信息
-    public int getTotalCount(String recordType);
-    public List<Object[]> getSumCountByDirName(String recordType, String startTime, String endTime);
+    public int getTotalCount(String recordType) throws SQLException;
+    public List<Object[]> getSumCountByDirName(String recordType, String startTime, String endTime) throws SQLException;
+
+    // 删除全部记录
+    public void deleteAllRecord(String recordType) throws SQLException;
 }

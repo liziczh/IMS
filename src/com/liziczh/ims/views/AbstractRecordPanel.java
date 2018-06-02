@@ -246,12 +246,12 @@ public abstract class AbstractRecordPanel extends JPanel {
                 endPage();
             }
         });
-        pageNumText.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                jumpPage();
-            }
-        });
+//        pageNumText.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//                jumpPage();
+//            }
+//        });
         pageNumText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -275,7 +275,6 @@ public abstract class AbstractRecordPanel extends JPanel {
 
     }
 
-
     public abstract void queryRecord();
     public abstract void homePage();
     public abstract void prevPage();
@@ -284,4 +283,5 @@ public abstract class AbstractRecordPanel extends JPanel {
     public abstract void jumpPage();
     public abstract void exportRecord();
     public abstract void importRecord();
+
 }

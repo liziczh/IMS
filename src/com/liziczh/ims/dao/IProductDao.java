@@ -11,6 +11,9 @@ public interface IProductDao {
     // 根据Count&Name查询
     public List<Product> getProductByCountAndDirName(String proName, int lowerCount, int upperCount, String dirName, int currentPage, int pageSize) throws SQLException;
 
+    // 获取全部
+    public List<Product> getAllProduct() throws SQLException;
+
     // 根据id查询
     public Product getProductById(int id) throws SQLException;
     // 插入产品

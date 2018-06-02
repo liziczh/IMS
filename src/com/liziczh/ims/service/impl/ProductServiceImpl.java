@@ -43,4 +43,20 @@ public class ProductServiceImpl implements IProductService {
         return product;
     }
 
+    @Override
+    public List<Product> getAllProduct() {
+        List<Product> proList = null;
+        try {
+            proList = productDao.getAllProduct();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return proList;
+    }
+
+    @Override
+    public void insertAllProduct() {
+
+    }
+
 }

@@ -3,8 +3,12 @@ package com.liziczh.ims.controller;
 import com.liziczh.ims.domain.Record;
 import com.liziczh.ims.service.IRecordService;
 import com.liziczh.ims.service.impl.RecordServiceImpl;
+import com.liziczh.ims.tools.ExcelUtils;
 import com.liziczh.ims.tools.ListTableModel;
 import com.liziczh.ims.views.AbstractRecordPanel;
+
+import java.io.File;
+import java.util.List;
 
 
 public class RecordController extends AbstractRecordPanel {
@@ -83,6 +87,12 @@ public class RecordController extends AbstractRecordPanel {
             pageNumText.setText(String.valueOf(currentPage));
             queryRecord();
         }
+    }
+
+    @Override
+    public void exportRecord() {
+        List<Record> proList =  recordService.getRecordByType(recordType);
+        ExcelUtils.writeExcel(proList,Record.class,colNames,new File("data/Stock"+recordType+"Record.xlsx"));
     }
 
 

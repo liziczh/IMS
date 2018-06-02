@@ -40,7 +40,12 @@ public class ProductDaoImpl implements IProductDao {
         }
         return total;
     }
-
+    @Override
+    public List<Product> getAllProduct() throws SQLException {
+        String sql = "select * from \"product\" order by \"proId\" ";
+        List<Product>  proList = queryRunner.query(sql,new BeanListHandler<>(Product.class));
+        return proList;
+    }
 
     @Override
     public Product getProductById(int id) throws SQLException {

@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,20 +58,44 @@ public class ExcelUtils {
         return null;
     }
 
-
-
-    public static <T> void write(List<T> list, File file) {
+    /**
+     * 针对xlsx文件，要求excel版本在2007以上
+     *
+     * @param list 数据
+     * @param T 泛型类
+     * @param colNames 表头信息,
+     * @param file 文件信息
+     * @return
+     * @throws Exception
+     */
+    public static <T> void writeExcel(List<T> list,Class T,String[] colNames, File file) {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("0");
-        Row row = sheet.createRow(0);
+        Row row = null;
+        // 表样式
         CellStyle cellStyle = workbook.createCellStyle();
-
-        for(int r = 0 ; r < list.size(); r++){
-            row.createCell(0).setCellValue("姓名");
-            row.createCell(1).setCellValue("年龄");
+        // 表头
+        row = sheet.createRow(0);
+        for(int c = 0 ; c < colNames.length ; c++){
+            row.createCell(c).setCellValue(colNames[c]);
         }
 
-
+        // 表数据
+        for(int r = 0 ; r < list.size(); r++){
+            T t = list.get(r);
+            Field[] fs = t.getClass().getDeclaredFields();
+            row = sheet.createRow(r+1);
+            for(int c = 0 ; c < fs.length ; c++){
+                String cellValue = null;
+                try {
+                    fs[c].setAccessible(true);
+                    cellValue = fs[c].get(t).toString();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                row.createCell(c).setCellValue(cellValue);
+            }
+        }
 
         workbook.setSheetName(0, "信息");
 
@@ -82,13 +106,6 @@ public class ExcelUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-
-    public static void main(String[] args) {
-        List list = new ArrayList();
-        write(list,new File("C:\\Users\\lizic\\Desktop\\POI3.xlsx"));
-//        readExcel(new File("C:\\Users\\lizic\\Desktop\\201505暑期留宿情况.xlsx"));
     }
 
 

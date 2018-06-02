@@ -32,7 +32,21 @@ public class RecordServiceImpl implements IRecordService {
         return total;
     }
 
+    @Override
+    public List<Record> getRecordByType(String recordType) {
+        List<Record> recordList = null;
+        try {
+            recordList = recordDao.getRecordByType(recordType);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recordList;
+    }
 
+    @Override
+    public void insertAllRecord() {
+
+    }
 
 
 }

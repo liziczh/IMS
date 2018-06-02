@@ -37,6 +37,7 @@ public abstract class AbstractRecordPanel extends JPanel {
     protected JComboBox dirBox = new JComboBox<>(def);
     // 查询
     private JButton queryBtn = new JButton();
+
     // record类型
     protected String recordType = "in";
     // 表格
@@ -59,6 +60,10 @@ public abstract class AbstractRecordPanel extends JPanel {
     private JButton endPageBtn = new JButton();
     // 当前页数
     protected JTextField pageNumText = new JTextField();
+    // 导入
+    private JButton importBtn = new JButton();
+    // 导出
+    private JButton exportBtn = new JButton();
 
     public AbstractRecordPanel(){
         this.init();
@@ -139,7 +144,6 @@ public abstract class AbstractRecordPanel extends JPanel {
         // 添加表格
         this.setTable();
 
-
     }
     protected void setTable(){
         // 表格
@@ -195,6 +199,18 @@ public abstract class AbstractRecordPanel extends JPanel {
         endPageBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
         endPageBtn.setBounds(670,390,50,25);
         this.add(endPageBtn);
+        // 导出
+        exportBtn.setIcon(new ImageIcon("imgs/export.png"));
+        exportBtn.setBackground(Color.white);
+        exportBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        exportBtn.setBounds(720,110,25,25);
+        this.add(exportBtn);
+        // 导入
+        importBtn.setIcon(new ImageIcon("imgs/import.png"));
+        importBtn.setBackground(Color.white);
+        importBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        importBtn.setBounds(720,135,25,25);
+        this.add(importBtn);
     }
 
     private void addListener() {
@@ -236,7 +252,20 @@ public abstract class AbstractRecordPanel extends JPanel {
                 jumpPage();
             }
         });
-
+        pageNumText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    jumpPage();
+                }
+            }
+        });
+        exportBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                exportRecord();
+            }
+        });
     }
 
 
@@ -246,5 +275,5 @@ public abstract class AbstractRecordPanel extends JPanel {
     public abstract void nextPage();
     public abstract void endPage();
     public abstract void jumpPage();
-
+    public abstract void exportRecord();
 }

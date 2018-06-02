@@ -3,11 +3,14 @@ package com.liziczh.ims.controller;
 import com.liziczh.ims.domain.Product;
 import com.liziczh.ims.service.IProductService;
 import com.liziczh.ims.service.impl.ProductServiceImpl;
+import com.liziczh.ims.tools.ExcelUtils;
 import com.liziczh.ims.tools.ListTableModel;
 import com.liziczh.ims.views.AbstractInventoryMngDialog;
 import com.liziczh.ims.views.AbstractInventoryPanel;
 
 import javax.swing.*;
+import java.io.File;
+import java.util.List;
 
 public class InventoryController extends AbstractInventoryPanel {
     private IProductService productService = new ProductServiceImpl();
@@ -106,6 +109,12 @@ public class InventoryController extends AbstractInventoryPanel {
             pageNumText.setText(String.valueOf(currentPage));
             queryProduct();
         }
+    }
+
+    @Override
+    public void exportProduct() {
+        List<Product> proList =  productService.getAllProduct();
+        ExcelUtils.writeExcel(proList,Product.class,colNames,new File("data/Product.xlsx"));
     }
 
 

@@ -44,6 +44,19 @@ public class RecordDaoImpl implements IRecordDao {
         return total;
     }
 
+    @Override
+    public List<Record> getAllRecord() throws SQLException {
+        String sql = "select * from \"record\" order by \"date\" desc ";
+        List<Record>  recordList = queryRunner.query(sql,new BeanListHandler<>(Record.class));
+        return recordList;
+    }
+
+    @Override
+    public List<Record> getRecordByType(String recordType) throws SQLException {
+        String sql = "select * from \"record\" where \"recordType\" = ? order by \"date\" desc ";
+        List<Record>  recordList = queryRunner.query(sql,new BeanListHandler<>(Record.class),recordType);
+        return recordList;
+    }
 
     @Override
     public void insertRecord(Product product,int count, String register,String recordType) {

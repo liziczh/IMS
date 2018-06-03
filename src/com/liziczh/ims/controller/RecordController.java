@@ -99,18 +99,11 @@ public class RecordController extends AbstractRecordPanel {
 
     @Override
     public void importRecord() {
-        List<List<Object>> recordList = ExcelUtils.readExcel(new File("data/Stock"+recordType+"Record.xlsx"));
+        List<Record> recordList = ExcelUtils.readExcel(Record.class,new File("data/Stock"+recordType+"Record.xlsx"));
         int n = JOptionPane.showConfirmDialog(null, "是否清空已有数据", "请确认",JOptionPane.YES_NO_OPTION);
         if(n == 0){
             recordService.clear(recordType);
-            for(List<Object> l : recordList) {
-                Record record = new Record();
-                record.setDate((String) l.get(0));
-                record.setProId(Integer.parseInt(l.get(1).toString()));
-                record.setProName((String)l.get(2));
-                record.setCount(Integer.parseInt(l.get(3).toString()));
-                record.setRegister((String)l.get(4));
-                record.setRecordType((String)l.get(5));
+            for(Record record : recordList) {
                 if(record != null){
                     recordService.insertRecord(record);
                 }else{
@@ -118,14 +111,8 @@ public class RecordController extends AbstractRecordPanel {
                 }
             }
         }else{
-            for(List<Object> l : recordList){
-                String date = (String) l.get(0);
-                int proId = Integer.parseInt(l.get(1).toString());
-                String proName = (String)l.get(2);
-                int count = Integer.parseInt(l.get(3).toString());
-                String register = (String)l.get(4);
-                String recordType = (String)l.get(5);
-                Record record = new Record(date,proId,proName,count,register,recordType);
+            recordService.clear(recordType);
+            for(Record record : recordList) {
                 if(record != null){
                     recordService.insertRecord(record);
                 }else{

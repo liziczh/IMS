@@ -119,24 +119,12 @@ public class InventoryController extends AbstractInventoryPanel {
 
     @Override
     public void importProduct() {
-        List<List<Object>> proList = ExcelUtils.readExcel(new File("data/Product.xlsx"));
+        List<Product> proList = ExcelUtils.readExcel(Product.class,new File("data/Product.xlsx"));
         int n = JOptionPane.showConfirmDialog(null, "是否清空已有数据", "请确认",JOptionPane.YES_NO_OPTION);
         if(n == 0){
             productService.clear();
         }
-        for(List<Object> l : proList){
-            int proId;
-            if(l.get(0).toString() == ""){
-                proId = Integer.parseInt(l.get(0).toString());
-            }else{
-                break;
-            }
-            String proName = (String)l.get(1);
-            String dirName = (String)l.get(2);
-            String supplier = (String)l.get(3);
-            String brand = (String)l.get(4);
-            int count = Integer.parseInt(l.get(5).toString());
-            Product product = new Product(proId,proName,dirName,supplier,brand,count);
+        for(Product product : proList){
             if(product != null){
                 if(productService.queryProductById(product.getProId()) == null){
                     productService.insertProduct(product);

@@ -20,9 +20,8 @@ public class ExcelUtils {
      * @return
      * @throws Exception
      */
-    public static List<List<Object>> readExcel(File file){
+    public static <T> List<T> readExcel(Class T,File file){
         try {
-            List<List<List<Object>>> wbList = new LinkedList<>();
             // 工作簿
             Workbook xwb = new XSSFWorkbook(new FileInputStream(file));
             // 表格
@@ -30,21 +29,27 @@ public class ExcelUtils {
             // 行
             Row row = null;
             // 单元格
-            String cell = null;
+            Cell cell = null;
             // 表
             sheet = xwb.getSheetAt(0);
-            List<List<Object>> sheetList = new LinkedList<>();
+            List<T> sheetList = new LinkedList<>();
             for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {
                 // 行
                 row = sheet.getRow(i);
-                List<Object> rowList = new LinkedList<>();
+                T t = (T) T.newInstance();
                 for (int j = row.getFirstCellNum(); j < row.getPhysicalNumberOfCells(); j++) {
                     // 通过 row.getCell(j).toString() 获取单元格内容，
-                    cell = row.getCell(j).toString();
+                    cell = row.getCell(j);
+                    Field[] fs = t.getClass().getDeclaredFields();
+                    fs[j].setAccessible(true);
+                    if(fs[j].getType() == String.class){
+                        fs[j].set(t,fs[j].getType().cast(cell.toString()));
+                    } else if (fs[j].getType() == Integer.class) {
+                        fs[j].set(t,Integer.parseInt(cell.toString()));
+                    }
                     System.out.println(cell);
-                    rowList.add(cell);
                 }
-                sheetList.add(rowList);
+                sheetList.add(t);
             }
             return sheetList;
         } catch (Exception e) {
@@ -93,11 +98,6 @@ public class ExcelUtils {
                 String cellValue = null;
                 try {
                     fs[c].setAccessible(true);
-//                    if(fs[c].get(t) != null){
-//                        cellValue = fs[c].get(t);
-//                    }else{
-//                        cellValue = "";
-//                    }
                     cell = row.createCell(c);
                     cell.setCellValue(String.valueOf(fs[c].get(t)));
                     cell.setCellStyle(cellStyle);

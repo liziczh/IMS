@@ -18,14 +18,17 @@ public class InventoryMngController extends AbstractInventoryMngDialog {
     @Override
     public void modify() {
         if(proIdText.getText() != null && proNameText.getText() != null && !"全部".equals((String) dirBox.getSelectedItem()) && supplierText.getText() != null && brandText.getText() != null){
-            if(proIdText.getText().matches("[0-9A-Za-z]+")) {
-                Product product = new Product(new Integer(proIdText.getText()), proNameText.getText(), (String) dirBox.getSelectedItem(), supplierText.getText(), brandText.getText(), 0);
-                modifyService.modify(product);
-                JOptionPane.showMessageDialog(this, "修改成功", "温馨提示", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-
-            }else{
-                JOptionPane.showMessageDialog(this,"商品编号输入有误","温馨提示",JOptionPane.WARNING_MESSAGE);
+            if(!"".equals(proIdText.getText()) && !"".equals(proNameText.getText()) && !"全部".equals((String) dirBox.getSelectedItem()) && !"".equals(supplierText.getText()) && !"".equals(brandText.getText())) {
+                if (proIdText.getText().matches("[0-9A-Za-z]+")) {
+                    Product product = new Product(new Integer(proIdText.getText()), proNameText.getText(), (String) dirBox.getSelectedItem(), supplierText.getText(), brandText.getText(), 0);
+                    modifyService.modify(product);
+                    JOptionPane.showMessageDialog(this, "修改成功", "温馨提示", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "商品编号输入有误", "温馨提示", JOptionPane.WARNING_MESSAGE);
+                }
+            } else{
+                JOptionPane.showMessageDialog(this,"请确认所有选项都已填写完成","温馨提示",JOptionPane.WARNING_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(this,"请确认所有选项都已填写完成","温馨提示",JOptionPane.WARNING_MESSAGE);

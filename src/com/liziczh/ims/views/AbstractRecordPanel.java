@@ -115,7 +115,7 @@ public abstract class AbstractRecordPanel extends JPanel {
         this.add(endDateLabel);
         this.add(endDateText);
         // 产品名称
-        proNameLabel.setText("产品名称：");
+        proNameLabel.setText("商品名称：");
         proNameLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
         proNameLabel.setBounds(290, 70, 80, 25);
         proNameText.setFont(new Font("微软雅黑", Font.BOLD, 14));

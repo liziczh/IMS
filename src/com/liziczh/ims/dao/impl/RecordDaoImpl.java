@@ -93,7 +93,11 @@ public class RecordDaoImpl implements IRecordDao {
     @Override
     public int getTotalCount(String recordType) throws SQLException {
         String sql = "select sum(\"count\") from \"record\" WHERE \"recordType\" = ?";
-        return  new Integer(queryRunner.query(sql,new ScalarHandler<>(1),recordType).toString());
+        if(queryRunner.query(sql,new ScalarHandler<>(1),recordType) != null){
+            return  new Integer(queryRunner.query(sql,new ScalarHandler<>(1),recordType).toString());
+        }else{
+            return -1;
+        }
     }
 
     @Override
@@ -111,7 +115,7 @@ public class RecordDaoImpl implements IRecordDao {
 
     @Override
     public void deleteAllRecord(String recordType) throws SQLException {
-        String sql = "delete from \"record\" where recordType = ? ";
+        String sql = "delete from \"record\" where \"recordType\" = ? ";
         queryRunner.update(sql,recordType);
     }
 

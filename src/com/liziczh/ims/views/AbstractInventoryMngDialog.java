@@ -52,7 +52,7 @@ public abstract class AbstractInventoryMngDialog extends JDialog {
     }
 
     private void addComponent(){
-        proIdLabel.setText("产品编号:");
+        proIdLabel.setText("商品编号:");
         proIdLabel.setFont(font);
         proIdLabel.setBounds(40,80,100,30);
         this.add(proIdLabel);
@@ -61,7 +61,7 @@ public abstract class AbstractInventoryMngDialog extends JDialog {
         proIdText.setEditable(false);
         proIdText.setBackground(Color.white);
         this.add(proIdText);
-        proNameLabel.setText("产品名称:");
+        proNameLabel.setText("商品名称:");
         proNameLabel.setFont(font);
         proNameLabel.setBounds(40,120,100,30);
         this.add(proNameLabel);

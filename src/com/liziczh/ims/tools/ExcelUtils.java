@@ -93,13 +93,13 @@ public class ExcelUtils {
                 String cellValue = null;
                 try {
                     fs[c].setAccessible(true);
-                    if(fs[c].get(t) != null){
-                        cellValue = fs[c].get(t).toString();
-                    }else{
-                        cellValue = "";
-                    }
+//                    if(fs[c].get(t) != null){
+//                        cellValue = fs[c].get(t);
+//                    }else{
+//                        cellValue = "";
+//                    }
                     cell = row.createCell(c);
-                    cell.setCellValue(cellValue);
+                    cell.setCellValue(String.valueOf(fs[c].get(t)));
                     cell.setCellStyle(cellStyle);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

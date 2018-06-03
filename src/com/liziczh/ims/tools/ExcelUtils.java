@@ -42,14 +42,22 @@ public class ExcelUtils {
                     cell = row.getCell(j);
                     Field[] fs = t.getClass().getDeclaredFields();
                     fs[j].setAccessible(true);
-                    System.out.println(fs[j].getType());
                     if(fs[j].getType() == String.class){
                         fs[j].set(t,fs[j].getType().cast(cell.toString()));
                     } else if (fs[j].getType() == int.class) {
                         fs[j].set(t,new Integer(cell.toString()));
-                    } else if(fs[j].getType() == boolean.class){
-                        fs[j].set(t,new Boolean(cell.toString()));
+                    } else if(fs[j].getType() == short.class){
+                        fs[j].set(t,new Short(cell.toString()));
+                    }else if(fs[j].getType() == long.class){
+                        fs[j].set(t,new Long(cell.toString()));
+                    }else if(fs[j].getType() == byte.class){
+                        fs[j].set(t,new Byte(cell.toString()));
+                    }else if(fs[j].getType() == float.class){
+                        fs[j].set(t,new Float(cell.toString()));
+                    }else if(fs[j].getType() == double.class){
+                        fs[j].set(t,new Double(cell.toString()));
                     }
+
                 }
                 sheetList.add(t);
             }
@@ -96,12 +104,11 @@ public class ExcelUtils {
             T t = list.get(r);
             Field[] fs = t.getClass().getDeclaredFields();
             row = sheet.createRow(r+1);
-            for(int c = 0 ; c < fs.length ; c++){
-                String cellValue = null;
+            for(int j = 0 ; j < fs.length ; j++){
                 try {
-                    fs[c].setAccessible(true);
-                    cell = row.createCell(c);
-                    cell.setCellValue(String.valueOf(fs[c].get(t)));
+                    fs[j].setAccessible(true);
+                    cell = row.createCell(j);
+                    cell.setCellValue(String.valueOf(fs[j].get(t)));
                     cell.setCellStyle(cellStyle);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

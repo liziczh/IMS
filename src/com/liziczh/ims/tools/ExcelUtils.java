@@ -42,12 +42,14 @@ public class ExcelUtils {
                     cell = row.getCell(j);
                     Field[] fs = t.getClass().getDeclaredFields();
                     fs[j].setAccessible(true);
+                    System.out.println(fs[j].getType());
                     if(fs[j].getType() == String.class){
                         fs[j].set(t,fs[j].getType().cast(cell.toString()));
-                    } else if (fs[j].getType() == Integer.class) {
-                        fs[j].set(t,Integer.parseInt(cell.toString()));
+                    } else if (fs[j].getType() == int.class) {
+                        fs[j].set(t,new Integer(cell.toString()));
+                    } else if(fs[j].getType() == boolean.class){
+                        fs[j].set(t,new Boolean(cell.toString()));
                     }
-                    System.out.println(cell);
                 }
                 sheetList.add(t);
             }

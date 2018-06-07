@@ -114,8 +114,12 @@ public class InventoryController extends AbstractInventoryPanel {
     @Override
     public void exportProduct() {
         List<Product> proList = productService.queryAllProduct(proNameText.getText(),lowerCount,upperCount, (String) dirBox.getSelectedItem());
-        ExcelUtils.writeExcel(proList,Product.class,colNames,ChooserUtils.chooserDir(exportBtn)+"/Product.xlsx");
-        JOptionPane.showMessageDialog(this,"导出成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        // 如果文件夹路径不为null
+        String dirPath =  ChooserUtils.chooserDir(exportBtn);
+        if(dirPath != null){
+            ExcelUtils.writeExcel(proList,Product.class,colNames,dirPath+"/Product.xlsx");
+            JOptionPane.showMessageDialog(this,"导出成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     @Override
@@ -124,13 +128,16 @@ public class InventoryController extends AbstractInventoryPanel {
         if(n == 0){
             productService.clear();
         }
-        List<Product> proList = ExcelUtils.readExcel(Product.class,ChooserUtils.chooserFile(importBtn));
-        for(Product product : proList){
-            if(productService.queryProductById(product.getProId()) == null){
-                productService.insertProduct(product);
+        String filePath = ChooserUtils.chooserFile(importBtn);
+        if(filePath != null){
+            List<Product> proList = ExcelUtils.readExcel(Product.class,filePath);
+            for(Product product : proList){
+                if(productService.queryProductById(product.getProId()) == null){
+                    productService.insertProduct(product);
+                }
             }
+            JOptionPane.showMessageDialog(this,"导入成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
         }
-        JOptionPane.showMessageDialog(this,"导入成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
     }
 
 

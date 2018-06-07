@@ -3,6 +3,7 @@ package com.liziczh.ims.controller;
 import com.liziczh.ims.domain.Product;
 import com.liziczh.ims.service.IProductService;
 import com.liziczh.ims.service.impl.ProductServiceImpl;
+import com.liziczh.ims.tools.ChooserUtils;
 import com.liziczh.ims.tools.ExcelUtils;
 import com.liziczh.ims.tools.ListTableModel;
 import com.liziczh.ims.views.AbstractInventoryPanel;
@@ -113,26 +114,24 @@ public class InventoryController extends AbstractInventoryPanel {
     @Override
     public void exportProduct() {
         List<Product> proList = productService.queryAllProduct(proNameText.getText(),lowerCount,upperCount, (String) dirBox.getSelectedItem());
-        ExcelUtils.writeExcel(proList,Product.class,colNames,new File("data/Product.xlsx"));
-        JOptionPane.showMessageDialog(this,"导出成功，请前往IMS/data/Product.xlsx查看","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        ExcelUtils.writeExcel(proList,Product.class,colNames,ChooserUtils.chooserDir(exportBtn)+"/Product.xlsx");
+        JOptionPane.showMessageDialog(this,"导出成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public void importProduct() {
-        List<Product> proList = ExcelUtils.readExcel(Product.class,new File("data/Product.xlsx"));
         int n = JOptionPane.showConfirmDialog(null, "是否清空已有数据", "请确认",JOptionPane.YES_NO_OPTION);
         if(n == 0){
             productService.clear();
         }
+        List<Product> proList = ExcelUtils.readExcel(Product.class,ChooserUtils.chooserFile(importBtn));
         for(Product product : proList){
-            if(product != null){
-                if(productService.queryProductById(product.getProId()) == null){
-                    productService.insertProduct(product);
-                }
-            }else{
-                JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
+            if(productService.queryProductById(product.getProId()) == null){
+                productService.insertProduct(product);
             }
         }
+        JOptionPane.showMessageDialog(this,"导入成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
     }
+
 
 }

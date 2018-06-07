@@ -36,7 +36,7 @@ public class JDBCUtils {
 	}
 
 
-
+	// 分页语句
 	public static String PagenationSql(String sql, int currentPage, int pageSize){
 		String pageSql = "select * from ( select \"temp\".*, ROWNUM \"rn\" from ("
 				+ sql + ") \"temp\" where ROWNUM <= " + currentPage + " * " + pageSize + " ) where \"rn\" > ("+ currentPage + " - 1) * "+ pageSize;

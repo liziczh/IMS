@@ -61,9 +61,9 @@ public abstract class AbstractRecordPanel extends JPanel {
     // 当前页数
     protected JTextField pageNumText = new JTextField();
     // 导入
-    private JButton importBtn = new JButton();
+    protected JButton importBtn = new JButton();
     // 导出
-    private JButton exportBtn = new JButton();
+    protected JButton exportBtn = new JButton();
 
     public AbstractRecordPanel(){
         this.init();
@@ -246,12 +246,6 @@ public abstract class AbstractRecordPanel extends JPanel {
                 endPage();
             }
         });
-//        pageNumText.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseExited(MouseEvent e) {
-//                jumpPage();
-//            }
-//        });
         pageNumText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {

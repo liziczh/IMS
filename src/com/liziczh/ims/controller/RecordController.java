@@ -3,6 +3,7 @@ package com.liziczh.ims.controller;
 import com.liziczh.ims.domain.Record;
 import com.liziczh.ims.service.IRecordService;
 import com.liziczh.ims.service.impl.RecordServiceImpl;
+import com.liziczh.ims.tools.ChooserUtils;
 import com.liziczh.ims.tools.ExcelUtils;
 import com.liziczh.ims.tools.ListTableModel;
 import com.liziczh.ims.views.AbstractRecordPanel;
@@ -10,6 +11,9 @@ import com.liziczh.ims.views.AbstractRecordPanel;
 import javax.swing.*;
 import java.io.File;
 import java.util.List;
+
+import static com.liziczh.ims.tools.ChooserUtils.chooserDir;
+import static com.liziczh.ims.tools.ChooserUtils.chooserFile;
 
 
 public class RecordController extends AbstractRecordPanel {
@@ -93,34 +97,24 @@ public class RecordController extends AbstractRecordPanel {
     @Override
     public void exportRecord() {
         List<Record> proList =  recordService.queryAllRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),this.recordType,(String)dirBox.getSelectedItem());
-        ExcelUtils.writeExcel(proList,Record.class,colNames,new File("data/Stock"+recordType+"Record.xlsx"));
-        JOptionPane.showMessageDialog(this,"导出成功，请前往IMS/data/Stock"+recordType+"Record.xlsx查看","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        ExcelUtils.writeExcel(proList,Record.class,colNames,ChooserUtils.chooserDir(exportBtn)+"Stock"+recordType+"Record.xlsx");
+        JOptionPane.showMessageDialog(this,"导出成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public void importRecord() {
-        List<Record> recordList = ExcelUtils.readExcel(Record.class,new File("data/Stock"+recordType+"Record.xlsx"));
+        List<Record> recordList = ExcelUtils.readExcel(Record.class,ChooserUtils.chooserFile(importBtn));
         int n = JOptionPane.showConfirmDialog(null, "是否清空已有数据", "请确认",JOptionPane.YES_NO_OPTION);
         if(n == 0){
             recordService.clear(recordType);
-            for(Record record : recordList) {
-                if(record != null){
-                    recordService.insertRecord(record);
-                }else{
-                    JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        }else{
-            recordService.clear(recordType);
-            for(Record record : recordList) {
-                if(record != null){
-                    recordService.insertRecord(record);
-                }else{
-                    JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
-                }
+        }
+        for(Record record : recordList) {
+            if(record != null){
+                recordService.insertRecord(record);
+            }else{
+                JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
             }
         }
-
     }
 
 }

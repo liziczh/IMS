@@ -56,9 +56,9 @@ public abstract class AbstractInventoryPanel extends JPanel {
     // 当前页数
     protected JTextField pageNumText = new JTextField();
     // 导出
-    private JButton exportBtn = new JButton();
+    protected JButton exportBtn = new JButton();
     // 导入
-    private JButton importBtn = new JButton();
+    protected JButton importBtn = new JButton();
 
     public AbstractInventoryPanel(){
             this.init();

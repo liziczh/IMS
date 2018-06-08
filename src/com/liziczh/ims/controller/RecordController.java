@@ -96,24 +96,28 @@ public class RecordController extends AbstractRecordPanel {
 
     @Override
     public void exportRecord() {
-        List<Record> proList =  recordService.queryAllRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),this.recordType,(String)dirBox.getSelectedItem());
-        ExcelUtils.writeExcel(proList,Record.class,colNames,ChooserUtils.chooserDir(exportBtn)+"Stock"+recordType+"Record.xlsx");
-        JOptionPane.showMessageDialog(this,"导出成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        List<Record> recordList =  recordService.queryAllRecord(beginDateText.getText(),endDateText.getText(),proNameText.getText(),this.recordType,(String)dirBox.getSelectedItem());
+        // 如果文件夹路径不为null
+        String dirPath =  ChooserUtils.chooserDir(exportBtn);
+        if(dirPath != null){
+            ExcelUtils.writeExcel(recordList,Record.class,colNames,dirPath+"/Stock"+recordType+"Record.xlsx");
+            JOptionPane.showMessageDialog(this,"导出成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     @Override
     public void importRecord() {
-        List<Record> recordList = ExcelUtils.readExcel(Record.class,ChooserUtils.chooserFile(importBtn));
         int n = JOptionPane.showConfirmDialog(null, "是否清空已有数据", "请确认",JOptionPane.YES_NO_OPTION);
         if(n == 0){
             recordService.clear(recordType);
         }
-        for(Record record : recordList) {
-            if(record != null){
+        String filePath = ChooserUtils.chooserFile(importBtn);
+        if(filePath != null){
+            List<Record> recordList = ExcelUtils.readExcel(Record.class,filePath);
+            for(Record record : recordList) {
                 recordService.insertRecord(record);
-            }else{
-                JOptionPane.showMessageDialog(this,"表内没有数据","温馨提示",JOptionPane.WARNING_MESSAGE);
             }
+            JOptionPane.showMessageDialog(this,"导入成功","温馨提示",JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

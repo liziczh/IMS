@@ -1,6 +1,10 @@
 # IMS-进销存管理系统
 基于 Java 实现的进销存管理系统（Inventory Management System）
 
+## 项目结构
+
+![IMS](imgs/IMS.png)
+
 ## 系统功能设计
 
 - **进货管理（Stock-In）**

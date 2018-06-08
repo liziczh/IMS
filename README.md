@@ -13,8 +13,8 @@
   - **查询库存（Inventory）**：Table
   - **商品管理（InventoryMng）**：Btn->Form
 - **统计报表（Statistics）**
-  - **商品采购统计（StatisticsStockInPanel）**：统计图
-  - **商品销售统计（StatisticsStockOutPanel）**：统计图
+  - **商品采购统计（StatisticsStockIn）**：统计图
+  - **商品销售统计（StatisticsStockOut）**：统计图
 
 ## MVC项目架构
 
@@ -48,10 +48,6 @@ Controller：控制层
 		|—— 统计报表(StatisticsPanel)：采购统计，销售统计
 ```
 
-- JFrame：界面窗口
-- JPanel：界面内容
-- JDialog：表单对话框
-
 ## 数据库设计
 
 用户表user：id (uk)，username，md5(password)；
@@ -62,7 +58,7 @@ Controller：控制层
 
 ## 功能实现
 
-**进货管理（Stock-In）**：
+**1. 进货管理（Stock-In）**：
 
 - **入库记录表（StockInRecord）**：查询by日期/产品名称/分类；
 
@@ -77,7 +73,7 @@ if(新商品在product表中存在){
 插入一条入库记录到record表中
 ```
 
-**销售出库**：
+**2. 销售出库（Stock-Out）**：
 
 - **出库记录表（StockInRecord）**：查询by日期/产品名称/分类；
 
@@ -95,7 +91,7 @@ if(新商品在product表中存在){
 }
 ```
 
-**库存管理（Inventory ）**
+**3. 库存管理（Inventory ）**
 
 - **查询库存（Inventory）**：查询by产品名称/库存范围/分类；
 - **商品管理（InventoryMng）**：
@@ -110,4 +106,36 @@ if(选中的product不为空){
 }
 ```
 
+**4. 统计报表（Statistics）**
 
+JFreeChart生成统计图。
+
+**5. 数据导入导出**
+
+基于Apache POI实现的表格数据导出为Excel.xlsx表格。
+
+
+
+## 还想实现的功能
+
+手机验证码，邮箱验证码。
+
+验证码验证，滑块验证，文字验证。
+
+时间戳随机生成订单序号。
+
+多角色使用。
+
+多终端使用。
+
+全部检索。
+
+伪删：触发器
+
+
+
+## 总结
+
+- 编写开发手册，需求分析+系统设计。
+- 编写开发手册，统一命名规则。
+- 合作沟通是提升效率的关键。

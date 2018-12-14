@@ -3,7 +3,7 @@
 
 ## 项目结构
 
-![IMS](imgs/IMS.png)
+![IMS](doc/IMS.png)
 
 ## 系统功能设计
 

@@ -22,7 +22,7 @@ public class ChooserUtils {
         return path;
     }
     // 选择目录
-    public static String  chooserDir(JButton btn){
+    public static String chooserDir(JButton btn){
         JFileChooser chooser = new JFileChooser();
         String path = null;
         chooser.setDialogTitle("请选择导出的文件夹...");
